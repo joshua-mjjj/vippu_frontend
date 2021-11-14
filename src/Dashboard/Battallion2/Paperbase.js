@@ -19,7 +19,8 @@ import BattallionData from './Views/BattallionData';
 import Profile from './Views/Profile';
 
 import {
-  battallion_two_fetch_data
+  battallion_two_fetch_data,
+  battallion_two_overrall_data
 } from "../../actions/battallions_fetch.js";
 
 let theme = createTheme({
@@ -184,8 +185,9 @@ function Paperbase(props) {
   }
 
   React.useEffect(() => {
-    console.log("Fetching dashboard data before rendering... ")
+    // console.log("Fetching dashboard data before rendering... ")
     props.battallion_two_fetch_data()
+    props.battallion_two_overrall_data()
   }, [props]);
 
   return (
@@ -273,5 +275,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  battallion_two_fetch_data
+  battallion_two_fetch_data,
+  battallion_two_overrall_data
 })(Paperbase);

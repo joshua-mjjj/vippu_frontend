@@ -1,6 +1,6 @@
 import axios from "axios";
 import { returnError } from "./errors";
-import { createMessage } from "./messages";
+import { createMessage, create_api_message } from "./messages";
 
 import {
   LOADING,
@@ -35,10 +35,13 @@ import {
   LOGOUT_SUCCESS,
   USER_LOADED,
   AUTH_ERROR,
+  CHANGE_PASSWORD_LOADING,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAIL
 
 } from "./types";
 
-const global_url = 'http://127.0.0.1:8000'
+export const global_url = 'http://127.0.0.1:8000'
 
 // LOAD USER
 export const check_user_type = (username) => (dispatch) => {
@@ -102,6 +105,32 @@ export const login = (username, password) => (dispatch) => {
       // console.log(err.response)
       dispatch({
         type: LOGIN_FAIL,
+      });
+    });
+};
+
+
+// CHANGE PASSWORD
+export const change_password = (old_password, new_password) => (dispatch, getState) => {
+  //Loading
+  dispatch({ type: CHANGE_PASSWORD_LOADING }); 
+
+  // Request Body
+  const body = JSON.stringify({ old_password, new_password });
+  // console.log(body)
+  const message = "Your password has successfully been changed."
+  axios
+    .post(`${global_url}/api/auth/password/change/`, body, tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: CHANGE_PASSWORD_SUCCESS,
+      });
+      dispatch(create_api_message(message, "change_password_success"));
+    })
+    .catch((err) => {
+      dispatch(returnError(err.response.data, err.response.status));
+      dispatch({
+        type: CHANGE_PASSWORD_FAIL,
       });
     });
 };

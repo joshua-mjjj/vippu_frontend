@@ -1,11 +1,13 @@
 import { 
 	BATTALION_TWO_DATA_FETCHED,
-    BATTALION_TWO_DATA_LOADING
+    BATTALION_TWO_DATA_LOADING,
+    BATTALION_TWO_OVERRALL_FETCHED
 } from '../actions/types';
 
 
 const initialState = {
 	battalion_two_data : null,
+	battalion_two_overrall_data : null,
 	battalion_two_data_loading: false
 }
 
@@ -15,6 +17,11 @@ export default function battallions_fetch(state=initialState, action) {
 			return {
 					...state,
 					battalion_two_data_loading: true
+				}
+		case BATTALION_TWO_OVERRALL_FETCHED:
+			return {
+					...state,
+					battalion_two_overrall_data: action.payload
 				}
 		case BATTALION_TWO_DATA_FETCHED:
 			return {

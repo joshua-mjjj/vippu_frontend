@@ -4,12 +4,11 @@ import { returnError } from "./errors";
 
 import {
   BATTALION_TWO_DATA_FETCHED,
-  BATTALION_TWO_DATA_LOADING
+  BATTALION_TWO_DATA_LOADING,
+  BATTALION_TWO_OVERRALL_FETCHED
 } from "./types";
 
-import { tokenConfig } from "./auth";
-
-const global_url = 'http://127.0.0.1:8000'
+import { tokenConfig, global_url } from "./auth";
 
 
 //  BATTALLION TWO CREATE 
@@ -40,3 +39,21 @@ export const battallion_two_fetch_data = () => (dispatch, getState) => {
     });
 };
 
+//  BATTALLION TWO DATA SUMMARY 
+export const battallion_two_overrall_data = () => (dispatch, getState) => {
+
+    axios
+    .get(`${global_url}/api/battaliontwo_overrall/`, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      if(res.data){
+        dispatch({
+          type: BATTALION_TWO_OVERRALL_FETCHED,
+          payload: res.data,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err.response)
+    });
+};

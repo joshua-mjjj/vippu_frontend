@@ -7,9 +7,7 @@ import {
   BATTALION_TWO_DETAIL_FETCHED
 } from "./types";
 
-import { tokenConfig } from "./auth";
-
-const global_url = 'http://127.0.0.1:8000'
+import { tokenConfig, global_url } from "./auth";
 
 
 //  BATTALLION TWO CREATE 

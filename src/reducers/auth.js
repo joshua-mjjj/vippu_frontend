@@ -33,7 +33,10 @@ GO_TO_WIZARD_SOCIAL,
   LOGIN_LOADING,
   LOGIN_FAIL,
   USER_LOADED,
-  AUTH_ERROR
+  AUTH_ERROR,
+  CHANGE_PASSWORD_LOADING,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAIL
 
 } from '../actions/types';
 
@@ -45,6 +48,7 @@ const initialState = {
 	user_type: null,
 	login_loading: false,
 	user: null,
+	change_password_loading: false,
 
 
 	isLoading: false,
@@ -56,6 +60,17 @@ export default function auth(state=initialState, action) {
 			return {
 					...state,
 					loading_check_user_type: true
+				}
+		case CHANGE_PASSWORD_LOADING:
+			return {
+					...state,
+					change_password_loading: true
+				}
+		case CHANGE_PASSWORD_SUCCESS:
+		case CHANGE_PASSWORD_FAIL:
+			return {
+					...state,
+					change_password_loading: false
 				}
 		case LOGIN_LOADING:
 			return {

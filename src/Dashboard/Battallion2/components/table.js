@@ -15,115 +15,7 @@ import {
 } from '@mui/material';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import { Scrollbar } from './scrollbar';
-
-const statusVariants = [
-  {
-    label: 'Active',
-    value: 'active'
-  },
-  {
-    label: 'Absent (AWOL)',
-    value: 'absent'
-  },
-  {
-    label: 'Transfered',
-    value: 'transfered'
-  },
-  {
-    label: 'Sick',
-    value: 'sick'
-  },
-  {
-    label: 'Dead',
-    value: 'dead'
-  },
-  {
-    label: 'Suspended',
-    value: 'suspended'
-  },
-  {
-    label: 'Dismissed',
-    value: 'dismissed'
-  },
-  {
-    label: 'In court',
-    value: 'in_court'
-  },
-  {
-    label: 'Deserted',
-    value: 'deserted'
-  },
-  {
-    label: 'On course',
-    value: 'on_course'
-  },
-  {
-    label: 'On mission',
-    value: 'on_mission'
-  }
-];
-
-const titleVariants = [
-  {
-    label: 'Commandant',
-    value: 'commandant'
-  },
-  {
-    label: 'Deputy commandant',
-    value: 'deputy_commandant'
-  },
-  {
-    label: 'Staff officier',
-    value: 'staff_officer'
-  },
-  {
-    label: 'Head of operations',
-    value: 'head_of_operations'
-  },
-  {
-    label: 'Head of armoury',
-    value: 'head_of_armoury'
-  },
-  {
-    label: 'Supervisor',
-    value: 'supervisor'
-  },
-  {
-    label: 'In charge',
-    value: 'in_Charge'
-  },
-  {
-    label: '2nd in charge',
-    value: '2nd_in_charge'
-  },
-  {
-    label: 'Driver',
-    value: 'driver'
-  }
-];
-
-const departmentVariants = [
-  {
-    label: 'Embassy',
-    value: 'embassy'
-  },
-  {
-    label: 'Consolate',
-    value: 'consolate'
-  },
-  {
-    label: 'High commission',
-    value: 'high_commission'
-  },
-  {
-    label: 'Other diplomats',
-    value: 'other_diplomats'
-  },
-  {
-    label: 'Administration',
-    value: 'administration'
-  }
-];
+import { statusVariants, titleVariants, departmentVariants } from './utils';
 
 export const OrdersTable = (props) => {
   const { data } = props;
@@ -323,6 +215,38 @@ export const OrdersTable = (props) => {
                      statusVariant.value === 'deserted' ? (
                       <Chip
                         sx={{ 'color' : 'red', 'fontWeight' : 'bold' }}
+                        label={statusVariant.label}
+                        variant="outlined"
+                      />): null
+                    }
+                    {
+                     statusVariant.value === 'in_court' ? (
+                      <Chip
+                        sx={{ 'color' : 'orange', 'fontWeight' : 'bold' }}
+                        label={statusVariant.label}
+                        variant="outlined"
+                      />): null
+                    }
+                    {
+                     statusVariant.value === 'on_course' ? (
+                      <Chip
+                        sx={{ 'color' : 'green', 'fontWeight' : 'bold' }}
+                        label={statusVariant.label}
+                        variant="outlined"
+                      />): null
+                    }
+                    {
+                     statusVariant.value === 'absent' ? (
+                      <Chip
+                        sx={{ 'color' : 'red', 'fontWeight' : 'bold' }}
+                        label={statusVariant.label}
+                        variant="outlined"
+                      />): null
+                    }
+                    {
+                     statusVariant.value === 'on_mission' ? (
+                      <Chip
+                        sx={{ 'color' : 'green', 'fontWeight' : 'bold' }}
                         label={statusVariant.label}
                         variant="outlined"
                       />): null

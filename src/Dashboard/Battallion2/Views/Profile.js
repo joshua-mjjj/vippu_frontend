@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import Content from './Content';
+import ChangePassword from '../components/ChangePassword';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -171,34 +171,18 @@ export default function Profile() {
     setTab_value(0)
   }
 
-  const set_tab_1 = () => {
-    setTab_value(1)
-  }
-
-  const set_tab_2 = () => {
-    setTab_value(2)
-  }
-
   return (
     <ThemeProvider theme={theme}>
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
               <Tabs value={tab_value} textColor="inherit">
-                <Tab onClick={set_tab_0} label="Program summary" />
-                <Tab onClick={set_tab_1} label="New entry" />
-                <Tab onClick={set_tab_2} label="Find employee" />
+                <Tab onClick={set_tab_0} label="Profile" />
               </Tabs>
             </AppBar>
             <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
               {/* Render conditionally */}
               { 
-                tab_value === 0 ? (<Content />) : null
-              }
-              { 
-                tab_value === 1 ? (<Content />) : null
-              }
-              { 
-                tab_value === 2 ? (<Content />) : null
+                tab_value === 0 ? (<ChangePassword />) : null
               }
             </Box>
             <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>

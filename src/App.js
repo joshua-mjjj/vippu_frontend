@@ -9,7 +9,7 @@ import StartPage from "./views/StartPage";
 
 import RenderDashboard from "./views/RenderDashboard";
 import { loadUser } from "./actions/auth";
-// import { get_breeds, get_breeds_cats } from "./actions/form";
+import { battallion_two_overrall_data } from "./actions/battallions_fetch";
 import store from "./store";
 
 var hist = createBrowserHistory();
@@ -19,7 +19,8 @@ class App extends Component {
     const token = localStorage.getItem("token");
     if (token) {
       store.dispatch(loadUser());
-      console.log("Calling ")
+      store.dispatch(battallion_two_overrall_data());
+      console.log("Calling")
     }
   }
 

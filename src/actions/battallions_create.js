@@ -10,9 +10,7 @@ import {
   CLEAR_ERRORS
 } from "./types";
 
-import { tokenConfig } from "./auth";
-
-const global_url = 'http://127.0.0.1:8000'
+import { tokenConfig, global_url } from "./auth";
 
 //  BATTALLION TWO CREATE 
 export const battallion_two_create = (
