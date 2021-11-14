@@ -1,0 +1,321 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1,h2,h3,p {
+  margin: 0;
+}
+
+a{
+  cursor: pointer;
+}
+
+input:focus{
+  outline: none;
+}
+
+hr {
+  display: none;
+}
+
+.container{
+  background-color: #FAFAFA;
+}
+
+.search-list{
+  padding: 0 0 0.5rem 0!important;
+}
+
+.location{
+  margin-top: 4px;
+  line-height: 2;
+}
+
+.suggestions{
+  position: absolute;
+  z-index: 1000;
+  margin-left: -5px;
+  border: 1px solid #dfe1e5;
+  border-top-color: transparent;
+  border-radius: 15px;
+  margin-top: 17px;
+  max-width: 37rem;
+  width: 100%;
+  padding: 4px;
+  background-color: white;
+}
+
+.suggestions .MuiListItemText-inset {
+  padding-left: 10px;
+}
+
+.suggestions .MuiListItem-button {
+  padding: 2px 4px;
+}
+
+.MuiInputBase-input{
+  height: 1rem!important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.MuiInputBase-inputMultiline{
+  height: auto!important;
+}
+
+.facebook-button-class{
+  padding-right: 17%;
+  width: 100%;
+  height: 56px;
+  background-color: #4c69ba;
+  border: 1px solid transparent;
+  font-weight: bold;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: 'Dosis';
+  font-size: 19px;
+  text-align: right;
+}
+
+.AppointmentFormContainer-content{
+  width: max-content;
+}
+
+.MuiStepIcon-root.MuiStepIcon-active, .MuiStepIcon-root.MuiStepIcon-completed, .MuiStepLabel-label.MuiStepLabel-active, .MuiStepLabel-label.MuiStepLabel-completed{
+ /* color: #663399!important; */
+  color: #FF3D00!important;
+}
+
+.MuiButton-root {
+  text-transform: capitalize!important;
+  font-weight: bold!important;
+}
+
+.MuiStepIcon-root, .MuiStepLabel-label{
+   color: rgb(182 184 185)!important;
+   /*color: #FF3D00!important;*/
+}
+
+.MuiStepConnector-lineHorizontal{
+  border-color: rgb(182 184 185)!important;
+}
+
+.MuiButton-contained.Mui-disabled {
+  /* color: rgba(0, 0, 0, 0.26)!important;*/
+  color: #FF3D00!important;
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.12)!important;
+}
+
+.MuiInput-underline:hover:not(.Mui-disabled):before{
+  border-bottom: 0px solid rgba(0, 0, 0, 0.42)!important;
+}
+
+.MuiFormLabel-root.Mui-focused{
+  /* color: #663399!important;*/
+  color: #FF3D00!important;
+}
+
+.MuiAccordion-root, .MuiAccordionSummary-root{
+  border-radius: 5px!important;
+}
+
+/* .MuiAccordion-root.Mui-expanded:last-child{
+  border: 1px solid rgba(0, 0, 0, .125)!important;
+} */
+
+.MuiTypography-body1 {
+  font-size: 13px!important;
+}
+
+.MuiAccordion-root{
+  border: none!important;
+}
+
+.MuiAccordionSummary-root{
+  min-height: 36px!important;
+}
+
+.select-pet {
+  padding: 10px 22px 10px 16px;
+  margin-bottom: 42px;
+  display: flex;
+  align-items: center;
+  width: 439px;
+  height: 93px;
+  background: #E7E7E7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.select-pet:last-child { 
+  margin-bottom: 0;
+}
+
+@media (max-width: 680px) {
+  .select-pet { 
+    width: 300px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+}
+
+.select-pet.checked > div:nth-of-type(2) {
+  background-color: #1B5E20;
+}
+
+.select-pet.checked > div::before {
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  transform: rotate(-45deg);
+  background-color: #1B5E20;
+}
+
+.select-pet.checked {
+  background: #BEE2BD;
+  /* background: #cce5e7; */
+}
+
+.MuiRating-root {
+  margin: 0;
+  padding: 0;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .suggestions{
+    margin-top: 17px;
+    max-width: 90vmax;
+    width: auto;
+    margin-left: -40px;
+    padding: 1px;
+    border-top-color: #dfe1e5;
+    margin-top: 20px;
+  }
+  .suggestions .MuiListItemText-primary{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 90vmax;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  
+}
+
+@font-face {
+  font-family: 'Dosis';
+  src: url('../src/fonts/Dosis-ExtraLight.woff2') format('woff2'),
+      url('../src/fonts/Dosis-ExtraLight.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Brody";
+  src: url("../src/fonts/brody-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dosis';
+  src: url('../src/fonts/Dosis-Light.woff2') format('woff2'),
+      url('../src/fonts/Dosis-Light.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dosis';
+  src: url('../src/fonts/Dosis-Medium.woff2') format('woff2'),
+      url('../src/fonts/Dosis-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dosis';
+  src: url('../src/fonts/Dosis-SemiBold.woff2') format('woff2'),
+      url('../src/fonts/Dosis-SemiBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dosis';
+  src: url('../src/fonts/Dosis-ExtraBold.woff2') format('woff2'),
+      url('../src/fonts/Dosis-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Averia Sans Libre';
+  src: url('../src/fonts/AveriaSansLibre-Bold.woff2') format('woff2'),
+      url('../src/fonts/AveriaSansLibre-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Averia Sans Libre';
+  src: url('../src/fonts/AveriaSansLibre-Regular.woff2') format('woff2'),
+      url('../src/fonts/AveriaSansLibre-Regular.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Averia Sans Libre';
+  src: url('../src/fonts/AveriaSansLibre-Light.woff2') format('woff2'),
+      url('../src/fonts/AveriaSansLibre-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
