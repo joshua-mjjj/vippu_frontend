@@ -118,6 +118,7 @@ export const change_password = (old_password, new_password) => (dispatch, getSta
   // Request Body
   const body = JSON.stringify({ old_password, new_password });
   // console.log(body)
+  
   const message = "Your password has successfully been changed."
   axios
     .post(`${global_url}/api/auth/password/change/`, body, tokenConfig(getState))

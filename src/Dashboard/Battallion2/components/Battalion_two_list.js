@@ -12,9 +12,9 @@ function Battalion_two_list(props){
 
 	const [show_detail, setToggle] = React.useState(false);
 
-  React.useEffect(() => {
-    // console.log(props.data)
-  }, [props.data]);
+  // React.useEffect(() => {
+  //   // console.log(props.data)
+  // }, [props.data]);
 
   const send_detail_id = (id) => {
   	console.log(id)
