@@ -137,6 +137,7 @@ export default function AutocompleteSections(props) {
           {...params}
           className={classes.inputSmall_}
           // sx={{ minWidth: 450 }}
+          placeholder="Type the section here."
           disableUnderline
           displayEmpty
           fullWidth
