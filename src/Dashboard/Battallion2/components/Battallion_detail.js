@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, Card, Container, Grid, Typography } from '@mui/material';	
 import { makeStyles } from '@material-ui/core/styles';
 
-import { statusVariants, titleVariants, departmentVariants, leaveVariants, educationVariants, shiftVariants } from './utils';
+// import { statusVariants, titleVariants, departmentVariants, leaveVariants, educationVariants, shiftVariants } from './utils';
 
 const useStyles = makeStyles((theme) => ({
    label: {
@@ -70,24 +70,24 @@ export default function Battallion_detail(props){
   const classes = useStyles();
   const { employee } = props;
 
-  const statusVariant = statusVariants.find(
-       (variant) => variant.value === employee.status
-     );
-	const departmentVariant = departmentVariants.find(
-	    (variant) => variant.value === employee.department
-	);
-	const titleVariant = titleVariants.find(
-        (variant) => variant.value === employee.title
-     );
-	const leaveVariant = leaveVariants.find(
-        (variant) => variant.value === employee.on_leave
-     );
-	const educationVariant = educationVariants.find(
-        (variant) => variant.value === employee.education_level
-     );
-	const shiftVariant = shiftVariants.find(
-        (variant) => variant.value === employee.shift
-     );
+ //  const statusVariant = statusVariants.find(
+ //       (variant) => variant.value === employee.status
+ //     );
+	// const departmentVariant = departmentVariants.find(
+	//     (variant) => variant.value === employee.department
+	// );
+	// const titleVariant = titleVariants.find(
+ //        (variant) => variant.value === employee.title
+ //     );
+	// const leaveVariant = leaveVariants.find(
+ //        (variant) => variant.value === employee.on_leave
+ //     );
+	// const educationVariant = educationVariants.find(
+ //        (variant) => variant.value === employee.education_level
+ //     );
+	// const shiftVariant = shiftVariants.find(
+ //        (variant) => variant.value === employee.shift
+ //     );
   return(
     <Box
       sx={{
@@ -190,11 +190,11 @@ export default function Battallion_detail(props){
 	               <span className={classes.label}>Title</span>
 	            </Grid>
                <Grid container spacing={2} >
-                 <Typography variant="subtitle1" className={classes.value} >{titleVariant.label}</Typography>
+                 <Typography variant="subtitle1" className={classes.value} >{employee.title}</Typography>
                </Grid>
             </Card>
             {
-            	employee.education_level === "other" ? 
+            	employee.education_level === "Other" ? 
             	(<Card
 	              sx={{
 	                display: 'grid',
@@ -222,7 +222,7 @@ export default function Battallion_detail(props){
 	               <span className={classes.label}>Education level</span>
 	            </Grid>
                <Grid container spacing={2} >
-                 <Typography variant="subtitle1" className={classes.value} >{educationVariant.label}</Typography>
+                 <Typography variant="subtitle1" className={classes.value} >{employee.education_level}</Typography>
                </Grid>
             </Card>)
             }
@@ -338,7 +338,7 @@ export default function Battallion_detail(props){
 	               <span className={classes.label}>Department</span>
 	            </Grid>
                <Grid container spacing={2} >
-                 <Typography variant="subtitle1" className={classes.value} >{departmentVariant.label}</Typography>
+                 <Typography variant="subtitle1" className={classes.value} >{employee.department}</Typography>
                </Grid>
             </Card>
           </Grid>
@@ -356,7 +356,7 @@ export default function Battallion_detail(props){
 	               <span className={classes.label}>Status</span>
 	            </Grid>
                <Grid container spacing={2} >
-                 <Typography variant="subtitle1" className={classes.value} >{statusVariant.label}</Typography>
+                 <Typography variant="subtitle1" className={classes.value} >{employee.status}</Typography>
                </Grid>
             </Card>
         	<Card
@@ -403,7 +403,7 @@ export default function Battallion_detail(props){
 	               <span className={classes.label}>Shift</span>
 	            </Grid>
                <Grid container spacing={2} >
-                 <Typography variant="subtitle1" className={classes.value} >{shiftVariant.label}</Typography>
+                 <Typography variant="subtitle1" className={classes.value} >{employee.shift}</Typography>
                </Grid>
             </Card>
 
@@ -419,12 +419,12 @@ export default function Battallion_detail(props){
 	               <span className={classes.label}>On leave</span>
 	            </Grid>
                <Grid container spacing={2} >
-                 <Typography variant="subtitle1" className={classes.value} >{leaveVariant.label}</Typography>
+                 <Typography variant="subtitle1" className={classes.value} >{employee.on_leave}</Typography>
                </Grid>
             </Card>
 
             {
-            	employee.on_leave !== 'not_no_leave' ? 
+            	employee.on_leave !== 'Not on leave' ? 
             	(
             		<div>
 	            		<Card

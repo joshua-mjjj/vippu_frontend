@@ -7,7 +7,9 @@ import {
   BATTALLION_TWO_CREATE_LOADING,
   BATTALLION_TWO_CREATED,
   CLEAR_MESSAGES,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  GENERATE_REPORT_BATTALLION_TWO_LOADING,
+  GENERATE_REPORT_BATTALLION_TWO_DONE
 } from "./types";
 
 import { tokenConfig, global_url } from "./auth";
@@ -99,16 +101,22 @@ export const battallion_two_create = (
 };
 
 // GETTING FILES
-export const download_file = () =>  (dispatch) => {
+export const download_file = (filename) =>  (dispatch, getState) => {
      
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+
      axios
-    .get(`${global_url}/api/export_excel/`, { responseType: 'blob', })
+    .get(`${global_url}/api/export_excel/`, { responseType: 'blob', }, tokenConfig(getState))
     .then((res) => {
-      fileDownload(res.data, 'filename.xls');
-      console.log(res.data)
+      fileDownload(res.data, `${filename}.xls`);
+      // fileDownload(res.data, "filename.xls");
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      // console.log(res.data)
     })
     .catch((err) => {
       console.log(err.response)
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
     });
 
 }

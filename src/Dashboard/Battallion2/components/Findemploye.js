@@ -77,24 +77,24 @@ function Findemploye(props) {
               />
             </Grid>
             <Grid item>
-				<Button
+				          <Button
                       variant="contained"
                       onClick={handle_submit}
                       color="primary"
                       style={{ 
                       	height: "36px",
-					    textTransform: 'none',
-					    fontSize: '20px!important',
-					    background: '#101F33',
-					    fontFamily: 'Dosis',
-					    fontWeight: 'bold',
-					    lineHeight: '16px',
-					    color: '#FFFFFF!important'
-					}}>
-                      {	
-		            	props.loading_query === true ? (<Spinner />) : "Search employee"
+          					    textTransform: 'none',
+          					    fontSize: '20px!important',
+          					    background: '#101F33',
+          					    fontFamily: 'Dosis',
+          					    fontWeight: 'bold',
+          					    lineHeight: '16px',
+          					    color: '#FFFFFF!important'
+					            }}>
+                  {	
+		            	  props.loading_query === true ? (<Spinner />) : "Search employee"
 		              }
-                    </Button>
+                 </Button>
             </Grid>
           </Grid>
         </Toolbar>

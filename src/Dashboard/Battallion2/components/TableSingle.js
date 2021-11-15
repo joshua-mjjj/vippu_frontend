@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import { Scrollbar } from './scrollbar';
-import { statusVariants, titleVariants, departmentVariants } from './utils';
+// import { statusVariants, titleVariants, departmentVariants } from './utils';
 
 export default function TableSingle(props){
   const { employee } = props;
@@ -25,17 +25,17 @@ export default function TableSingle(props){
     props.send_detail_id(id)
   }
 
-  const statusVariant = statusVariants.find(
-    (variant) => variant.value === employee.status
-  );
+  // const statusVariant = statusVariants.find(
+  //   (variant) => variant.value === employee.status
+  // );
 
-  const titleVariant = titleVariants.find(
-    (variant) => variant.value === employee.title
-  );
+  // const titleVariant = titleVariants.find(
+  //   (variant) => variant.value === employee.title
+  // );
 
-  const departmentVariant = departmentVariants.find(
-    (variant) => variant.value === employee.department
-  );
+  // const departmentVariant = departmentVariants.find(
+  //   (variant) => variant.value === employee.department
+  // );
 
   return (
     <div>
@@ -133,7 +133,7 @@ export default function TableSingle(props){
                         color="inherit"
                         variant="inherit"
                       >
-                        {titleVariant.label}
+                        {employee.title}
                       </Typography>
                     </Box>
                   </TableCell>
@@ -153,7 +153,7 @@ export default function TableSingle(props){
                         color="inherit"
                         variant="inherit"
                       >
-                        {departmentVariant.label}
+                        {employee.department}
                       </Typography>
                     </Box>
                   </TableCell>
@@ -162,90 +162,90 @@ export default function TableSingle(props){
                   </TableCell>
                   <TableCell>
                    {
-                    statusVariant.value === 'active' ? (
+                    employee.status === 'Active' ? (
                       <Chip
                         sx={{ 'color' : 'green', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }
                     {
-                     statusVariant.value === 'transfered' ? (
+                     employee.status === 'Transfered' ? (
                       <Chip
                         sx={{ 'color' : 'green', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }
                     {
-                     statusVariant.value === 'sick' ? (
+                     employee.status === 'Sick' ? (
                       <Chip
                         sx={{ 'color' : 'orange', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }
                     {
-                     statusVariant.value === 'dead' ? (
+                     employee.status === 'Dead' ? (
                       <Chip
                         sx={{ 'color' : 'orange', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }
                     {
-                     statusVariant.value === 'suspended' ? (
+                     employee.status === 'Suspended' ? (
                       <Chip
                         sx={{ 'color' : 'red', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }
                     {
-                     statusVariant.value === 'dismissed' ? (
+                     employee.status === 'Dismissed' ? (
                       <Chip
                         sx={{ 'color' : 'red', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }
                     {
-                     statusVariant.value === 'deserted' ? (
+                     employee.status === 'Deserted' ? (
                       <Chip
                         sx={{ 'color' : 'red', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }
                     {
-                     statusVariant.value === 'in_court' ? (
+                     employee.status === 'In court' ? (
                       <Chip
                         sx={{ 'color' : 'orange', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }
                     {
-                     statusVariant.value === 'on_course' ? (
+                     employee.status === 'On course' ? (
                       <Chip
                         sx={{ 'color' : 'green', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }
                     {
-                     statusVariant.value === 'absent' ? (
+                     employee.status === 'Absent' ? (
                       <Chip
                         sx={{ 'color' : 'red', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }
                     {
-                     statusVariant.value === 'on_mission' ? (
+                     employee.status === 'On mission' ? (
                       <Chip
                         sx={{ 'color' : 'green', 'fontWeight' : 'bold' }}
-                        label={statusVariant.label}
+                        label={employee.status}
                         variant="outlined"
                       />): null
                     }

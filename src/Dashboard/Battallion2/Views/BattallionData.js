@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import BattallionList from '../components/Battalion_two_list';
+import GenerateExcel from '../components/GenerateExcel';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -18,7 +19,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="#">
-        @SourceCode
+        @iCode
       </Link>{' '}
       {new Date().getFullYear()}.
     </Typography>
@@ -182,9 +183,9 @@ function BattallionData(props) {
     props.battallion_two_fetch_data()
   }
 
-  // const set_tab_1 = () => {
-  //   setTab_value(1)
-  // }
+  const set_tab_1 = () => {
+    setTab_value(1)
+  }
 
   // const set_tab_2 = () => {
   //   setTab_value(2)
@@ -201,7 +202,7 @@ function BattallionData(props) {
               <Tabs value={tab_value} textColor="inherit">
                 <Tab onClick={set_tab_0} label="Battalion employees" />
                 <Tab 
-                  // onClick={set_tab_1} 
+                  onClick={set_tab_1} 
                   label="Generate report" />
                {/* <Tab onClick={set_tab_2} label="Find employee" />*/}
               </Tabs>
@@ -211,9 +212,9 @@ function BattallionData(props) {
               { 
                 tab_value === 0 ? (<BattallionList refetch_data={refetch_data} data={props.data !== null ? props.data : null } />) : null
               }
-              {/*{ 
-                tab_value === 1 ? (<Content />) : null
-              }*/}
+              { 
+                tab_value === 1 ? (<GenerateExcel />) : null
+              }
               {/*{ 
                 tab_value === 2 ? (<Content />) : null
               }*/}

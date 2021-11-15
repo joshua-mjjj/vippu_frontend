@@ -178,7 +178,7 @@ function Content_Newentry(props) {
   }
 
   const handle_education_level_change = (e) => {
-    if(e.target.value === "other"){
+    if(e.target.value === "Other"){
       setEducation_level_bool(false)
       setEducation_level(e.target.value)
     }else{
@@ -494,8 +494,8 @@ function Content_Newentry(props) {
                       className={classes.inputSmall_}
                       onChange={(e) => setSex(e.target.value)}
                     >
-                      <MenuItem value="male">Male</MenuItem>
-                      <MenuItem value="female" >Female</MenuItem>
+                      <MenuItem value="Male">Male</MenuItem>
+                      <MenuItem value="Female" >Female</MenuItem>
                     </Select>
                 </Grid>
                 <Grid item md={6} xs={12} sm={6}>
@@ -540,14 +540,14 @@ function Content_Newentry(props) {
                       className={classes.inputSmall_}
                       onChange={handle_education_level_change}
                     >
-                      <MenuItem value="ple">PLE</MenuItem>
-                      <MenuItem value="uce" >UCE</MenuItem>
-                      <MenuItem value="uace">UACE</MenuItem>
-                      <MenuItem value="diploma">Diploma</MenuItem>
-                      <MenuItem value="bachelors">Bachelors</MenuItem>
-                      <MenuItem value="masters">Masters</MenuItem>
-                      <MenuItem value="doctorate">Doctorate(PhD)</MenuItem>
-                      <MenuItem value="other">Other</MenuItem>
+                      <MenuItem value="PLE">PLE</MenuItem>
+                      <MenuItem value="UCE" >UCE</MenuItem>
+                      <MenuItem value="UACE">UACE</MenuItem>
+                      <MenuItem value="Diploma">Diploma</MenuItem>
+                      <MenuItem value="Bachelors">Bachelors</MenuItem>
+                      <MenuItem value="Masters">Masters</MenuItem>
+                      <MenuItem value="Doctorate">Doctorate(PhD)</MenuItem>
+                      <MenuItem value="Other">Other</MenuItem>
                     </Select>
                 </Grid> 
                <Grid item md={6} xs={12} sm={6}>
@@ -603,11 +603,11 @@ function Content_Newentry(props) {
                       className={classes.inputSmall_}
                       onChange={handle_Department_Change}
                     >
-                      <MenuItem value="embassy">Embassy</MenuItem>
-                      <MenuItem value="consolate" >Consulate</MenuItem>
-                      <MenuItem value="high_commission">High Commission</MenuItem>
-                      <MenuItem value="other_diplomats">Other diplomats</MenuItem>
-                      <MenuItem value="administration">Administration</MenuItem>
+                      <MenuItem value="Embassy">Embassy</MenuItem>
+                      <MenuItem value="Consulate" >Consulate</MenuItem>
+                      <MenuItem value="High commission">High Commission</MenuItem>
+                      <MenuItem value="Other diplomats">Other diplomats</MenuItem>
+                      <MenuItem value="Administration">Administration</MenuItem>
                     </Select>
                 </Grid>
 
@@ -623,15 +623,15 @@ function Content_Newentry(props) {
                       className={classes.inputSmall_}
                       onChange={handle_Title_Change}
                     >
-                      <MenuItem value="commandant">Commandant</MenuItem>
-                      <MenuItem value="deputy_commandant" >Deputy Commandant</MenuItem>
-                      <MenuItem value="staff_officer">Staff Officer</MenuItem>
-                      <MenuItem value="head_of_operations">Head of Operations</MenuItem>
-                      <MenuItem value="head_of_armoury">Head of Armoury</MenuItem>
-                      <MenuItem value="supervisor">Supervisor</MenuItem>
-                      <MenuItem value="in_Charge">In Charge</MenuItem>
-                      <MenuItem value="2nd_in_charge">2nd In charge</MenuItem>
-                      <MenuItem value="driver">Driver</MenuItem>
+                      <MenuItem value="Commandant">Commandant</MenuItem>
+                      <MenuItem value="Deputy commandant" >Deputy Commandant</MenuItem>
+                      <MenuItem value="Staff officer">Staff Officer</MenuItem>
+                      <MenuItem value="Head of operations">Head of Operations</MenuItem>
+                      <MenuItem value="Head of armoury">Head of Armoury</MenuItem>
+                      <MenuItem value="Supervisor">Supervisor</MenuItem>
+                      <MenuItem value="In Charge">In Charge</MenuItem>
+                      <MenuItem value="2nd In Charge">2nd In charge</MenuItem>
+                      <MenuItem value="Driver">Driver</MenuItem>
                     </Select>
                 </Grid>                 
               </Grid>
@@ -649,17 +649,17 @@ function Content_Newentry(props) {
                       className={classes.inputSmall_}
                       onChange={handle_Status_Change}
                     >
-                      <MenuItem value="active">Active</MenuItem>
-                      <MenuItem value="absent" >Absent(AWOL)</MenuItem>
-                      <MenuItem value="transfered">Transfered</MenuItem>
-                      <MenuItem value="sick">Sick</MenuItem>
-                      <MenuItem value="dead">Dead</MenuItem>
-                      <MenuItem value="suspended">Suspended</MenuItem>
-                      <MenuItem value="dismissed">Dismissed</MenuItem>
-                      <MenuItem value="in_court">In court(Displinary/criminal)</MenuItem>
-                      <MenuItem value="deserted">Deserted</MenuItem>
-                      <MenuItem value="on_course">On course</MenuItem>
-                      <MenuItem value="on_mission">On mission</MenuItem>
+                      <MenuItem value="Active">Active</MenuItem>
+                      <MenuItem value="Absent" >Absent(AWOL)</MenuItem>
+                      <MenuItem value="Transfered">Transfered</MenuItem>
+                      <MenuItem value="Sick">Sick</MenuItem>
+                      <MenuItem value="Dead">Dead</MenuItem>
+                      <MenuItem value="Suspended">Suspended</MenuItem>
+                      <MenuItem value="Dismissed">Dismissed</MenuItem>
+                      <MenuItem value="In court">In court(Displinary/criminal)</MenuItem>
+                      <MenuItem value="Deserted">Deserted</MenuItem>
+                      <MenuItem value="On course">On course</MenuItem>
+                      <MenuItem value="On mission">On mission</MenuItem>
                     </Select>
                 </Grid>
                 <Grid item md={6} xs={12} sm={6}>
@@ -674,10 +674,10 @@ function Content_Newentry(props) {
                       className={classes.inputSmall_}
                       onChange={handle_Shift_Change}
                     >
-                      <MenuItem value="day">Day</MenuItem>
-                      <MenuItem value="night" >Night</MenuItem>
-                      <MenuItem value="long_night">Long night</MenuItem>
-                      <MenuItem value="none">None(not applicable)</MenuItem>
+                      <MenuItem value="Day">Day</MenuItem>
+                      <MenuItem value="Night" >Night</MenuItem>
+                      <MenuItem value="Long night">Long night</MenuItem>
+                      <MenuItem value="None">None(not applicable)</MenuItem>
                     </Select>
                 </Grid>  
               </Grid>
@@ -762,8 +762,8 @@ function Content_Newentry(props) {
                       className={classes.inputSmall_}
                       onChange={(e) => setArmed(e.target.value)}
                     >
-                      <MenuItem value="yes">Yes</MenuItem>
-                      <MenuItem value="no" >No</MenuItem>
+                      <MenuItem value="Yes">Yes</MenuItem>
+                      <MenuItem value="No" >No</MenuItem>
                     </Select>
                 </Grid>           
               </Grid>
@@ -806,12 +806,12 @@ function Content_Newentry(props) {
                       className={classes.inputSmall_}
                       onChange={handle_Leave_Change}
                     >
-                      <MenuItem value="pass_leave">Pass leave</MenuItem>
-                      <MenuItem value="maternity_leave" >Maternity leave</MenuItem>
-                      <MenuItem value="sick_leave">Sick leave</MenuItem>
-                      <MenuItem value="study_leave">Study leave</MenuItem>
-                      <MenuItem value="annual_leave">Annual leave</MenuItem>
-                      <MenuItem value="not_no_leave">Not on leave</MenuItem>
+                      <MenuItem value="Pass leave">Pass leave</MenuItem>
+                      <MenuItem value="Maternity leave" >Maternity leave</MenuItem>
+                      <MenuItem value="Sick leave">Sick leave</MenuItem>
+                      <MenuItem value="Study leave">Study leave</MenuItem>
+                      <MenuItem value="Annual leave">Annual leave</MenuItem>
+                      <MenuItem value="Not on leave">Not on leave</MenuItem>
                     </Select>
                 </Grid>  
                  <Grid item md={4} xs={12} sm={12}>
