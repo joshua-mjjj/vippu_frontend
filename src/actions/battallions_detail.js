@@ -19,7 +19,7 @@ export const battallion_two_fetch_detail = (id) => (dispatch, getState) => {
     axios
     .get(`${global_url}/api/battallion_two/${id}`, tokenConfig(getState))
     .then((res) => {
-      console.log(res.data)
+      // console.log(res.data)
       if(res.data){
       	dispatch({
 	        type: BATTALION_TWO_DETAIL_FETCHED,

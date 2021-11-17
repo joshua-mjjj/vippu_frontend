@@ -107,9 +107,9 @@ function GenerateExcel(props) {
     props.clear_messages()
   }
 
-  const control_bool_error = () => {
-    props.clear_errors()
-  }
+  // const control_bool_error = () => {
+  //   props.clear_errors()
+  // }
 
   const content_all_fields_required = "Please provide a file name before submitting."
 
@@ -137,13 +137,13 @@ function GenerateExcel(props) {
                   show_alert === true ? ( <Alert content={content_all_fields_required} control_bool={control_bool} status="error" />) : null
                  }
                  {
-                  props.messages.api_message !== null && props.messages.message_type === "change_password_success" ? 
+                  props.messages.api_message !== null && props.messages.message_type === "file_downloaded" ? 
                   ( <Alert content={props.messages.api_message} control_bool={control_bool_api_message} status="success" />) : null
                  }
-                 {
+                 {/*{
                   props.error.msg !== null && props.error.msg.detail ? 
                   ( <Alert content={"You provided an invalid password, please make you provide a valid password inorder to change your password. If you have forgot your password, please contact the System Adminstrators for help."} control_bool={control_bool_error} status="error" />) : null
-                 }
+                 }*/}
                 </Grid>  
 
                 <Grid item md={12} xs={12} sm={12}>

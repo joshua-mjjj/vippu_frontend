@@ -137,7 +137,7 @@ export default function AutocompleteLocations(props) {
           {...params}
           className={classes.inputSmall_}
           // sx={{ minWidth: 450 }}
-          placeholder="Type the location e.g buziga"
+          placeholder={props.default_value}
           disableUnderline
           displayEmpty
           fullWidth

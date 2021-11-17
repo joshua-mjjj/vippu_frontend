@@ -109,6 +109,8 @@ export const download_file = (filename) =>  (dispatch, getState) => {
      axios
     .get(`${global_url}/api/export_excel/`, { responseType: 'blob', }, tokenConfig(getState))
     .then((res) => {
+      const message = "Your report will soon be downloaded, please find it in your downloads folder."
+      dispatch(create_api_message(message, "file_downloaded"));
       fileDownload(res.data, `${filename}.xls`);
       // fileDownload(res.data, "filename.xls");
       dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
