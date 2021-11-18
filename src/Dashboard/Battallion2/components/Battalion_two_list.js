@@ -19,7 +19,7 @@ function Battalion_two_list(props){
   // }, [props.data]);
 
   const send_detail_id = (id) => {
-  	console.log(id)
+  	// console.log(id)
   	setToggle(true)
   	props.battallion_two_fetch_detail(id)
   }

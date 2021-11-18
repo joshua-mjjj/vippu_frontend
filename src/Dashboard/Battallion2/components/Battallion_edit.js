@@ -25,7 +25,7 @@ import Alert from './Alert';
 import Spinner from "../../../components/Spinner";
  
 
-import { battallion_two_create, clear_messages, clear_errors } from '../../../actions/battallions_create';
+import { battallion_two_create, battallion_two_update, clear_messages, clear_errors } from '../../../actions/battallions_create';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -114,14 +114,13 @@ function Battallion_edit(props) {
 
   const [education_level, setEducation_level] = React.useState(employee.education_level);
   const [education_level_other, setOtherEducation_level] = React.useState(employee.other_education_level);
-  const [other_education_level, setEducation_level_bool] = React.useState(true);
+  const [other_education_level, setEducation_level_bool] = React.useState(employee.education_level === "Other" ? false: true);
 
   const [armed, setArmed] = React.useState(employee.armed);
   const [rank, setRank] = React.useState(employee.rank);
   const [title, setTitle] = React.useState(employee.title);
   const [shift, setShift] = React.useState(employee.shift);
   const [status, setStatus] = React.useState(employee.status);
-  const [date_pickers_enabled, setEnable_date_pickers] = React.useState(true);
 
   const [date_of_enlistment, setDate_of_enlistment] = React.useState(new Date(employee.date_of_enlistment));
   const [date_of_enlistment_data, setDate_of_enlistment_data] = React.useState(null);
@@ -135,11 +134,13 @@ function Battallion_edit(props) {
   const [date_of_birth, setDate_of_birth] = React.useState(new Date(employee.date_of_birth));
   const [date_of_birth_data, setDate_of_birth_data] = React.useState(null);
 
+  const [date_pickers_enabled, setEnable_date_pickers] = React.useState(employee.on_leave === "Not on leave" ? true : false);
   const [on_leave, setOnLeave] = React.useState(employee.on_leave);
-  const [leave_start, setLeave_start] = React.useState(new Date());
+  
+  const [leave_start, setLeave_start] = React.useState(new Date(employee.on_leave !== "Not on leave" ? employee.leave_start_date : null));
   const [leave_start_data, setLeave_start_data] = React.useState(null);
 
-  const [leave_end, setLeave_end] = React.useState(new Date());
+  const [leave_end, setLeave_end] = React.useState(new Date(employee.on_leave !== "Not on leave" ? employee.leave_end_date : null));
   const [leave_end_data, setLeave_end_data] = React.useState(null);
 
   const [show_alert, setShow_alert] = React.useState(false);
@@ -193,7 +194,7 @@ function Battallion_edit(props) {
   }
 
   const handle_Leave_Change = (e) => {
-    if(e.target.value === "not_no_leave"){
+    if(e.target.value === "Not on leave"){
       setEnable_date_pickers(true)
       setOnLeave(e.target.value)
     }else{
@@ -216,6 +217,7 @@ function Battallion_edit(props) {
       setEducation_level(e.target.value)
     }else{
        setEducation_level_bool(true)
+       setOtherEducation_level(null)
        setEducation_level(e.target.value)
     }
   }
@@ -293,7 +295,7 @@ function Battallion_edit(props) {
 
     let date_of_enlistment_sub
     if(date_of_enlistment_data === null){
-      let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
+      let date_object = `${date_of_enlistment.getFullYear()}-${date_of_enlistment.getMonth()+1}-${date_of_enlistment.getDate()}`
       date_of_enlistment_sub = date_object
     }else {
       date_of_enlistment_sub = date_of_enlistment_data
@@ -301,7 +303,7 @@ function Battallion_edit(props) {
 
     let date_of_transfer_sub
     if(date_of_transfer_data === null){
-      let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
+      let date_object = `${date_of_transfer.getFullYear()}-${date_of_transfer.getMonth()+1}-${date_of_transfer.getDate()}`
       date_of_transfer_sub = date_object
     }else{
       date_of_transfer_sub = date_of_transfer_data
@@ -309,7 +311,7 @@ function Battallion_edit(props) {
 
     let date_of_promotion_sub
     if(date_of_promotion_data === null){
-      let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
+      let date_object = `${date_of_promotion.getFullYear()}-${date_of_promotion.getMonth()+1}-${date_of_promotion.getDate()}`
       date_of_promotion_sub = date_object
     }else{
       date_of_promotion_sub = date_of_promotion_data
@@ -317,14 +319,14 @@ function Battallion_edit(props) {
 
     let date_of_birth_sub
     if(date_of_birth_data === null){
-      let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
+      let date_object = `${date_of_birth.getFullYear()}-${date_of_birth.getMonth()+1}-${date_of_birth.getDate()}`
       date_of_birth_sub = date_object
     }else{
       date_of_birth_sub = date_of_birth_data
     }
 
     let leave_start_sub = null
-    if(leave_start_data === null && on_leave !== 'not_no_leave'){
+    if(leave_start_data === null && on_leave !== 'Not on leave'){
       let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
       leave_start_sub = date_object
     }else{
@@ -332,7 +334,7 @@ function Battallion_edit(props) {
     }
 
     let leave_end_sub = null
-    if(leave_end_data === null && on_leave !== 'not_no_leave'){
+    if(leave_end_data === null && on_leave !== 'Not on leave'){
       let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
       leave_end_sub = date_object
     }else{
@@ -340,8 +342,39 @@ function Battallion_edit(props) {
     }
 
     const battallion_value = "battallion_two" // Battallion 2 form, hence we do alittle bit of hard coding
-    // Create an employee
-    e.preventDefault()
+    
+        console.log("start here: =================================")
+        console.log(first_name)
+        console.log(last_name)
+        console.log(nin)
+        console.log(ipps)
+        console.log(file_number)
+        console.log(battallion_value)
+        console.log(account_number)
+        console.log(contact)
+        console.log(sex)
+        console.log(rank)
+        console.log(education_level)
+        console.log(education_level_other)
+        console.log(bank)
+        console.log(branch)
+        console.log(department)
+        console.log(title)
+        console.log(status)
+        console.log(shift)
+        console.log(date_of_enlistment_sub)
+        console.log(date_of_transfer_sub)
+        console.log(date_of_promotion_sub)
+        console.log(date_of_birth_sub)
+        console.log(armed)
+        console.log(section)
+        console.log(location)
+        console.log(on_leave)
+        console.log(leave_start_sub)
+        console.log(leave_end_sub)
+
+    // update an employee
+    // e.preventDefault()
     if(
       department !== null && 
       rank !== null && 
@@ -364,7 +397,9 @@ function Battallion_edit(props) {
       section !== null && 
       location !== null
     ){
-      props.battallion_two_create(first_name,
+      props.battallion_two_update(
+        employee.id,
+        first_name,
         last_name,
         nin,
         ipps,
@@ -925,6 +960,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   battallion_two_create,
   clear_messages,
-  clear_errors
+  clear_errors,
+  battallion_two_update
 })(Battallion_edit);
 

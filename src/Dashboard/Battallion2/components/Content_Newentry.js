@@ -291,7 +291,7 @@ function Content_Newentry(props) {
     }
 
     let leave_start_sub = null
-    if(leave_start_data === null && on_leave !== 'not_no_leave'){
+    if(leave_start_data === null && on_leave !== 'Not on leave'){
       let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
       leave_start_sub = date_object
     }else{
@@ -299,7 +299,7 @@ function Content_Newentry(props) {
     }
 
     let leave_end_sub = null
-    if(leave_end_data === null && on_leave !== 'not_no_leave'){
+    if(leave_end_data === null && on_leave !== 'Not on leave'){
       let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
       leave_end_sub = date_object
     }else{

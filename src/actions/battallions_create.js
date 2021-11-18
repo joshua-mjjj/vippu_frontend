@@ -100,14 +100,102 @@ export const battallion_two_create = (
     });
 };
 
+//  BATTALLION TWO UPDATE 
+export const battallion_two_update = (
+        id,
+        first_name,
+        last_name,
+        nin,
+        ipps,
+        file_number,
+        battallion,
+        account_number,
+        contact,
+        sex,
+        rank,
+        education_level,
+        other_education_level,
+        bank,
+        branch,
+        department,
+        title,
+        status,
+        shift,
+        date_of_enlistment,
+        date_of_transfer,
+        date_of_promotion,
+        date_of_birth,
+        armed,
+        section,
+        location,
+        on_leave,
+        leave_start_date,
+        leave_end_date
+    ) => (dispatch, getState) => {
+  //Loading
+  dispatch({ type: BATTALLION_TWO_CREATE_LOADING });
+
+  // Request Body
+  const body = JSON.stringify({ 
+        first_name,
+        last_name,
+        nin,
+        ipps,
+        file_number,
+        battallion,
+        account_number,
+        contact,
+        sex,
+        rank,
+        education_level,
+        other_education_level,
+        bank,
+        branch,
+        department,
+        title,
+        status,
+        shift,
+        date_of_enlistment,
+        date_of_transfer,
+        date_of_promotion,
+        date_of_birth,
+        armed,
+        section,
+        location,
+        on_leave,
+        leave_start_date,
+        leave_end_date 
+    });
+    // console.log(body)
+    const message = `${first_name}'s details have successfully been updated in the database.`
+    axios
+    .put(`${global_url}/api/battallion_two/${id}/`, body, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      dispatch({
+        type: BATTALLION_TWO_CREATED,
+        payload: res.data,
+      });
+      dispatch(create_api_message(message, "battallion_employee_created"));
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+      dispatch(returnError(err.response.data, err.response.status));
+      dispatch({
+        type: BATTALLION_TWO_CREATED,
+      });
+    });
+};
+
 // GETTING FILES
 export const download_file = (filename) =>  (dispatch, getState) => {
      
     // generating
     dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    // const token = getState().auth.token;
 
      axios
-    .get(`${global_url}/api/export_excel/`, { responseType: 'blob', }, tokenConfig(getState))
+    .get(`${global_url}/api/export_excel/`, { responseType: 'blob', })
     .then((res) => {
       const message = "Your report will soon be downloaded, please find it in your downloads folder."
       dispatch(create_api_message(message, "file_downloaded"));

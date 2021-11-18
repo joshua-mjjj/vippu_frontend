@@ -114,7 +114,7 @@ export default function AutocompleteSections(props) {
     }
   }, [open]);
 
-  console.log(props.default_value)
+  // console.log(props.default_value)
 
   return (
     <Autocomplete
