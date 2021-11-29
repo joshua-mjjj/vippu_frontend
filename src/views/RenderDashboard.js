@@ -9,6 +9,7 @@ import IdleTimer from 'react-idle-timer';
 // import LoginPage from "./LoginPage";
 import DashboardRoot from "../Dashboard/Paperbase";
 import DashboardRootBattallion2 from "../Dashboard/Battallion2/Paperbase";
+import DashboardRootBattallion1 from "../Dashboard/Battallion1/Paperbase";
 
 import * as Scroll from 'react-scroll';
 var scroll = Scroll.animateScroll;
@@ -92,6 +93,10 @@ class RenderDashboard extends React.Component {
 						         		  	{
 						         		  		this.props.auth.user.battallion === "battallion_two" ? 
 						         		  		(<DashboardRootBattallion2 /> ) :("")
+						         		  	}
+						         		  	{
+						         		  		this.props.auth.user.battallion === "battallion_one" ? 
+						         		  		(<DashboardRootBattallion1 /> ) :("")
 						         		  	}
 						         		   </div>
 						         		  ):("")

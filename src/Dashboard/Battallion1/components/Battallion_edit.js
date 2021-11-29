@@ -25,7 +25,7 @@ import Alert from './Alert';
 import Spinner from "../../../components/Spinner";
  
 
-import { battallion_two_create, clear_messages, clear_errors } from '../../../actions/battallions_create';
+import { battallion_two_create, battallion_two_update, clear_messages, clear_errors } from '../../../actions/battallions_create';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,57 +92,91 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Content_Newentry(props) {
+function Battallion_edit(props) {
   const classes = useStyles();
-
+  const { employee } = props; 
   // Implementaion code 
 
-  const [first_name, setFirst_name] = React.useState(null);
-  const [last_name, setLast_name] = React.useState(null);
-  const [nin, setNin] = React.useState(null);
-  const [ipps, setIpps] = React.useState(null);
-  const [file_number, setFile_number] = React.useState(null);
-  const [account_number, setAccount_number] = React.useState(null);
-  const [bank, setBank] = React.useState(null);
-  const [branch, setBranch] = React.useState(null);
-  const [contact, setContact] = React.useState(null);
-  const [sex, setSex] = React.useState(null);
+  const [first_name, setFirst_name] = React.useState(employee.first_name);
+  const [last_name, setLast_name] = React.useState(employee.last_name);
+  const [nin, setNin] = React.useState(employee.nin);
+  const [ipps, setIpps] = React.useState(employee.ipps);
+  const [file_number, setFile_number] = React.useState(employee.file_number);
+  const [account_number, setAccount_number] = React.useState(employee.account_number);
+  const [bank, setBank] = React.useState(employee.bank);
+  const [branch, setBranch] = React.useState(employee.branch);
+  const [contact, setContact] = React.useState(employee.contact);
+  const [sex, setSex] = React.useState(employee.sex);
 
-  const [department, setDepartment] = React.useState(null);
-  const [section, setSection] = React.useState(null);
-  const [location, setLocation] = React.useState(null);
+  const [department, setDepartment] = React.useState(employee.department);
+  const [section, setSection] = React.useState(employee.section);
+  const [location, setLocation] = React.useState(employee.location);
 
-  const [education_level, setEducation_level] = React.useState(null);
-  const [education_level_other, setOtherEducation_level] = React.useState(null);
-  const [other_education_level, setEducation_level_bool] = React.useState(true);
+  const [education_level, setEducation_level] = React.useState(employee.education_level);
+  const [education_level_other, setOtherEducation_level] = React.useState(employee.other_education_level);
+  const [other_education_level, setEducation_level_bool] = React.useState(employee.education_level === "Other" ? false: true);
 
-  const [armed, setArmed] = React.useState(null);
-  const [rank, setRank] = React.useState(null);
-  const [title, setTitle] = React.useState(null);
-  const [shift, setShift] = React.useState(null);
-  const [status, setStatus] = React.useState(null);
-  const [date_pickers_enabled, setEnable_date_pickers] = React.useState(true);
+  const [armed, setArmed] = React.useState(employee.armed);
+  const [rank, setRank] = React.useState(employee.rank);
+  const [title, setTitle] = React.useState(employee.title);
+  const [shift, setShift] = React.useState(employee.shift);
+  const [status, setStatus] = React.useState(employee.status);
 
-  const [date_of_enlistment, setDate_of_enlistment] = React.useState(new Date());
+  const [date_of_enlistment, setDate_of_enlistment] = React.useState(new Date(employee.date_of_enlistment));
   const [date_of_enlistment_data, setDate_of_enlistment_data] = React.useState(null);
 
-  const [date_of_transfer, setDate_of_transfer] = React.useState(new Date());
+  const [date_of_transfer, setDate_of_transfer] = React.useState(new Date(employee.date_of_transfer));
   const [date_of_transfer_data, setDate_of_transfer_data] = React.useState(null);
 
-  const [date_of_promotion, setDate_of_promotion] = React.useState(new Date());
+  const [date_of_promotion, setDate_of_promotion] = React.useState(new Date(employee.date_of_promotion));
   const [date_of_promotion_data, setDate_of_promotion_data] = React.useState(null);
 
-  const [date_of_birth, setDate_of_birth] = React.useState(new Date());
+  const [date_of_birth, setDate_of_birth] = React.useState(new Date(employee.date_of_birth));
   const [date_of_birth_data, setDate_of_birth_data] = React.useState(null);
 
-  const [on_leave, setOnLeave] = React.useState(null);
-  const [leave_start, setLeave_start] = React.useState(new Date());
+  const [date_pickers_enabled, setEnable_date_pickers] = React.useState(employee.on_leave === "Not on leave" ? true : false);
+  const [on_leave, setOnLeave] = React.useState(employee.on_leave);
+  
+  const [leave_start, setLeave_start] = React.useState(new Date(employee.on_leave !== "Not on leave" ? employee.leave_start_date : null));
   const [leave_start_data, setLeave_start_data] = React.useState(null);
 
-  const [leave_end, setLeave_end] = React.useState(new Date());
+  const [leave_end, setLeave_end] = React.useState(new Date(employee.on_leave !== "Not on leave" ? employee.leave_end_date : null));
   const [leave_end_data, setLeave_end_data] = React.useState(null);
 
   const [show_alert, setShow_alert] = React.useState(false);
+
+// account_number: null
+// armed: "yes"
+// bank: "Standbic"
+// battallion: "battallion_two"
+// branch: "Kampala"
+// contact: "0775356433"
+// created_at: "2021-11-06T13:52:50.930266Z"
+// date_of_birth: "2021-11-06"
+// date_of_enlistment: "2021-11-06"
+// date_of_promotion: "2021-11-06"
+// date_of_transfer: "2021-11-06"
+// department: "administration"
+// education_level: "masters"
+// file_number: "W/66574"
+// first_name: "Joshua"
+// id: 2
+// ipps: "WE5346577"
+// last_name: "Wafula"
+// leave_end_date: null
+// leave_start_date: null
+// location: "Plot 2 Accacia Avenue"
+// nin: "AC65789f"
+// on_leave: "not_no_leave"
+// other_education_level: null
+// rank: "SCP"
+// section: "Algerian Embassy"
+// sex: "male"
+// shift: "none"
+// status: "active"
+// title: "commandant"
+// updated_at: "2021-11-06T13:52:50.930299Z"
+
 
   // eslint-disable-next-line
   const [battallion, setBattallion] = React.useState("Battalion 2");  // We already know this is Battallion 2 form
@@ -183,6 +217,7 @@ function Content_Newentry(props) {
       setEducation_level(e.target.value)
     }else{
        setEducation_level_bool(true)
+       setOtherEducation_level(null)
        setEducation_level(e.target.value)
     }
   }
@@ -260,7 +295,7 @@ function Content_Newentry(props) {
 
     let date_of_enlistment_sub
     if(date_of_enlistment_data === null){
-      let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
+      let date_object = `${date_of_enlistment.getFullYear()}-${date_of_enlistment.getMonth()+1}-${date_of_enlistment.getDate()}`
       date_of_enlistment_sub = date_object
     }else {
       date_of_enlistment_sub = date_of_enlistment_data
@@ -268,7 +303,7 @@ function Content_Newentry(props) {
 
     let date_of_transfer_sub
     if(date_of_transfer_data === null){
-      let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
+      let date_object = `${date_of_transfer.getFullYear()}-${date_of_transfer.getMonth()+1}-${date_of_transfer.getDate()}`
       date_of_transfer_sub = date_object
     }else{
       date_of_transfer_sub = date_of_transfer_data
@@ -276,7 +311,7 @@ function Content_Newentry(props) {
 
     let date_of_promotion_sub
     if(date_of_promotion_data === null){
-      let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
+      let date_object = `${date_of_promotion.getFullYear()}-${date_of_promotion.getMonth()+1}-${date_of_promotion.getDate()}`
       date_of_promotion_sub = date_object
     }else{
       date_of_promotion_sub = date_of_promotion_data
@@ -284,7 +319,7 @@ function Content_Newentry(props) {
 
     let date_of_birth_sub
     if(date_of_birth_data === null){
-      let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
+      let date_object = `${date_of_birth.getFullYear()}-${date_of_birth.getMonth()+1}-${date_of_birth.getDate()}`
       date_of_birth_sub = date_object
     }else{
       date_of_birth_sub = date_of_birth_data
@@ -307,8 +342,39 @@ function Content_Newentry(props) {
     }
 
     const battallion_value = "battallion_two" // Battallion 2 form, hence we do alittle bit of hard coding
-    // Create an employee
-    e.preventDefault()
+    
+        console.log("start here: =================================")
+        console.log(first_name)
+        console.log(last_name)
+        console.log(nin)
+        console.log(ipps)
+        console.log(file_number)
+        console.log(battallion_value)
+        console.log(account_number)
+        console.log(contact)
+        console.log(sex)
+        console.log(rank)
+        console.log(education_level)
+        console.log(education_level_other)
+        console.log(bank)
+        console.log(branch)
+        console.log(department)
+        console.log(title)
+        console.log(status)
+        console.log(shift)
+        console.log(date_of_enlistment_sub)
+        console.log(date_of_transfer_sub)
+        console.log(date_of_promotion_sub)
+        console.log(date_of_birth_sub)
+        console.log(armed)
+        console.log(section)
+        console.log(location)
+        console.log(on_leave)
+        console.log(leave_start_sub)
+        console.log(leave_end_sub)
+
+    // update an employee
+    // e.preventDefault()
     if(
       department !== null && 
       rank !== null && 
@@ -331,7 +397,9 @@ function Content_Newentry(props) {
       section !== null && 
       location !== null
     ){
-      props.battallion_two_create(first_name,
+      props.battallion_two_update(
+        employee.id,
+        first_name,
         last_name,
         nin,
         ipps,
@@ -778,7 +846,7 @@ function Content_Newentry(props) {
                     className={classes.inputSmall}
                     fullWidth
                   />*/}
-                  <AutocompleteSections get_section_value={get_section_value} />
+                  <AutocompleteSections default_value={section} get_section_value={get_section_value} />
                 </Grid>    
                 <Grid item md={6} xs={12} sm={6}>
                   <FormLabel component="label" className={classes.formLabel}>Location</FormLabel>                 
@@ -789,7 +857,7 @@ function Content_Newentry(props) {
                     className={classes.inputSmall}
                     fullWidth
                   />*/}
-                  <AutocompleteLocations get_section_value={get_location_value} />
+                  <AutocompleteLocations default_value={location} get_section_value={get_location_value} />
                 </Grid>              
               </Grid>
 
@@ -892,6 +960,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   battallion_two_create,
   clear_messages,
-  clear_errors
-})(Content_Newentry);
+  clear_errors,
+  battallion_two_update
+})(Battallion_edit);
 

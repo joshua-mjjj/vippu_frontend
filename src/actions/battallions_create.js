@@ -14,6 +14,8 @@ import {
 
 import { tokenConfig, global_url } from "./auth";
 
+export const unique_site_id = '@regulars_encode_data$IAMTHEREFOREIAM'
+
 //  BATTALLION TWO CREATE 
 export const battallion_two_create = (
 	    first_name,
@@ -195,7 +197,7 @@ export const download_file = (filename) =>  (dispatch, getState) => {
     // const token = getState().auth.token;
 
      axios
-    .get(`${global_url}/api/export_excel/`, { responseType: 'blob', })
+    .get(`${global_url}/api/export_excel/?unique=${unique_site_id}`, { responseType: 'blob', })
     .then((res) => {
       const message = "Your report will soon be downloaded, please find it in your downloads folder."
       dispatch(create_api_message(message, "file_downloaded"));
