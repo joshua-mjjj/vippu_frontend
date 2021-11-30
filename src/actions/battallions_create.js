@@ -102,6 +102,92 @@ export const battallion_two_create = (
     });
 };
 
+//  BATTALLION ONE CREATE 
+export const battallion_one_create = (
+        first_name,
+        last_name,
+        nin,
+        ipps,
+        file_number,
+        battallion,
+        account_number,
+        contact,
+        sex,
+        rank,
+        education_level,
+        other_education_level,
+        bank,
+        branch,
+        department,
+        title,
+        status,
+        shift,
+        date_of_enlistment,
+        date_of_transfer,
+        date_of_promotion,
+        date_of_birth,
+        armed,
+        section,
+        location,
+        on_leave,
+        leave_start_date,
+        leave_end_date
+    ) => (dispatch, getState) => {
+  //Loading
+  dispatch({ type: BATTALLION_TWO_CREATE_LOADING });
+
+  // Request Body
+  const body = JSON.stringify({ 
+        first_name,
+        last_name,
+        nin,
+        ipps,
+        file_number,
+        battallion,
+        account_number,
+        contact,
+        sex,
+        rank,
+        education_level,
+        other_education_level,
+        bank,
+        branch,
+        department,
+        title,
+        status,
+        shift,
+        date_of_enlistment,
+        date_of_transfer,
+        date_of_promotion,
+        date_of_birth,
+        armed,
+        section,
+        location,
+        on_leave,
+        leave_start_date,
+        leave_end_date 
+    });
+    // console.log(body)
+    const message = `${first_name}'s details have been saved in the database.`
+    axios
+    .post(`${global_url}/api/battallion_one/`, body, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      dispatch({
+        type: BATTALLION_TWO_CREATED,
+        payload: res.data,
+      });
+      dispatch(create_api_message(message, "battallion_employee_created"));
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+      dispatch(returnError(err.response.data, err.response.status));
+      dispatch({
+        type: BATTALLION_TWO_CREATED,
+      });
+    });
+};
+
 //  BATTALLION TWO UPDATE 
 export const battallion_two_update = (
         id,
@@ -172,6 +258,93 @@ export const battallion_two_update = (
     const message = `${first_name}'s details have successfully been updated in the database.`
     axios
     .put(`${global_url}/api/battallion_two/${id}/`, body, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      dispatch({
+        type: BATTALLION_TWO_CREATED,
+        payload: res.data,
+      });
+      dispatch(create_api_message(message, "battallion_employee_created"));
+    })
+    .catch((err) => {
+      console.log(err.response.data)
+      dispatch(returnError(err.response.data, err.response.status));
+      dispatch({
+        type: BATTALLION_TWO_CREATED,
+      });
+    });
+};
+
+//  BATTALLION TWO UPDATE 
+export const battallion_one_update = (
+        id,
+        first_name,
+        last_name,
+        nin,
+        ipps,
+        file_number,
+        battallion,
+        account_number,
+        contact,
+        sex,
+        rank,
+        education_level,
+        other_education_level,
+        bank,
+        branch,
+        department,
+        title,
+        status,
+        shift,
+        date_of_enlistment,
+        date_of_transfer,
+        date_of_promotion,
+        date_of_birth,
+        armed,
+        section,
+        location,
+        on_leave,
+        leave_start_date,
+        leave_end_date
+    ) => (dispatch, getState) => {
+  //Loading
+  dispatch({ type: BATTALLION_TWO_CREATE_LOADING });
+
+  // Request Body
+  const body = JSON.stringify({ 
+        first_name,
+        last_name,
+        nin,
+        ipps,
+        file_number,
+        battallion,
+        account_number,
+        contact,
+        sex,
+        rank,
+        education_level,
+        other_education_level,
+        bank,
+        branch,
+        department,
+        title,
+        status,
+        shift,
+        date_of_enlistment,
+        date_of_transfer,
+        date_of_promotion,
+        date_of_birth,
+        armed,
+        section,
+        location,
+        on_leave,
+        leave_start_date,
+        leave_end_date 
+    });
+    // console.log(body)
+    const message = `${first_name}'s details have successfully been updated in the database.`
+    axios
+    .put(`${global_url}/api/battallion_one/${id}/`, body, tokenConfig(getState))
     .then((res) => {
       // console.log(res.data)
       dispatch({

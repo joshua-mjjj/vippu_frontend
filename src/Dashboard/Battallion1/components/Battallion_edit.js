@@ -25,7 +25,7 @@ import Alert from './Alert';
 import Spinner from "../../../components/Spinner";
  
 
-import { battallion_two_create, battallion_two_update, clear_messages, clear_errors } from '../../../actions/battallions_create';
+import { battallion_one_update, battallion_two_update, clear_messages, clear_errors } from '../../../actions/battallions_create';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -179,7 +179,7 @@ function Battallion_edit(props) {
 
 
   // eslint-disable-next-line
-  const [battallion, setBattallion] = React.useState("Battalion 2");  // We already know this is Battallion 2 form
+  const [battallion, setBattallion] = React.useState("Battalion 1");  // We already know this is Battallion 2 form
 
   const handle_Department_Change = (e) => {
     setDepartment(e.target.value)
@@ -341,37 +341,37 @@ function Battallion_edit(props) {
       leave_end_sub = leave_end_data
     }
 
-    const battallion_value = "battallion_two" // Battallion 2 form, hence we do alittle bit of hard coding
+    const battallion_value = "battallion_one" // Battallion 2 form, hence we do alittle bit of hard coding
     
-        console.log("start here: =================================")
-        console.log(first_name)
-        console.log(last_name)
-        console.log(nin)
-        console.log(ipps)
-        console.log(file_number)
-        console.log(battallion_value)
-        console.log(account_number)
-        console.log(contact)
-        console.log(sex)
-        console.log(rank)
-        console.log(education_level)
-        console.log(education_level_other)
-        console.log(bank)
-        console.log(branch)
-        console.log(department)
-        console.log(title)
-        console.log(status)
-        console.log(shift)
-        console.log(date_of_enlistment_sub)
-        console.log(date_of_transfer_sub)
-        console.log(date_of_promotion_sub)
-        console.log(date_of_birth_sub)
-        console.log(armed)
-        console.log(section)
-        console.log(location)
-        console.log(on_leave)
-        console.log(leave_start_sub)
-        console.log(leave_end_sub)
+        // console.log("start here: =================================")
+        // console.log(first_name)
+        // console.log(last_name)
+        // console.log(nin)
+        // console.log(ipps)
+        // console.log(file_number)
+        // console.log(battallion_value)
+        // console.log(account_number)
+        // console.log(contact)
+        // console.log(sex)
+        // console.log(rank)
+        // console.log(education_level)
+        // console.log(education_level_other)
+        // console.log(bank)
+        // console.log(branch)
+        // console.log(department)
+        // console.log(title)
+        // console.log(status)
+        // console.log(shift)
+        // console.log(date_of_enlistment_sub)
+        // console.log(date_of_transfer_sub)
+        // console.log(date_of_promotion_sub)
+        // console.log(date_of_birth_sub)
+        // console.log(armed)
+        // console.log(section)
+        // console.log(location)
+        // console.log(on_leave)
+        // console.log(leave_start_sub)
+        // console.log(leave_end_sub)
 
     // update an employee
     // e.preventDefault()
@@ -397,7 +397,7 @@ function Battallion_edit(props) {
       section !== null && 
       location !== null
     ){
-      props.battallion_two_update(
+      props.battallion_one_update(
         employee.id,
         first_name,
         last_name,
@@ -671,11 +671,9 @@ function Battallion_edit(props) {
                       className={classes.inputSmall_}
                       onChange={handle_Department_Change}
                     >
-                      <MenuItem value="Embassy">Embassy</MenuItem>
-                      <MenuItem value="Consulate" >Consulate</MenuItem>
-                      <MenuItem value="High commission">High Commission</MenuItem>
-                      <MenuItem value="Other diplomats">Other diplomats</MenuItem>
+                      <MenuItem value="UN Agencies">UN Agencies</MenuItem>
                       <MenuItem value="Administration">Administration</MenuItem>
+                      <MenuItem value="Drivers" >Drivers</MenuItem>
                     </Select>
                 </Grid>
 
@@ -958,7 +956,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  battallion_two_create,
+  battallion_one_update,
   clear_messages,
   clear_errors,
   battallion_two_update

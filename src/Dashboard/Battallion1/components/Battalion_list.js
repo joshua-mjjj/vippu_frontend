@@ -7,7 +7,7 @@ import BattallionDetail  from './Battallion_detail';
 import BattallionEdit  from './Battallion_edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
-import { battallion_two_fetch_detail } from '../../../actions/battallions_detail';
+import { battallion_one_fetch_detail } from '../../../actions/battallions_detail';
 
 function Battalion_two_list(props){
 
@@ -21,7 +21,7 @@ function Battalion_two_list(props){
   const send_detail_id = (id) => {
   	// console.log(id)
   	setToggle(true)
-  	props.battallion_two_fetch_detail(id)
+  	props.battallion_one_fetch_detail(id)
   }
 
   const toggle_UI = () => {
@@ -209,12 +209,13 @@ const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
   error: state.errors,
-  loading : state.battallions_detail.battalion_two_data_detail_loading,
-  detail_data : state.battallions_detail.battalion_two_detail_data,
+  loading : state.battallions_detail.battalion_one_data_detail_loading,
+  detail_data : state.battallions_detail.battalion_one_detail_data,
   
 });
 
 export default connect(mapStateToProps, {
-  battallion_two_fetch_detail
+  battallion_one_fetch_detail
+
 })(Battalion_two_list);
 

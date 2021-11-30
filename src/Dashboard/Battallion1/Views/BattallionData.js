@@ -4,14 +4,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import BattallionList from '../components/Battalion_two_list';
+import BattallionList from '../components/Battalion_list';
 import GenerateExcel from '../components/GenerateExcel';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 
 import {
-  battallion_two_fetch_data
+  battallion_one_fetch_data
 } from "../../../actions/battallions_fetch.js";
 
 function Copyright() {
@@ -180,7 +180,7 @@ function BattallionData(props) {
 
   const refetch_data = () => {
     console.log("Refetching battalion two data ...")
-    props.battallion_two_fetch_data()
+    props.battallion_one_fetch_data()
   }
 
   const set_tab_1 = () => {
@@ -231,9 +231,9 @@ const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
   error: state.errors,
-  data: state.battallions_fetch.battalion_two_data
+  data: state.battallions_fetch.battalion_one_data
 });
 
 export default connect(mapStateToProps, { 
-  battallion_two_fetch_data
+  battallion_one_fetch_data
 })(BattallionData);

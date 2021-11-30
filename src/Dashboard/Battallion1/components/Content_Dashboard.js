@@ -2,65 +2,44 @@ import * as React from 'react';
 import { connect } from "react-redux";
 import { Box, Container, Grid } from '@mui/material'
 import { SummaryItem } from './summary-item';
-import HouseSidingIcon from '@mui/icons-material/HouseSiding';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import FlagIcon from '@mui/icons-material/Flag';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import DriveEtaIcon from '@mui/icons-material/DriveEta';
+// import MenuBookIcon from '@mui/icons-material/MenuBook';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 function Content_Dashboard(props){
   let stats;
   props.overrall_data !== null ?  stats = [
       {
-        content: `${props.overrall_data.embassy}`,
+        content: `${props.overrall_data.agencies}`,
         icon: AccountBalanceIcon,
-        label: 'Embassy'
+        label: 'UN Agencies'
       },
-      {
-        content: `${props.overrall_data.consolate}`,
-        icon: HouseSidingIcon,
-        label: 'Consulate'
-      },
-      {
-        content: `${props.overrall_data.high_commission}`,
-        icon: FlagIcon,
-        label: 'High Commission'
-      },
-      {
-        content: `${props.overrall_data.other_diplomats}`,
-        icon: MenuBookIcon,
-        label: 'Other Diplomats'
-      },
-      {
+       {
         content: `${props.overrall_data.administration}`,
-        icon: AccountBoxIcon,
+        icon: AdminPanelSettingsIcon,
         label: 'Administration'
+      },
+      {
+        content: `${props.overrall_data.drivers}`,
+        icon: DriveEtaIcon,
+        label: 'Drivers'
       }
   ] :  stats = [
           {
             content: '',
             icon: AccountBalanceIcon,
-            label: 'Embassy'
+            label: 'UN Agencies'
           },
           {
             content: '',
-            icon: HouseSidingIcon,
-            label: 'Consulate'
-          },
-          {
-            content: '',
-            icon: FlagIcon,
-            label: 'High Commission'
-          },
-          {
-            content: '',
-            icon: MenuBookIcon,
-            label: 'Other Diplomats'
-          },
-          {
-            content: '',
-            icon: AccountBoxIcon,
+            icon: AdminPanelSettingsIcon,
             label: 'Administration'
+          },
+          {
+            content: '',
+            icon: DriveEtaIcon,
+            label: 'Drivers'
           }
         ];
   

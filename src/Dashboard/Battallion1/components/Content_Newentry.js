@@ -25,7 +25,7 @@ import Alert from './Alert';
 import Spinner from "../../../components/Spinner";
  
 
-import { battallion_two_create, clear_messages, clear_errors } from '../../../actions/battallions_create';
+import { battallion_one_create, clear_messages, clear_errors } from '../../../actions/battallions_create';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -145,7 +145,7 @@ function Content_Newentry(props) {
   const [show_alert, setShow_alert] = React.useState(false);
 
   // eslint-disable-next-line
-  const [battallion, setBattallion] = React.useState("Battalion 2");  // We already know this is Battallion 2 form
+  const [battallion, setBattallion] = React.useState("Battalion 1");  // We already know this is Battallion 2 form
 
   const handle_Department_Change = (e) => {
     setDepartment(e.target.value)
@@ -306,7 +306,7 @@ function Content_Newentry(props) {
       leave_end_sub = leave_end_data
     }
 
-    const battallion_value = "battallion_two" // Battallion 2 form, hence we do alittle bit of hard coding
+    const battallion_value = "battallion_one" // Battallion 2 form, hence we do alittle bit of hard coding
     // Create an employee
     e.preventDefault()
     if(
@@ -331,7 +331,7 @@ function Content_Newentry(props) {
       section !== null && 
       location !== null
     ){
-      props.battallion_two_create(first_name,
+      props.battallion_one_create(first_name,
         last_name,
         nin,
         ipps,
@@ -603,11 +603,9 @@ function Content_Newentry(props) {
                       className={classes.inputSmall_}
                       onChange={handle_Department_Change}
                     >
-                      <MenuItem value="Embassy">Embassy</MenuItem>
-                      <MenuItem value="Consulate" >Consulate</MenuItem>
-                      <MenuItem value="High commission">High Commission</MenuItem>
-                      <MenuItem value="Other diplomats">Other diplomats</MenuItem>
+                      <MenuItem value="UN Agencies">UN Agencies</MenuItem>
                       <MenuItem value="Administration">Administration</MenuItem>
+                      <MenuItem value="Drivers" >Drivers</MenuItem>
                     </Select>
                 </Grid>
 
@@ -890,7 +888,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  battallion_two_create,
+  battallion_one_create,
   clear_messages,
   clear_errors
 })(Content_Newentry);

@@ -16,6 +16,7 @@ import { battallion_two_fetch_detail } from '../../../actions/battallions_detail
 import { battallion_two_query } from '../../../actions/battallions_fetch';
 import { clear_messages, clear_errors } from '../../../actions/battallions_create';
 import BattallionDetail  from './Battallion_detail';
+import BattallionEdit  from './Battallion_edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 function Findemploye(props) {
@@ -23,11 +24,13 @@ function Findemploye(props) {
   const [input, setInput] = React.useState(null);
   const [query_available, setQuery_available] = React.useState(false);
   const [show_detail, setShowDetail] = React.useState(false);
+  const [show_edit, showEdit] = React.useState(false);
 
   const handle_submit = () => {
   	if(input){
-  		console.log(input)
-		props.battallion_two_query(input)
+  		// console.log(input)
+      const trimmed_input = input.trim()
+		  props.battallion_two_query(trimmed_input)
   	}else return 
   }
 
@@ -38,7 +41,15 @@ function Findemploye(props) {
   }
 
   const toggle_UI = () => {
-  	setShowDetail(false)
+    setShowDetail(false)
+  }
+
+  const toggle_edit_UI = () => {
+    showEdit(true)
+  }
+
+  const untoggle_edit_UI = () => {
+    showEdit(false)
   }
 
   const control_bool_api_message = () => {
@@ -125,34 +136,75 @@ function Findemploye(props) {
     					): 
     					(
     					  <Card variant="outlined">
-	            			<Box
-					            sx={{ alignItems: 'center', display: 'flex', mb: 3 }}>
-					            <Typography
-					              color="textPrimary" variant="h4" sx={{ marginLeft: '20px' }}>
-					              <span style={{ fontSize : '23px',fontFamily: 'Dosis',fontWeight: '800' }}> Employee details </span>
-					            </Typography>
-						        <Box sx={{ flexGrow: 1 }} />
-						        <Button onClick={toggle_UI} variant="outlined" sx={{ marginRight : '20px', marginTop : '15px' }} ><KeyboardBackspaceIcon />  </Button>
-						        <Button 
-					              // onClick={toggle_UI} 
-					               variant="outlined" 
-					               sx={{ marginRight : '20px', marginTop : '15px' }} >
-					             	<span style={{
-					              	fontSize : '15px',
-					              	fontFamily: 'Dosis',
-					              	fontWeight: '800'
-					              }}>Edit</span>
-					            </Button>
-						    </Box>
-				            
-				            {/* Detail component */}
-				            <Card>
-				            <hr/>
-				            {	
-				            	props.loading === false && props.detail_data !== null ? (<BattallionDetail employee={props.detail_data} />) : (<Spinner />)
-				            }
-				            </Card>
-			            </Card>
+                  {
+                    show_edit === false ? 
+                      (
+                        <div>
+                           <Box
+                             sx={{ alignItems: 'center', display: 'flex', mb: 3 }}>
+                             <Typography
+                              color="textPrimary" variant="h4" sx={{ marginLeft: '20px' }}>
+                             <span style={{ fontSize : '23px',fontFamily: 'Dosis',fontWeight: '800' }}> Employee details </span>
+                             </Typography>
+                           <Box sx={{ flexGrow: 1 }} />
+                             <Button onClick={toggle_UI} variant="outlined" sx={{ marginRight : '20px', marginTop : '15px' }} ><KeyboardBackspaceIcon />  </Button>
+                              <Button 
+                                onClick={toggle_edit_UI} 
+                                 variant="outlined" 
+                                 sx={{ marginRight : '20px', marginTop : '15px' }} >
+                                <span style={{
+                                  fontSize : '15px',
+                                  fontFamily: 'Dosis',
+                                  fontWeight: '800'
+                                }}>Edit</span>
+                            </Button>
+                          </Box>
+                    
+                            {/* Detail component */}
+                            <Card>
+                            <hr/>
+                            { 
+                              props.loading === false && props.detail_data !== null ? (<BattallionDetail employee={props.detail_data} />) : (<Spinner />)
+                            }
+                            </Card>
+                        </div>
+                      ):(
+                        <div>
+                            <Box
+                                sx={{
+                                  alignItems: 'center',
+                                  display: 'flex',
+                                  mb: 3
+                                }}>
+                                <Typography
+                                  color="textPrimary"
+                                  variant="h4"
+                                  sx={{
+                                    marginLeft: '20px'
+                                  }}>
+                                  <span style={{
+                                    fontSize : '23px',
+                                    fontFamily: 'Dosis',
+                                    fontWeight: '800'
+                                  }}> Edit Employee details </span>
+                                </Typography>
+                                <Box sx={{ flexGrow: 1 }} />
+                                 <Button onClick={untoggle_edit_UI} variant="outlined" sx={{ marginRight : '20px', marginTop : '15px' }} >
+                                    <KeyboardBackspaceIcon />
+                                </Button>
+                            </Box>
+                            
+                            {/* Edit component */}
+                            <Card >
+                            <hr/>
+                            { 
+                              props.loading === false && props.detail_data !== null ? (<BattallionEdit employee={props.detail_data} />) : (<Spinner />)
+                            }
+                            </Card>
+                        </div>
+                      )
+                  }
+                </Card>
     					)
     				}
     			</div>
