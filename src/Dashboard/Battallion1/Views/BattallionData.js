@@ -210,7 +210,7 @@ function BattallionData(props) {
             <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
               {/* Render conditionally */}
               { 
-                tab_value === 0 ? (<BattallionList refetch_data={refetch_data} data={props.data !== null ? props.data : null } />) : null
+                tab_value === 0 ? (<BattallionList section_title={null}refetch_data={refetch_data} data={props.data !== null ? props.data : null } />) : null
               }
               { 
                 tab_value === 1 ? (<GenerateExcel />) : null

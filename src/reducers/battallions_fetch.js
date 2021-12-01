@@ -7,6 +7,8 @@ import {
 	BATTALION_TWO_QUERY_FAILED,
 	BATTALION_ONE_DATA_LOADING,
     BATTALION_ONE_DATA_FETCHED,
+    BATTALION_SECTION_QUERY_LOADING,
+    BATTALION_SECTION_QUERY_FETCHED
 } from '../actions/types';
 
 
@@ -19,7 +21,9 @@ const initialState = {
 
 	// battalion one 
 	battalion_one_data : null,
+	battalion_sectionquery : null,
     battalion_one_data_loading: false,
+    battalion_sectionquery_loading: false,
 }
 
 export default function battallions_fetch(state=initialState, action) {
@@ -28,6 +32,17 @@ export default function battallions_fetch(state=initialState, action) {
 			return {
 					...state,
 					battalion_two_data_loading: true
+				}
+		case BATTALION_SECTION_QUERY_LOADING:
+			return {
+					...state,
+					battalion_sectionquery_loading: true
+				}
+		case BATTALION_SECTION_QUERY_FETCHED:
+			return {
+					...state,
+					battalion_sectionquery: action.payload,
+					battalion_sectionquery_loading: false
 				}
 		case BATTALION_ONE_DATA_LOADING:
 			return {

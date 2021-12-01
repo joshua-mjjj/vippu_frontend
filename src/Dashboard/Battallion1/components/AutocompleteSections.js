@@ -114,8 +114,6 @@ export default function AutocompleteSections(props) {
     }
   }, [open]);
 
-  console.log(props.default_value)
-
   return (
     <Autocomplete
       id="asynchronous-demo"

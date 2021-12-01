@@ -92,7 +92,7 @@ function Battalion_two_list(props){
 	            	show_detail === false ? 
 	            		(<Card variant="outlined">
 				              <CardHeader 
-			                  title={`Employees total: ${props.data.length}`}/>
+			                  title={props.section_title !== null ? `${props.section_title} total: ${props.data.length}` : `Employees total: ${props.data.length}`}/>
 				              <Divider />
 				              <OrdersTable data={props.data} send_detail_id={send_detail_id}/>
 			             </Card>)

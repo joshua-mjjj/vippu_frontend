@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Box, Card, Typography } from '@mui/material';
 
-export const SummaryItem = (props) => {
+export const Summary = (props) => {
   const { content, icon: Icon, label } = props;
 
   return (
@@ -18,7 +18,7 @@ export const SummaryItem = (props) => {
           display: 'flex',
           p: 2
         }}
-        // onClick={(e) => {console.log("Box clicked")}}
+        onClick={(e) => props.get_section(label)}
       >
         {Icon && (
           <Box
@@ -58,7 +58,7 @@ export const SummaryItem = (props) => {
   );
 };
 
-SummaryItem.propTypes = {
+Summary.propTypes = {
   content: PropTypes.string.isRequired,
   icon: PropTypes.elementType,
   label: PropTypes.string.isRequired

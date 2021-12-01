@@ -1,12 +1,19 @@
 import * as React from 'react';
+import { connect } from "react-redux";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import Content from '../components/Content_Dashboard';
+import ContentDashboard from '../components/Content_Dashboard';
+import BattallionList from '../components/Battalion_list';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+
+import {
+  battallion_section_query
+} from "../../../actions/battallions_fetch.js";
+import Backdrop from "../../GlobalComponents/Backdrop.js";
 
 function Copyright() {
   return (
@@ -163,26 +170,59 @@ theme = {
   },
 };
 
-
-export default function Dashboard() {
+function Dashboard(props) {
   // Implementation code
+  const [tab_value, setTab_value] = React.useState(0);
+  const [section, setSection] = React.useState(null);
   // const [tab_value, setTab_value] = React.useState(0);
 
-  // const set_tab_0 = () => {
-  //   setTab_value(0)
-  // }
+  const set_tab_0 = () => {
+    setTab_value(0)
+  }
+
+  const get_section = (section) => {
+    setTab_value(1)
+    // true
+    // false
+    // in_charge
+    // None
+    console.log(props.auth.user.top_level_incharge)
+    console.log(props.auth.user.lower_level_incharge)
+    console.log(props.auth.user.account_type)
+    console.log(props.auth.user.section)
+    setSection(section)
+    // props.battallion_section_query(section)
+  }
 
   return (
     <ThemeProvider theme={theme}>
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
-              <Tabs value={0} textColor="inherit">
-                <Tab label="Program summary" />
+              <Tabs value={tab_value} textColor="inherit">
+                <Tab onClick={set_tab_0} label="Program summary" />
+                <Tab 
+                   disabled={tab_value === 0 ? true : false}
+                   label="Section data" 
+                  />
               </Tabs>
             </AppBar>
             <Box component="main" sx={{ flex: 1, py: 3, px: 4, bgcolor: '#eaeff1' }}>
               {/* Render conditionally */}
-                <Content />
+              { 
+                tab_value === 0 ? (<ContentDashboard get_child_section={get_section} />) : null
+              }
+
+              { 
+                tab_value === 1 ? (
+                  <div>
+                    {  props.data !== null ? (
+                       <BattallionList  section_title={section} data={props.data !== null ? props.data : null } />
+                     ) : <Backdrop /> 
+                    }
+                  </div>
+                ) : null
+              }
+                
             </Box>
             <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
               <Copyright />
@@ -191,3 +231,15 @@ export default function Dashboard() {
     </ThemeProvider>
   );
 }
+
+const mapStateToProps = (state) => ({
+  messages: state.messages,
+  auth: state.auth,
+  error: state.errors,
+  overrall_data : state.battallions_fetch.battalion_two_overrall_data,
+  data: state.battallions_fetch.battalion_sectionquery
+});
+
+export default connect(mapStateToProps, { 
+  battallion_section_query
+} )(Dashboard);

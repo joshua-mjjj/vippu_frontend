@@ -12,27 +12,27 @@ function Content_Dashboard(props){
   let stats;
   props.overrall_data !== null ?  stats = [
       {
-        content: `${props.overrall_data.embassy}`,
+        content: props.overrall_data.embassy === undefined ? "" : `${props.overrall_data.embassy}`,
         icon: AccountBalanceIcon,
         label: 'Embassy'
       },
       {
-        content: `${props.overrall_data.consolate}`,
+        content: props.overrall_data.consolate === undefined ? "" : `${props.overrall_data.consolate}`,
         icon: HouseSidingIcon,
         label: 'Consulate'
       },
       {
-        content: `${props.overrall_data.high_commission}`,
+        content: props.overrall_data.high_commission === undefined ? "" : `${props.overrall_data.high_commission}`,
         icon: FlagIcon,
         label: 'High Commission'
       },
       {
-        content: `${props.overrall_data.other_diplomats}`,
+        content: props.overrall_data.other_diplomats === undefined ? "" : `${props.overrall_data.other_diplomats}`,
         icon: MenuBookIcon,
         label: 'Other Diplomats'
       },
       {
-        content: `${props.overrall_data.administration}`,
+        content: props.overrall_data.administration === undefined ? "" : `${props.overrall_data.administration}`,
         icon: AccountBoxIcon,
         label: 'Administration'
       }
