@@ -103,24 +103,40 @@ export const battallion_two_query = (file_number) => (dispatch, getState) => {
 };
 
 //  BATTALLION ONE CREATE 
-export const battallion_one_query = (file_number) => (dispatch, getState) => {
+export const battallion_one_query = (file_number, section, low_level_incharge) => (dispatch, getState) => {
   //Loading
   dispatch({ type: BATTALION_TWO_QUERY_LOADING });
+
+  console.log(low_level_incharge)
+  console.log(section)
 
   // Request Body
   const body = JSON.stringify({ file_number });
   // console.log(body)
 
    const error_message = "Employee with this file number doesn't exit in the database, please try again with a valid file number."
+   const error_message2 = "Your are not authorized to view data for this employee, Contact the admin for more information."
     axios
     .post(`${global_url}/api/battalionquery_one/`, body, tokenConfig(getState))
     .then((res) => {
       if(res.data){
         // console.log(res.data)
-        dispatch({
-          type: BATTALION_TWO_QUERY_FETCHED,
-          payload: res.data,
-        });
+        if(low_level_incharge === true){  // restricting search for In charges to sections they are allowed to access
+          if(res.data.section === section){
+            dispatch({
+              type: BATTALION_TWO_QUERY_FETCHED,
+              payload: res.data,
+            });
+          }else{
+            dispatch(create_api_message(error_message2, "battallion_query_fail"));
+            dispatch({ type: BATTALION_TWO_QUERY_FAILED });
+          }
+        }else{
+          dispatch({
+              type: BATTALION_TWO_QUERY_FETCHED,
+              payload: res.data,
+            });
+        }
       }
     })
     .catch((err) => {

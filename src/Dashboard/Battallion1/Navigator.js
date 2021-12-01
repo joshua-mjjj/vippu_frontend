@@ -34,45 +34,89 @@ function Navigator(props) {
   const [new_entry, setNew_entry] = React.useState(false);
   const [find_employee, setFind_employee] = React.useState(false);
   const [profile, setProfile] = React.useState(false);
-
-    const categories = [
-    {
-      id: props.auth.user !== null ? `${props.auth.user.first_name} ${props.auth.user.last_name}` : null,
-      children: [
-        {
-          id: 'Dashboard',
-          icon: <AccountCircleIcon />,
-          active: dashboard,
-        },
-        {
-          id: 'Battalion data',
-          icon: <StorageIcon />,
-          active: battallion_data,
-        },
-        { 
-          id: 'New entry', 
-          icon: <AddBoxIcon />,
-          active: new_entry,
-        },
-        { 
-          id: 'Find employee', 
-          icon: <PageviewIcon />,
-          active: find_employee, 
-        },
-      ],
-    },
-    {
-      id: 'Account',
-      children: [
-        { 
-          id: 'Profile', 
-          icon: <SettingsIcon />,
-          active: profile,  
-        },
-        { id: 'Logout', icon: <LogoutIcon /> }
-      ],
-    },
-  ];
+  
+  let categories
+  // console.log(props.auth.user.top_level_incharge)
+    if(props.auth.user.lower_level_incharge === true){
+       categories = [
+          {
+            id: props.auth.user !== null ? `${props.auth.user.first_name} ${props.auth.user.last_name}` : null,
+            children: [
+              {
+                id: 'Dashboard',
+                icon: <AccountCircleIcon />,
+                active: dashboard,
+              },
+              // {
+              //   id: 'Battalion data',
+              //   icon: <StorageIcon />,
+              //   active: battallion_data,
+              // },
+              { 
+                id: 'New entry', 
+                icon: <AddBoxIcon />,
+                active: new_entry,
+              },
+              { 
+                id: 'Find employee', 
+                icon: <PageviewIcon />,
+                active: find_employee, 
+              },
+            ],
+          },
+          {
+            id: 'Account',
+            children: [
+              { 
+                id: 'Profile', 
+                icon: <SettingsIcon />,
+                active: profile,  
+              },
+              { id: 'Logout', icon: <LogoutIcon /> }
+            ],
+          },
+       ];
+    }else{
+       categories = [
+          {
+            id: props.auth.user !== null ? `${props.auth.user.first_name} ${props.auth.user.last_name}` : null,
+            children: [
+              {
+                id: 'Dashboard',
+                icon: <AccountCircleIcon />,
+                active: dashboard,
+              },
+              {
+                id: 'Battalion data',
+                icon: <StorageIcon />,
+                active: battallion_data,
+              },
+              { 
+                id: 'New entry', 
+                icon: <AddBoxIcon />,
+                active: new_entry,
+              },
+              { 
+                id: 'Find employee', 
+                icon: <PageviewIcon />,
+                active: find_employee, 
+              },
+            ],
+          },
+          {
+            id: 'Account',
+            children: [
+              { 
+                id: 'Profile', 
+                icon: <SettingsIcon />,
+                active: profile,  
+              },
+              { id: 'Logout', icon: <LogoutIcon /> }
+            ],
+          },
+        ];
+    }
+  
 
   const item = {
     py: '2px',

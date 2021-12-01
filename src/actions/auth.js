@@ -136,6 +136,11 @@ export const change_password = (old_password, new_password) => (dispatch, getSta
     });
 };
 
+// USER NOT ALLOWED TO VIEW SECTION
+export const auth_message = () => (dispatch, getState) => {
+  const message = "Your are not authorized to view data for this section, Contact the admin for more information."
+  dispatch(create_api_message(message, "user_error_section_data_access"));
+};
 // LOAD USER
 export const loadUser = () => (dispatch, getState) => {
   // user Loading

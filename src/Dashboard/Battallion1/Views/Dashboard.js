@@ -9,11 +9,21 @@ import BattallionList from '../components/Battalion_list';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import Alert from '../components/Alert';
+import { clear_messages } from '../../../actions/battallions_create';
 
 import {
   battallion_section_query
 } from "../../../actions/battallions_fetch.js";
+
+import {
+  auth_message
+} from "../../../actions/auth.js";
+
 import Backdrop from "../../GlobalComponents/Backdrop.js";
+import * as Scroll from 'react-scroll';
+
+var scroll = Scroll.animateScroll;
 
 function Copyright() {
   return (
@@ -180,18 +190,34 @@ function Dashboard(props) {
     setTab_value(0)
   }
 
+  const control_bool_api_message = () => {
+    props.clear_messages()
+  }
+
+
   const get_section = (section) => {
-    setTab_value(1)
+    setSection(section)
     // true
     // false
     // in_charge
     // None
-    console.log(props.auth.user.top_level_incharge)
-    console.log(props.auth.user.lower_level_incharge)
-    console.log(props.auth.user.account_type)
-    console.log(props.auth.user.section)
-    setSection(section)
-    // props.battallion_section_query(section)
+    if(props.auth.user.top_level_incharge === true || props.auth.user.account_type === "admin"){
+      props.battallion_section_query(section)
+      setTab_value(1)
+    }
+    if(props.auth.user.lower_level_incharge === true){
+       if(props.auth.user.section === section){
+         props.battallion_section_query(section)
+         setTab_value(1)
+       }else{
+         scroll.scrollToTop();
+         props.auth_message()
+         console.log("You are not to view this Section's data")
+       }
+    }
+    // console.log(props.auth.user.top_level_incharge)
+    // console.log(props.auth.user.lower_level_incharge)
+    // console.log(props.auth.user.section)
   }
 
   return (
@@ -207,6 +233,10 @@ function Dashboard(props) {
               </Tabs>
             </AppBar>
             <Box component="main" sx={{ flex: 1, py: 3, px: 4, bgcolor: '#eaeff1' }}>
+              {
+                props.messages.api_message !== null && props.messages.message_type === "user_error_section_data_access" ? 
+                ( <Alert content={props.messages.api_message} control_bool={control_bool_api_message} status="info" />) : null
+              }
               {/* Render conditionally */}
               { 
                 tab_value === 0 ? (<ContentDashboard get_child_section={get_section} />) : null
@@ -241,5 +271,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { 
-  battallion_section_query
+  battallion_section_query,
+  auth_message,
+  clear_messages
 } )(Dashboard);

@@ -11,6 +11,7 @@ import DriveEtaIcon from '@mui/icons-material/DriveEta';
 // import MenuBookIcon from '@mui/icons-material/MenuBook';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import FormLabel from '@mui/material/FormLabel';
+import Backdrop from "../../GlobalComponents/Backdrop.js";
 
 const useStyles = makeStyles((theme) => ({
   formLabel:{
@@ -23,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
 function Content_Dashboard(props){
   
   const classes = useStyles();
-
+  
   let stats;
-  let sections_stats;
+ 
   props.overrall_data !== null ?  stats = [
       {
         content: props.overrall_data.agencies === undefined ? "" : `${props.overrall_data.agencies}`,
@@ -60,7 +61,11 @@ function Content_Dashboard(props){
           }
         ];
 
-  sections_stats = [
+  const [sorted_starts, setSorted_stats] = React.useState(null);
+
+  React.useEffect(() => {
+    let sections_stats;
+    sections_stats = [
       {
         // content: `${props.overrall_data.agencies}`,
         icon: AccountBalanceIcon,
@@ -172,6 +177,24 @@ function Content_Dashboard(props){
         label: 'UNDP Arua'
       },
   ] 
+
+    function moveArrayItemToNewIndex(arr, old_index, new_index) {
+        if (new_index >= arr.length) {
+            var k = new_index - arr.length + 1;
+            while (k--) {
+                arr.push(undefined);
+            }
+        }
+        arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+        return arr; 
+    };
+    const index = sections_stats.findIndex((section) => section.label === props.auth.user.section);
+    // console.log(index)
+    sections_stats = moveArrayItemToNewIndex(sections_stats, index, 0) // moving current user's section to the start of the list
+    setSorted_stats(sections_stats)
+    
+  }, [props.auth.user.section]);
+
   const get_section = (section) => {
     // console.log(section)
     props.get_child_section(section)
@@ -185,51 +208,58 @@ function Content_Dashboard(props){
               pb: 3,
               pt: 3
             }}
-          >
-            <Container maxWidth="lg">
-              <Grid
-                container
-                spacing={1}
-              >
-                {stats.map((item) => (
+          > 
+          {
+            props.auth.user.top_level_incharge === true ? 
+             (  <Container maxWidth="lg">
                   <Grid
-                    item
-                    key={item.label}
-                    md={4}
-                    xs={12}
+                    container
+                    spacing={1}
                   >
-                    <SummaryItem
-                      content={item.content}
-                      icon={item.icon}
-                      label={item.label}
-                    />
+                    {stats.map((item) => (
+                      <Grid
+                        item
+                        key={item.label}
+                        md={4}
+                        xs={12}
+                      >
+                        <SummaryItem
+                          content={item.content}
+                          icon={item.icon}
+                          label={item.label}
+                        />
+                      </Grid>
+                    ))}
                   </Grid>
-                ))}
-              </Grid>
-            </Container>
-            <br/>
+                  <br/>
+                </Container>) : (null)
+           }
             <Container maxWidth="lg">
             <FormLabel component="label" className={classes.formLabel}>Sections</FormLabel> 
+            {
+              sorted_starts !== null ? (
               <Grid
                 container
                 spacing={1}
               >
-                {sections_stats.map((item) => (
-                  <Grid
-                    item
-                    key={item.label}
-                    md={4}
-                    xs={12}
-                  >
-                    <Summary
-                      get_section={get_section}
-                      content={item.content}
-                      icon={item.icon}
-                      label={item.label}
-                    />
-                  </Grid>
-                ))}
+                {sorted_starts.map((item) => (
+                    <Grid
+                      item
+                      key={item.label}
+                      md={4}
+                      xs={12}
+                    >
+                      <Summary
+                        get_section={get_section}
+                        content={item.content}
+                        icon={item.icon}
+                        label={item.label}
+                      />
+                    </Grid>
+                ))} 
               </Grid>
+            ): <Backdrop />
+          }
             </Container>
           </Box>
     )

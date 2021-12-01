@@ -31,7 +31,7 @@ function Findemploye(props) {
   	if(input){
   		// console.log(input)
       const trimmed_input = input.trim()
-		  props.battallion_one_query(trimmed_input)
+		  props.battallion_one_query(trimmed_input, props.auth.user.section, props.auth.user.lower_level_incharge)
   	}else return 
   }
 

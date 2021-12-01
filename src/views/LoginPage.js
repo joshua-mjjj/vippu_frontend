@@ -345,8 +345,6 @@ function SignInSide(props) {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(user_id)
-    console.log(password)
     props.login(user_id, password);
   };
 
