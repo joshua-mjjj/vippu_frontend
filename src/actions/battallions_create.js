@@ -362,15 +362,36 @@ export const battallion_one_update = (
     });
 };
 
+// SECTION DATA 
+export const download_file_section = (api, filename, section) =>  (dispatch, getState) => {
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    // const token = getState().auth.token;
+     axios
+    .get(`${global_url}/api/${api}/?section=${section}&unique=${unique_site_id}`, { responseType: 'blob', })
+    .then((res) => {
+      const message = "Your report will soon be downloaded, please find it in your downloads folder."
+      dispatch(create_api_message(message, "file_downloaded"));
+      fileDownload(res.data, `${filename}.xls`);
+      // fileDownload(res.data, "filename.xls");
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      // console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err.response)
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+    });
+
+}
+
 // GETTING FILES
-export const download_file = (filename) =>  (dispatch, getState) => {
+export const download_file = (api, filename) =>  (dispatch, getState) => {
      
     // generating
     dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
     // const token = getState().auth.token;
-
      axios
-    .get(`${global_url}/api/export_excel/?unique=${unique_site_id}`, { responseType: 'blob', })
+    .get(`${global_url}/api/${api}/?unique=${unique_site_id}`, { responseType: 'blob', })
     .then((res) => {
       const message = "Your report will soon be downloaded, please find it in your downloads folder."
       dispatch(create_api_message(message, "file_downloaded"));

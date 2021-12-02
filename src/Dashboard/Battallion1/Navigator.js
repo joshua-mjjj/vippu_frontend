@@ -47,11 +47,6 @@ function Navigator(props) {
                 icon: <AccountCircleIcon />,
                 active: dashboard,
               },
-              // {
-              //   id: 'Battalion data',
-              //   icon: <StorageIcon />,
-              //   active: battallion_data,
-              // },
               { 
                 id: 'New entry', 
                 icon: <AddBoxIcon />,
@@ -62,6 +57,11 @@ function Navigator(props) {
                 icon: <PageviewIcon />,
                 active: find_employee, 
               },
+              {
+                id: 'Generate report', // using the same variables, jus changing the view
+                icon: <StorageIcon />,
+                active: battallion_data,
+              }
             ],
           },
           {
@@ -141,7 +141,7 @@ function Navigator(props) {
       setNew_entry(false)
       setFind_employee(false)
       setProfile(false)
-    }else if(child === "Battalion data"){
+    }else if(child === "Battalion data" || child === "Generate report"){
       setBattallion_data(true)
       setDashboard(false)
       setNew_entry(false)

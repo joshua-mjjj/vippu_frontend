@@ -16,6 +16,7 @@ import Dashboard from './Views/Dashboard';
 import NewEntry from './Views/NewEntry';
 import Findemployee from './Views/Findemployee';
 import BattallionData from './Views/BattallionData';
+import BattalionDataReport from './Views/BattalionData_report';
 import Profile from './Views/Profile';
 
 import {
@@ -231,6 +232,15 @@ function Paperbase(props) {
                   <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <Header title="Battalion Data Overview " onDrawerToggle={handleDrawerToggle} />
                     <BattallionData />
+                  </Box>
+                ) : null
+              }
+              { 
+                active_page === "Generate report" ? 
+                (
+                  <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Header title="Generate section report" onDrawerToggle={handleDrawerToggle} />
+                    <BattalionDataReport />
                   </Box>
                 ) : null
               }

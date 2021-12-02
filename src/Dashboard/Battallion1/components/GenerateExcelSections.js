@@ -13,7 +13,7 @@ import Stack from '@mui/material/Stack';
 import Alert from './Alert';
 import Spinner from "../../../components/Spinner";
  
-import { clear_messages, clear_errors, download_file } from '../../../actions/battallions_create';
+import { clear_messages, clear_errors, download_file_section } from '../../../actions/battallions_create';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function GenerateExcel(props) {
+function GenerateExcelSections(props) {
   const classes = useStyles();
 
   // Implementaion code 
@@ -89,10 +89,11 @@ function GenerateExcel(props) {
   const [show_alert, setShow_alert] = React.useState(false);
 
   const handle_submit_data = (e) => {
-    const url = "export_battalion_one"
+    const url = "export_battalion_one_section"
+    const section = props.auth.user.section
     e.preventDefault()
     if(filename !== null){
-      props.download_file(url, filename)
+      props.download_file_section(url, filename, section)
     }else{
       setShow_alert(true)
     }
@@ -110,7 +111,6 @@ function GenerateExcel(props) {
   // const control_bool_error = () => {
   //   props.clear_errors()
   // }
-
   const content_all_fields_required = "Please provide a file name before submitting."
 
   return (
@@ -177,6 +177,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   clear_messages,
   clear_errors,
-  download_file
-})(GenerateExcel);
+  download_file_section
+})(GenerateExcelSections);
 

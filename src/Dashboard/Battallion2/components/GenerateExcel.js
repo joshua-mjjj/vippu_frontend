@@ -89,10 +89,10 @@ function GenerateExcel(props) {
   const [show_alert, setShow_alert] = React.useState(false);
 
   const handle_submit_data = (e) => {
-
+    const url = "export_excel"
     e.preventDefault()
     if(filename !== null){
-      props.download_file(filename)
+      props.download_file(url, filename)
     }else{
       setShow_alert(true)
     }
