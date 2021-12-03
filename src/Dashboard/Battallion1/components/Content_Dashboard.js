@@ -2,7 +2,7 @@ import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from "react-redux";
 import { Box, Container, Grid } from '@mui/material'
-import { SummaryItem } from './summary-item';
+import { SummaryItem } from '../../GlobalComponents/summary-item';
 import { Summary } from './summary';
 import AccountBalanceIcon_ from '@mui/icons-material/AccountBalance';
 import AccountBalanceIcon from '@mui/icons-material/GridView';

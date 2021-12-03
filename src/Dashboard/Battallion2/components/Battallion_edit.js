@@ -21,7 +21,7 @@ import Stack from '@mui/material/Stack';
 
 import AutocompleteSections from './AutocompleteSections';
 import AutocompleteLocations from './AutocompleteLocations';
-import Alert from './Alert';
+import Alert from '../../GlobalComponents/Alert';
 import Spinner from "../../../components/Spinner";
  
 

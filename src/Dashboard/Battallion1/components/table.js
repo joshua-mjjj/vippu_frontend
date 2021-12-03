@@ -14,7 +14,7 @@ import {
   ToggleButton,
 } from '@mui/material';
 import ViewListIcon from '@mui/icons-material/ViewList';
-import { Scrollbar } from './scrollbar';
+import { Scrollbar } from '../../GlobalComponents/scrollbar';
 // import { statusVariants, titleVariants, departmentVariants } from './utils';
 
 export const OrdersTable = (props) => {

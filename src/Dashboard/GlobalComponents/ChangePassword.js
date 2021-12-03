@@ -11,11 +11,11 @@ import Button from "@mui/material/Button";
 import Stack from '@mui/material/Stack';
 
 import Alert from './Alert';
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../components/Spinner";
  
 
-import { clear_messages, clear_errors } from '../../../actions/battallions_create';
-import { change_password } from '../../../actions/auth';
+import { clear_messages, clear_errors } from '../../actions/battallions_create';
+import { change_password } from '../../actions/auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import Spinner  from '../../../components/Spinner';
-import Alert from './Alert';
+import Alert from '../../GlobalComponents/Alert';
 import TableSingle from './TableSingle';
 import { battallion_two_fetch_detail, battallion_one_fetch_detail } from '../../../actions/battallions_detail';
 import { battallion_two_query, battallion_one_query } from '../../../actions/battallions_fetch';

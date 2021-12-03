@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button";
 import Stack from '@mui/material/Stack';
 
-import Alert from './Alert';
+import Alert from '../../GlobalComponents/Alert';
 import Spinner from "../../../components/Spinner";
  
 import { clear_messages, clear_errors, download_file } from '../../../actions/battallions_create';

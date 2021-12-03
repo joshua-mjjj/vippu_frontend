@@ -55,20 +55,6 @@ class RenderDashboard extends React.Component {
     }
 
     render(){
-     //  let route_to;
-    	// const routing_to = localStorage.getItem("routing_to");
-    	// if(routing_to !== null && routing_to !== undefined){
-    	// 	route_to = routing_to
-    	// 	// console.log(route_to)
-    	// }
-
-    	// //let route_to;
-	    // if(this.props.location.state !== null || this.props.location.state !== undefined){
-	    //     console.log(this.props.location.state.detail)
-	    //     console.log("here")
-	    //    // route_to = this.props.location.state.detail
-	    //   }
-
       return(
  			<>
       	 <IdleTimer

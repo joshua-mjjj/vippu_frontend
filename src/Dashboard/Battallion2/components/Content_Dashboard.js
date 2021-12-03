@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from "react-redux";
 import { Box, Container, Grid } from '@mui/material'
-import { SummaryItem } from './summary-item';
+import { SummaryItem } from '../../GlobalComponents/summary-item';
 import HouseSidingIcon from '@mui/icons-material/HouseSiding';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import FlagIcon from '@mui/icons-material/Flag';

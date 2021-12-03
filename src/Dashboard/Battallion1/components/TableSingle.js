@@ -15,8 +15,8 @@ import {
   ToggleButton,
 } from '@mui/material';
 import ViewListIcon from '@mui/icons-material/ViewList';
-import { Scrollbar } from './scrollbar';
-// import { statusVariants, titleVariants, departmentVariants } from './utils';
+import { Scrollbar } from '../../GlobalComponents/scrollbar';
+// import { statusVariants, titleVariants, departmentVariants } from '../../GlobalComponents/utils';
 
 export default function TableSingle(props){
   const { employee } = props;

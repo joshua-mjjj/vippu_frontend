@@ -9,7 +9,7 @@ import BattallionList from '../components/Battalion_list';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import Alert from '../components/Alert';
+import Alert from '../../GlobalComponents/Alert';
 import { clear_messages } from '../../../actions/battallions_create';
 
 import {
