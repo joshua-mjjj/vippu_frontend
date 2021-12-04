@@ -407,6 +407,56 @@ export const download_file = (api, filename) =>  (dispatch, getState) => {
 
 }
 
+export const download_file_query_status = (api, filename, status_type) =>  (dispatch, getState) => {
+     
+     // console.log(status_type)
+     // console.log(api)
+     // console.log(filename)
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    // const token = getState().auth.token;
+     axios
+    .get(`${global_url}/api/${api}/?status_type=${status_type}&unique=${unique_site_id}`, { responseType: 'blob', })
+    .then((res) => {
+      const message = "Your report will soon be downloaded, please find it in your downloads folder."
+      dispatch(create_api_message(message, "file_downloaded"));
+      fileDownload(res.data, `${filename}.xls`);
+      // fileDownload(res.data, "filename.xls");
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      // console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err.response)
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+    });
+
+}
+
+export const download_file_query_leave = (api, filename, leave_type) =>  (dispatch, getState) => {
+     
+     console.log(leave_type)
+     console.log(api)
+     console.log(filename)
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    // const token = getState().auth.token;
+     axios
+    .get(`${global_url}/api/${api}/?leave_type=${leave_type}&unique=${unique_site_id}`, { responseType: 'blob', })
+    .then((res) => {
+      const message = "Your report will soon be downloaded, please find it in your downloads folder."
+      dispatch(create_api_message(message, "file_downloaded"));
+      fileDownload(res.data, `${filename}.xls`);
+      // fileDownload(res.data, "filename.xls");
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      // console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err.response)
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+    });
+
+}
+
 // CLEAR MESSAGES
 export const clear_messages = () =>  (dispatch) => {
     dispatch({

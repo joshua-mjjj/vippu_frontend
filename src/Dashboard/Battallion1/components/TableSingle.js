@@ -249,6 +249,14 @@ export default function TableSingle(props){
                         variant="outlined"
                       />): null
                     }
+                    {
+                     employee.status === 'On leave' ? (
+                      <Chip
+                        sx={{ 'color' : 'orange', 'fontWeight' : 'bold' }}
+                        label={employee.status}
+                        variant="outlined"
+                      />): null
+                    }
                   </TableCell>
                   <TableCell>
                     <ToggleButton value="table">

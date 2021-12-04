@@ -728,6 +728,7 @@ function Battallion_edit(props) {
                       <MenuItem value="Deserted">Deserted</MenuItem>
                       <MenuItem value="On course">On course</MenuItem>
                       <MenuItem value="On mission">On mission</MenuItem>
+                      <MenuItem value="On leave">On leave</MenuItem>
                     </Select>
                 </Grid>
                 <Grid item md={6} xs={12} sm={6}>

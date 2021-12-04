@@ -212,6 +212,9 @@ function Content_Dashboard(props){
           {
             props.auth.user.top_level_incharge === true ? 
              (  <Container maxWidth="lg">
+             {
+               props.overrall_data !== null ? (<FormLabel component="label" className={classes.formLabel}>Battalion one overall total : {props.overrall_data.total} </FormLabel> ) : null
+             }
                   <Grid
                     container
                     spacing={1}

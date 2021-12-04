@@ -41,7 +41,8 @@ import {
 
 } from "./types";
 
-export const global_url = 'http://127.0.0.1:8000'
+// export const global_url = 'http://127.0.0.1:8000'
+export const global_url = process.env.REACT_APP_API_URL
 
 // LOAD USER
 export const check_user_type = (username) => (dispatch) => {

@@ -196,6 +196,14 @@ export const OrdersTable = (props) => {
                       />): null
                     }
                     {
+                     employee.status === 'On leave' ? (
+                      <Chip
+                        sx={{ 'color' : 'orange', 'fontWeight' : 'bold' }}
+                        label={employee.status}
+                        variant="outlined"
+                      />): null
+                    }
+                    {
                      employee.status === 'Suspended' ? (
                       <Chip
                         sx={{ 'color' : 'red', 'fontWeight' : 'bold' }}

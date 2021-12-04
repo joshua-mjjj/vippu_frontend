@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import FormLabel from '@mui/material/FormLabel';
 import { connect } from "react-redux";
 import { Box, Container, Grid } from '@mui/material'
 import { SummaryItem } from '../../GlobalComponents/summary-item';
@@ -8,7 +10,16 @@ import FlagIcon from '@mui/icons-material/Flag';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
+ const useStyles = makeStyles((theme) => ({
+  formLabel:{
+      fontSize: '18px',
+      color: 'black',
+      fontWeight: '600',
+      fontFamily: 'Dosis',
+  }}));
 function Content_Dashboard(props){
+  const classes = useStyles();
+
   let stats;
   props.overrall_data !== null ?  stats = [
       {
@@ -74,6 +85,9 @@ function Content_Dashboard(props){
             }}
           >
             <Container maxWidth="lg">
+            {
+               props.overrall_data !== null ? (<FormLabel component="label" className={classes.formLabel}>Battalion two overall total : {props.overrall_data.total} </FormLabel> ) : null
+             }
               <Grid
                 container
                 spacing={1}
