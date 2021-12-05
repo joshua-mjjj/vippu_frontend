@@ -9,11 +9,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button";
 import Stack from '@mui/material/Stack';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 import Alert from '../../GlobalComponents/Alert';
 import Spinner from "../../../components/Spinner";
- 
-import { clear_messages, clear_errors, download_file_section } from '../../../actions/battallions_create';
+import Checkbox from '@mui/material/Checkbox';
+import { clear_messages, 
+  clear_errors, 
+  download_file_section_status_Bone, 
+  download_file_section_leave_Bone, 
+  download_file_section } from '../../../actions/battallions_create';
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,10 +31,17 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(2),
     }
   },
-  formLabel:{
-      fontSize: '15px',
+   formLabel:{
+      fontSize: '20px',
       color: 'black',
       fontWeight: '600',
+      fontFamily: 'Dosis',
+      // margin: theme.spacing(4),
+  },
+  formLabel_:{
+      fontSize: '18px',
+      color: 'black',
+      fontWeight: '500',
       fontFamily: 'Dosis',
       // margin: theme.spacing(4),
   },
@@ -78,6 +93,12 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(2, 0),
     },
   },
+  notice_on: {
+    color: 'red'
+  },
+  notice_off: {
+    color: 'black'
+  }
 }));
 
 function GenerateExcelSections(props) {
@@ -88,24 +109,96 @@ function GenerateExcelSections(props) {
   const [filename, setFilename] = React.useState(null);
   const [show_alert, setShow_alert] = React.useState(false);
 
-  const handle_submit_data = (e) => {
-    const url = "export_battalion_one_section"
-    const section = props.auth.user.section
-    e.preventDefault()
-    if(filename !== null){
-      props.download_file_section(url, filename, section)
-    }else{
-      setShow_alert(true)
-    }
-
-  }
-
   const control_bool = () => {
     setShow_alert(false)
   }
   
   const control_bool_api_message = () => {
     props.clear_messages()
+  }
+
+   const [one_option_flag, setFlag] = React.useState(false);
+
+  const [general, setGeneral] = React.useState(false);
+  const [report_status, setReport_status] = React.useState(false);
+  const [report_leave, setReport_leave] = React.useState(false);
+
+  React.useEffect(() => {
+    if((general === true && report_status === true) || 
+       (general === true && report_leave === true) || 
+       (report_status === true && report_leave === true) ||
+       (report_status === true && report_status === true && general === true))
+    {
+      setFlag(true)
+    }else{
+      setFlag(false)
+    }
+
+  }, [general, report_status, report_leave]);
+
+  const general_report = (e) => {
+    e.preventDefault()
+    //console.log(e.target.checked)
+    setGeneral(e.target.checked)
+  }
+  const status_report = (e) => {
+    e.preventDefault()
+    //console.log(e.target.checked)
+    setReport_status(e.target.checked)
+  }
+  const leave_report = (e) => {
+    e.preventDefault()
+    //console.log(e.target.checked)
+    setReport_leave(e.target.checked)
+  }
+
+  const [leave_type, setOnLeave] = React.useState(null);
+  const handle_Leave_Change = (e) => {
+    setOnLeave(e.target.value)
+  }
+
+  const [status_type, setStatus] = React.useState(null);
+  const handle_Status_Change = (e) => {
+    setStatus(e.target.value)
+  }
+
+  const handle_submit_data = (e) => {
+    const url_general = "export_battalion_one_section"
+    const url_status = "export_battalion_one_section_status"
+    const url_leave = "export_battalion_one_section_leave"
+
+    const section = props.auth.user.section
+    e.preventDefault()
+    if(filename !== null){
+      // console.log("General report: " + general)
+      // console.log("Query by status: " + report_status)
+      // console.log("Query by leave: " + report_leave)
+
+      // console.log("Leave type: " + leave_type)
+      // console.log("Status type: " + status_type)
+
+      // general report
+      if(general === true && report_status === false && report_leave === false){
+         props.download_file_section(url_general, filename, section)
+      }
+
+      // report querying by status
+      if(report_status === true && general === false && report_leave === false){
+         if(status_type !== null){
+           props.download_file_section_status_Bone(url_status, filename, section, status_type)
+         }
+      }
+
+      // report querying by leave
+      if(report_leave === true && general === false && report_status === false){
+         if(leave_type !== null){
+           props.download_file_section_leave_Bone(url_leave, filename, section, leave_type)
+         }
+      }
+    }else{
+      setShow_alert(true)
+    }
+
   }
 
   // const control_bool_error = () => {
@@ -127,6 +220,73 @@ function GenerateExcelSections(props) {
                     onChange={(e) => setFilename(e.target.value)}
                     className={classes.inputSmall}
                   />
+                  <FormLabel component="label" className={classes.formLabel}>Please specify more information about the report you want to generate . <span className={one_option_flag === true ? classes.notice_on : classes.notice_off } >(Please check one option)</span></FormLabel>  
+                   <div>
+                      <FormLabel component="label" className={classes.formLabel_}>General Battalion Report</FormLabel> 
+                      <Checkbox  onChange={general_report} {...label} /><br/>
+                      <FormLabel component="label" className={classes.formLabel_}>Battalion Report queried by status</FormLabel> 
+                      <Checkbox  onChange={status_report} {...label} /><br/>
+                      <FormLabel component="label" className={classes.formLabel_}>Battalion Report queried by Leave status</FormLabel> 
+                      <Checkbox  onChange={leave_report} {...label} />
+                   </div>  
+                   {
+                      report_status === true && general === false && report_leave === false ? (
+                        <div>
+                          <FormLabel component="label" className={classes.formLabel}>Please select the status to include in the report</FormLabel>  
+                           <Grid item md={6} xs={12} sm={6}> 
+                              <Select
+                                  labelId="demo-simple-select-label"
+                                  isableUnderline
+                                  displayEmpty
+                                  fullWidth
+                                  id="demo-simple-select"
+                                  value={status_type}
+                                  className={classes.inputSmall_}
+                                  onChange={handle_Status_Change}
+                                >
+                                  <MenuItem value="Active">Active</MenuItem>
+                                  <MenuItem value="Absent" >Absent(AWOL)</MenuItem>
+                                  <MenuItem value="Transfered">Transfered</MenuItem>
+                                  <MenuItem value="Sick">Sick</MenuItem>
+                                  <MenuItem value="Dead">Dead</MenuItem>
+                                  <MenuItem value="Suspended">Suspended</MenuItem>
+                                  <MenuItem value="Dismissed">Dismissed</MenuItem>
+                                  <MenuItem value="In court">In court(Displinary/criminal)</MenuItem>
+                                  <MenuItem value="Deserted">Deserted</MenuItem>
+                                  <MenuItem value="On course">On course</MenuItem>
+                                  <MenuItem value="On mission">On mission</MenuItem>
+                                  <MenuItem value="On leave">On leave</MenuItem>
+                                </Select>
+                            </Grid> 
+                        </div>
+                      ) : null
+                    }  
+                    {
+                      report_status === false && general === false && report_leave === true ? (
+                        <div>
+                          <FormLabel component="label" className={classes.formLabel}>Please select the leave status to include in the report</FormLabel>  
+                           <Grid item md={6} xs={12} sm={6}> 
+                              <Select
+                                labelId="demo-simple-select-label"
+                                isableUnderline
+                                displayEmpty
+                                fullWidth
+                                id="demo-simple-select"
+                                value={leave_type}
+                                className={classes.inputSmall_}
+                                onChange={handle_Leave_Change}
+                              >
+                                <MenuItem value="Pass leave">Pass leave</MenuItem>
+                                <MenuItem value="Maternity leave" >Maternity leave</MenuItem>
+                                <MenuItem value="Sick leave">Sick leave</MenuItem>
+                                <MenuItem value="Study leave">Study leave</MenuItem>
+                                <MenuItem value="Annual leave">Annual leave</MenuItem>
+                                <MenuItem value="Not on leave">Not on leave</MenuItem>
+                              </Select>
+                            </Grid> 
+                        </div>
+                      ) : null
+                    }
                 </Grid>              
               </Grid>
              
@@ -177,6 +337,8 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   clear_messages,
   clear_errors,
-  download_file_section
+  download_file_section,
+  download_file_section_status_Bone,
+  download_file_section_leave_Bone,
 })(GenerateExcelSections);
 

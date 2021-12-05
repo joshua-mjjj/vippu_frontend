@@ -384,6 +384,49 @@ export const download_file_section = (api, filename, section) =>  (dispatch, get
 
 }
 
+// SECTION DATA 
+export const download_file_section_status_Bone = (api, filename, section, status_type) =>  (dispatch, getState) => {
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    // const token = getState().auth.token;
+     axios
+    .get(`${global_url}/api/${api}/?section=${section}&status_type=${status_type}&unique=${unique_site_id}`, { responseType: 'blob', })
+    .then((res) => {
+      const message = "Your report will soon be downloaded, please find it in your downloads folder."
+      dispatch(create_api_message(message, "file_downloaded"));
+      fileDownload(res.data, `${filename}.xls`);
+      // fileDownload(res.data, "filename.xls");
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      // console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err.response)
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+    });
+
+}
+
+// SECTION DATA 
+export const download_file_section_leave_Bone = (api, filename, section, leave_type) =>  (dispatch, getState) => {
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    // const token = getState().auth.token;
+     axios
+    .get(`${global_url}/api/${api}/?section=${section}&leave_type=${leave_type}&unique=${unique_site_id}`, { responseType: 'blob', })
+    .then((res) => {
+      const message = "Your report will soon be downloaded, please find it in your downloads folder."
+      dispatch(create_api_message(message, "file_downloaded"));
+      fileDownload(res.data, `${filename}.xls`);
+      // fileDownload(res.data, "filename.xls");
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      // console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err.response)
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+    });
+
+}
 // GETTING FILES
 export const download_file = (api, filename) =>  (dispatch, getState) => {
      
@@ -417,6 +460,56 @@ export const download_file_query_status = (api, filename, status_type) =>  (disp
     // const token = getState().auth.token;
      axios
     .get(`${global_url}/api/${api}/?status_type=${status_type}&unique=${unique_site_id}`, { responseType: 'blob', })
+    .then((res) => {
+      const message = "Your report will soon be downloaded, please find it in your downloads folder."
+      dispatch(create_api_message(message, "file_downloaded"));
+      fileDownload(res.data, `${filename}.xls`);
+      // fileDownload(res.data, "filename.xls");
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      // console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err.response)
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+    });
+
+}
+
+export const download_file_query_status_Bone = (api, filename, status_type) =>  (dispatch, getState) => {
+     
+     // console.log(status_type)
+     // console.log(api)
+     // console.log(filename)
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    // const token = getState().auth.token;
+     axios
+    .get(`${global_url}/api/${api}/?status_type=${status_type}&unique=${unique_site_id}`, { responseType: 'blob', })
+    .then((res) => {
+      const message = "Your report will soon be downloaded, please find it in your downloads folder."
+      dispatch(create_api_message(message, "file_downloaded"));
+      fileDownload(res.data, `${filename}.xls`);
+      // fileDownload(res.data, "filename.xls");
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      // console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err.response)
+      dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+    });
+
+}
+
+export const download_file_query_leave_Bone = (api, filename, leave_type) =>  (dispatch, getState) => {
+     
+     // console.log(leave_type)
+     // console.log(api)
+     // console.log(filename)
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    // const token = getState().auth.token;
+     axios
+    .get(`${global_url}/api/${api}/?leave_type=${leave_type}&unique=${unique_site_id}`, { responseType: 'blob', })
     .then((res) => {
       const message = "Your report will soon be downloaded, please find it in your downloads folder."
       dispatch(create_api_message(message, "file_downloaded"));

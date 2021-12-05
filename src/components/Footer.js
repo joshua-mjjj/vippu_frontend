@@ -52,7 +52,7 @@ export default function Footer() {
     <div className={classes.root}>
       {/* <h3 className={classes.copyright}>Copyright HPV</h3> */}
       <div className={classes.linkList}>
-        <a href="/about" className={classes.link}>@AUTLab</a>
+        <a href="/about" className={classes.link}>@iCodeLab</a>
       </div>
     </div>
   );

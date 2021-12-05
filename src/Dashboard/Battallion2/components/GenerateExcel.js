@@ -170,12 +170,12 @@ function GenerateExcel(props) {
     const url_leave = "export_battalion_two_leave"
     e.preventDefault()
     if(filename !== null){
-      console.log("General report: " + general)
-      console.log("Query by status: " + report_status)
-      console.log("Query by leave: " + report_leave)
+      // console.log("General report: " + general)
+      // console.log("Query by status: " + report_status)
+      // console.log("Query by leave: " + report_leave)
 
-      console.log("Leave type: " + leave_type)
-      console.log("Status type: " + status_type)
+      // console.log("Leave type: " + leave_type)
+      // console.log("Status type: " + status_type)
 
       // general report
       if(general === true && report_status === false && report_leave === false){

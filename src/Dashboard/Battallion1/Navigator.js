@@ -47,11 +47,11 @@ function Navigator(props) {
                 icon: <AccountCircleIcon />,
                 active: dashboard,
               },
-              { 
-                id: 'New entry', 
-                icon: <AddBoxIcon />,
-                active: new_entry,
-              },
+              // {  // Battalion second in charges do not have access to the entire battalion list.
+              //   id: 'New entry', 
+              //   icon: <AddBoxIcon />,
+              //   active: new_entry,
+              // },
               { 
                 id: 'Find employee', 
                 icon: <PageviewIcon />,

@@ -193,16 +193,6 @@ function Battallion_edit(props) {
     setTitle(e.target.value)
   }
 
-  const handle_Leave_Change = (e) => {
-    if(e.target.value === "Not on leave"){
-      setEnable_date_pickers(true)
-      setOnLeave(e.target.value)
-    }else{
-      setEnable_date_pickers(false)
-      setOnLeave(e.target.value)
-    }
-  }
-
   const handle_Shift_Change = (e) => {
     setShift(e.target.value)
   }
@@ -290,6 +280,21 @@ function Battallion_edit(props) {
     setLocation(location_value)
   }
 
+   let leave_start_sub = null
+   let leave_end_sub = null
+   const handle_Leave_Change = (e) => {
+    if(e.target.value === "Not on leave"){
+      setEnable_date_pickers(true)
+      setOnLeave(e.target.value)
+      leave_start_sub = null
+      leave_end_sub = null
+    }else{
+      setEnable_date_pickers(false)
+      setOnLeave(e.target.value)
+    }
+  }
+
+
   const handle_submit_data = (e) => {
     const current_date = new Date()
 
@@ -325,7 +330,6 @@ function Battallion_edit(props) {
       date_of_birth_sub = date_of_birth_data
     }
 
-    let leave_start_sub = null
     if(leave_start_data === null && on_leave !== 'Not on leave'){
       let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
       leave_start_sub = date_object
@@ -333,7 +337,6 @@ function Battallion_edit(props) {
       leave_start_sub = leave_start_data
     }
 
-    let leave_end_sub = null
     if(leave_end_data === null && on_leave !== 'Not on leave'){
       let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
       leave_end_sub = date_object
