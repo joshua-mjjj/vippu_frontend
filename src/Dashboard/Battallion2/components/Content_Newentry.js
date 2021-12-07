@@ -255,6 +255,30 @@ function Content_Newentry(props) {
     setLocation(location_value)
   }
 
+  const clearState = () => {
+    setFirst_name("")
+    setLast_name("")
+    setNin("")
+    setIpps("")
+    setFile_number("")
+    setAccount_number("")
+    setBank(null)
+    setBranch("")
+    setContact("")
+    setSex(null)
+    setDepartment(null)
+    setSection(null)
+    setLocation(null)
+    setEducation_level(null)
+    setOtherEducation_level(null)
+    setArmed(null)
+    setRank(null)
+    setTitle(null)
+    setShift(null)
+    setStatus(null)
+    setOnLeave(null)
+  }
+
   const handle_submit_data = (e) => {
     const current_date = new Date()
 
@@ -310,26 +334,26 @@ function Content_Newentry(props) {
     // Create an employee
     e.preventDefault()
     if(
-      department !== null && 
-      rank !== null && 
-      title !== null && 
-      shift !== null && 
-      status !== null && 
-      on_leave !== null && 
-      first_name !== null && 
-      last_name !== null && 
-      nin !== null && 
-      ipps !== null && 
-      file_number !== null && 
+      (department !== null && department !== "") && 
+      (rank !== null && rank !== "") && 
+      (title !== null && title !== "") && 
+      (shift !== null && shift !== "") && 
+      (status !== null && status !== "") && 
+      (on_leave !== null && on_leave !== "") && 
+      (first_name !== null && first_name !== "") && 
+      (last_name !== null && last_name !== "") && 
+      (nin !== null && nin !== "") && 
+      (ipps !== null && ipps !== "") && 
+      (file_number !== null && file_number !== "")  && 
       // account_number !== null && // can be null
       // bank !== null && // can be null
       // branch !== null && // can be null
       // contact !== null && // can be null
-      sex !== null && 
-      education_level !== null && 
-      armed !== null && 
-      section !== null && 
-      location !== null
+      (sex !== null && sex !== "") && 
+      (education_level !== null && education_level !== "") && 
+      (armed !== null && armed !== "") && 
+      (section !== null && section !== "") && 
+      (location !== null && location !== "")
     ){
       props.battallion_two_create(first_name,
         last_name,
@@ -359,6 +383,7 @@ function Content_Newentry(props) {
         on_leave,
         leave_start_sub,
         leave_end_sub)
+        clearState()
     }else{
       setShow_alert(true)
     }

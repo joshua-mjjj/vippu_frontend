@@ -18,6 +18,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import Stack from '@mui/material/Stack';
+// import Checkbox from '@mui/material/Checkbox';
 
 import AutocompleteSections from './AutocompleteSections';
 import AutocompleteLocations from './AutocompleteLocations';
@@ -26,6 +27,8 @@ import Spinner from "../../../components/Spinner";
  
 
 import { battallion_one_create, clear_messages, clear_errors } from '../../../actions/battallions_create';
+
+// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -255,6 +258,30 @@ function Content_Newentry(props) {
     setLocation(location_value)
   }
 
+  const clearState = () => {
+    setFirst_name("")
+    setLast_name("")
+    setNin("")
+    setIpps("")
+    setFile_number("")
+    setAccount_number("")
+    setBank(null)
+    setBranch("")
+    setContact("")
+    setSex(null)
+    setDepartment(null)
+    setSection(null)
+    setLocation(null)
+    setEducation_level(null)
+    setOtherEducation_level(null)
+    setArmed(null)
+    setRank(null)
+    setTitle(null)
+    setShift(null)
+    setStatus(null)
+    setOnLeave(null)
+  }
+
   const handle_submit_data = (e) => {
     const current_date = new Date()
 
@@ -310,26 +337,26 @@ function Content_Newentry(props) {
     // Create an employee
     e.preventDefault()
     if(
-      department !== null && 
-      rank !== null && 
-      title !== null && 
-      shift !== null && 
-      status !== null && 
-      on_leave !== null && 
-      first_name !== null && 
-      last_name !== null && 
-      nin !== null && 
-      ipps !== null && 
-      file_number !== null && 
+      (department !== null && department !== "") && 
+      (rank !== null && rank !== "") && 
+      (title !== null && title !== "") && 
+      (shift !== null && shift !== "") && 
+      (status !== null && status !== "") && 
+      (on_leave !== null && on_leave !== "") && 
+      (first_name !== null && first_name !== "") && 
+      (last_name !== null && last_name !== "") && 
+      (nin !== null && nin !== "") && 
+      (ipps !== null && ipps !== "") && 
+      (file_number !== null && file_number !== "")  && 
       // account_number !== null && // can be null
       // bank !== null && // can be null
       // branch !== null && // can be null
       // contact !== null && // can be null
-      sex !== null && 
-      education_level !== null && 
-      armed !== null && 
-      section !== null && 
-      location !== null
+      (sex !== null && sex !== "") && 
+      (education_level !== null && education_level !== "") && 
+      (armed !== null && armed !== "") && 
+      (section !== null && section !== "") && 
+      (location !== null && location !== "")
     ){
       props.battallion_one_create(first_name,
         last_name,
@@ -359,6 +386,7 @@ function Content_Newentry(props) {
         on_leave,
         leave_start_sub,
         leave_end_sub)
+        clearState()
     }else{
       setShow_alert(true)
     }
@@ -567,15 +595,42 @@ function Content_Newentry(props) {
               <Grid container spacing={1}>
                  <Grid item md={6} xs={12} sm={6}>
                   <FormLabel component="label" className={classes.formLabel}>Bank</FormLabel>                 
-                  <Input
+                  {/*<Input
                     placeholder="Enter bank"
                     disableUnderline
                     value={bank}
                     onChange={(e) => setBank(e.target.value)}
                     className={classes.inputSmall}
                     fullWidth
-                  />
-                </Grid> 
+                  />*/}
+                  <Select
+                      labelId="demo-simple-select-label"
+                      isableUnderline
+                      displayEmpty
+                      fullWidth
+                      id="demo-simple-select"
+                      value={bank}
+                      className={classes.inputSmall_}
+                      onChange={(e) => setBank(e.target.value)}
+                    >
+                      <MenuItem value="CENTENARY">CENTENARY</MenuItem>
+                      <MenuItem value="STANBIC" >STANBIC</MenuItem>
+                      <MenuItem value="ABSA/BARCLAYS">ABSA/BARCLAYS</MenuItem>
+                      <MenuItem value="DFCU">DFCU</MenuItem>
+                      <MenuItem value="EQUITY">EQUITY</MenuItem>
+                      <MenuItem value="HOUSING FIN">HOUSING FIN</MenuItem>
+                      <MenuItem value="STANDARD CHARTERED">STANDARD CHARTERED</MenuItem>
+                      <MenuItem value="PRIDE">PRIDE</MenuItem>
+                      <MenuItem value="FINCA">FINCA</MenuItem>
+                      <MenuItem value="POST">POST</MenuItem>
+                      <MenuItem value="BOA">BOA</MenuItem>
+                      <MenuItem value="EXIM">EXIM</MenuItem>
+                      <MenuItem value="BARODA">BARODA</MenuItem>
+                      <MenuItem value="ORIENT">ORIENT</MenuItem>
+                      <MenuItem value="UBA">UBA</MenuItem>
+                      <MenuItem value="DIAMOND TRUST">DIAMOND TRUST</MenuItem>
+                    </Select>
+                </Grid>  
                  <Grid item md={6} xs={12} sm={6}> 
                   <FormLabel component="label" className={classes.formLabel}>Branch</FormLabel>                 
                   <Input
@@ -717,7 +772,10 @@ function Content_Newentry(props) {
 
               <Grid container spacing={1}>
                  <Grid item md={6} xs={12} sm={6}> 
-                  <FormLabel component="label" className={classes.formLabel}>Date of promotion</FormLabel>                 
+                  <FormLabel component="label" className={classes.formLabel}>Date of promotion.</FormLabel>  
+                  {/*<Checkbox  
+                     // onChange={general_report} 
+                     {...label} /> */}     
                   <Stack spacing={6}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DesktopDatePicker

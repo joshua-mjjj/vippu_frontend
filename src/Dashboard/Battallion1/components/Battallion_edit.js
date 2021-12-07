@@ -639,14 +639,41 @@ function Battallion_edit(props) {
               <Grid container spacing={1}>
                  <Grid item md={6} xs={12} sm={6}>
                   <FormLabel component="label" className={classes.formLabel}>Bank</FormLabel>                 
-                  <Input
+                  {/*<Input
                     placeholder="Enter bank"
                     disableUnderline
                     value={bank}
                     onChange={(e) => setBank(e.target.value)}
                     className={classes.inputSmall}
                     fullWidth
-                  />
+                  />*/}
+                  <Select
+                      labelId="demo-simple-select-label"
+                      isableUnderline
+                      displayEmpty
+                      fullWidth
+                      id="demo-simple-select"
+                      value={bank}
+                      className={classes.inputSmall_}
+                      onChange={(e) => setBank(e.target.value)}
+                    >
+                      <MenuItem value="CENTENARY">CENTENARY</MenuItem>
+                      <MenuItem value="STANBIC" >STANBIC</MenuItem>
+                      <MenuItem value="ABSA/BARCLAYS">ABSA/BARCLAYS</MenuItem>
+                      <MenuItem value="DFCU">DFCU</MenuItem>
+                      <MenuItem value="EQUITY">EQUITY</MenuItem>
+                      <MenuItem value="HOUSING FIN">HOUSING FIN</MenuItem>
+                      <MenuItem value="STANDARD CHARTERED">STANDARD CHARTERED</MenuItem>
+                      <MenuItem value="PRIDE">PRIDE</MenuItem>
+                      <MenuItem value="FINCA">FINCA</MenuItem>
+                      <MenuItem value="POST">POST</MenuItem>
+                      <MenuItem value="BOA">BOA</MenuItem>
+                      <MenuItem value="EXIM">EXIM</MenuItem>
+                      <MenuItem value="BARODA">BARODA</MenuItem>
+                      <MenuItem value="ORIENT">ORIENT</MenuItem>
+                      <MenuItem value="UBA">UBA</MenuItem>
+                      <MenuItem value="DIAMOND TRUST">DIAMOND TRUST</MenuItem>
+                    </Select>
                 </Grid> 
                  <Grid item md={6} xs={12} sm={6}> 
                   <FormLabel component="label" className={classes.formLabel}>Branch</FormLabel>                 
