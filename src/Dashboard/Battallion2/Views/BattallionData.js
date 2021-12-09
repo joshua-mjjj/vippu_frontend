@@ -14,6 +14,9 @@ import {
   battallion_two_fetch_data
 } from "../../../actions/battallions_fetch.js";
 
+import * as Scroll from 'react-scroll';
+var scroll = Scroll.animateScroll;
+
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -194,6 +197,10 @@ function BattallionData(props) {
   // React.useEffect(() => {
   //   console.log(props.data)
   // }, [props.data]);
+
+  React.useEffect(() => {
+    scroll.scrollToTop();
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

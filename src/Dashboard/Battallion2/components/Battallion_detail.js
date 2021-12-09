@@ -154,6 +154,22 @@ export default function Battallion_detail(props){
                 p:2
               }}
                 elevation={0}>
+                <Grid container spacing={2} wrap="wrap">
+                 <span className={classes.label}>Tin number</span>
+              </Grid>
+               <Grid container spacing={2} >
+                 <Typography variant="subtitle1" className={classes.value} >{employee.tin_number}</Typography>
+               </Grid>
+            </Card>
+
+            <Card
+              sx={{
+                display: 'grid',
+                gap: 2,
+                mb: 0,
+                p:2
+              }}
+                elevation={0}>
               	<Grid container spacing={2} wrap="wrap">
 	               <span className={classes.label}>IPPS</span>
 	            </Grid>
@@ -464,7 +480,7 @@ export default function Battallion_detail(props){
           </Grid>
 
            <Grid md={8}xs={12}>
-        	<Card
+        	 <Card
               sx={{
                 display: 'grid',
                 gap: 2,
@@ -496,23 +512,28 @@ export default function Battallion_detail(props){
                 </Grid>
             </Card>
 
-             <Card
-              sx={{
-                display: 'grid',
-                gap: 2,
-                mb: 0,
-                p:2
-              }}
-                elevation={0}>
-              	<Grid container spacing={2} wrap="wrap">
-	               <span className={classes.label}>Date of promotion</span>
-	            </Grid>
-               <Grid container spacing={2} >
-                 <Typography variant="subtitle1" className={classes.value} >{`${new Date(employee.date_of_promotion).toString().substring(0,15)}`}</Typography>
-               </Grid>
-            </Card>
+            {
+              employee.date_of_promotion !== null ? 
+              (
+                <Card
+                  sx={{
+                    display: 'grid',
+                    gap: 2,
+                    mb: 0,
+                    p:2
+                  }}
+                    elevation={0}>
+                    <Grid container spacing={2} wrap="wrap">
+                     <span className={classes.label}>Date of promotion</span>
+                  </Grid>
+                   <Grid container spacing={2} >
+                     <Typography variant="subtitle1" className={classes.value} >{`${new Date(employee.date_of_promotion).toString().substring(0,15)}`}</Typography>
+                   </Grid>
+                </Card>
+              ): null
+            }
 
-             <Card
+            <Card
               sx={{
                 display: 'grid',
                 gap: 2,

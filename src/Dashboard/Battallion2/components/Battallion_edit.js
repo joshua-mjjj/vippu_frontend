@@ -18,6 +18,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import Stack from '@mui/material/Stack';
+import Checkbox from '@mui/material/Checkbox';
 
 import AutocompleteSections from './AutocompleteSections';
 import AutocompleteLocations from './AutocompleteLocations';
@@ -26,6 +27,8 @@ import Spinner from "../../../components/Spinner";
  
 
 import { battallion_two_create, battallion_two_update, clear_messages, clear_errors } from '../../../actions/battallions_create';
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -102,6 +105,7 @@ function Battallion_edit(props) {
   const [nin, setNin] = React.useState(employee.nin);
   const [ipps, setIpps] = React.useState(employee.ipps);
   const [file_number, setFile_number] = React.useState(employee.file_number);
+  const [tin_number, setTin_number] = React.useState(employee.tin_number);
   const [account_number, setAccount_number] = React.useState(employee.account_number);
   const [bank, setBank] = React.useState(employee.bank);
   const [branch, setBranch] = React.useState(employee.branch);
@@ -134,6 +138,7 @@ function Battallion_edit(props) {
   const [date_of_birth, setDate_of_birth] = React.useState(new Date(employee.date_of_birth));
   const [date_of_birth_data, setDate_of_birth_data] = React.useState(null);
 
+  const [date_promotion_enabled, setEnable_promotion_pickers] = React.useState(employee.date_of_promotion === null ? true : false);
   const [date_pickers_enabled, setEnable_date_pickers] = React.useState(employee.on_leave === "Not on leave" ? true : false);
   const [on_leave, setOnLeave] = React.useState(employee.on_leave);
   
@@ -144,38 +149,6 @@ function Battallion_edit(props) {
   const [leave_end_data, setLeave_end_data] = React.useState(null);
 
   const [show_alert, setShow_alert] = React.useState(false);
-
-// account_number: null
-// armed: "yes"
-// bank: "Standbic"
-// battallion: "battallion_two"
-// branch: "Kampala"
-// contact: "0775356433"
-// created_at: "2021-11-06T13:52:50.930266Z"
-// date_of_birth: "2021-11-06"
-// date_of_enlistment: "2021-11-06"
-// date_of_promotion: "2021-11-06"
-// date_of_transfer: "2021-11-06"
-// department: "administration"
-// education_level: "masters"
-// file_number: "W/66574"
-// first_name: "Joshua"
-// id: 2
-// ipps: "WE5346577"
-// last_name: "Wafula"
-// leave_end_date: null
-// leave_start_date: null
-// location: "Plot 2 Accacia Avenue"
-// nin: "AC65789f"
-// on_leave: "not_no_leave"
-// other_education_level: null
-// rank: "SCP"
-// section: "Algerian Embassy"
-// sex: "male"
-// shift: "none"
-// status: "active"
-// title: "commandant"
-// updated_at: "2021-11-06T13:52:50.930299Z"
 
 
   // eslint-disable-next-line
@@ -293,7 +266,15 @@ function Battallion_edit(props) {
       setOnLeave(e.target.value)
     }
   }
-
+  
+  const handle_check = (e) => {
+    e.preventDefault()
+    if(e.target.checked){
+      setEnable_promotion_pickers(false)
+    }else{
+      setEnable_promotion_pickers(true)
+    }
+  }
 
   const handle_submit_data = (e) => {
     const current_date = new Date()
@@ -315,11 +296,16 @@ function Battallion_edit(props) {
     }
 
     let date_of_promotion_sub
-    if(date_of_promotion_data === null){
+    // constructing date object for the user to use the current date
+    if(date_of_promotion_data === null && date_promotion_enabled === false){ 
       let date_object = `${date_of_promotion.getFullYear()}-${date_of_promotion.getMonth()+1}-${date_of_promotion.getDate()}`
       date_of_promotion_sub = date_object
     }else{
-      date_of_promotion_sub = date_of_promotion_data
+      if(date_promotion_enabled === false){
+        date_of_promotion_sub = date_of_promotion_data
+      }else{
+        date_of_promotion_sub = null
+      }
     }
 
     let date_of_birth_sub
@@ -346,35 +332,35 @@ function Battallion_edit(props) {
 
     const battallion_value = "battallion_two" // Battallion 2 form, hence we do alittle bit of hard coding
     
-        console.log("start here: =================================")
-        console.log(first_name)
-        console.log(last_name)
-        console.log(nin)
-        console.log(ipps)
-        console.log(file_number)
-        console.log(battallion_value)
-        console.log(account_number)
-        console.log(contact)
-        console.log(sex)
-        console.log(rank)
-        console.log(education_level)
-        console.log(education_level_other)
-        console.log(bank)
-        console.log(branch)
-        console.log(department)
-        console.log(title)
-        console.log(status)
-        console.log(shift)
-        console.log(date_of_enlistment_sub)
-        console.log(date_of_transfer_sub)
-        console.log(date_of_promotion_sub)
-        console.log(date_of_birth_sub)
-        console.log(armed)
-        console.log(section)
-        console.log(location)
-        console.log(on_leave)
-        console.log(leave_start_sub)
-        console.log(leave_end_sub)
+        // console.log("start here: =================================")
+        // console.log(first_name)
+        // console.log(last_name)
+        // console.log(nin)
+        // console.log(ipps)
+        // console.log(file_number)
+        // console.log(battallion_value)
+        // console.log(account_number)
+        // console.log(contact)
+        // console.log(sex)
+        // console.log(rank)
+        // console.log(education_level)
+        // console.log(education_level_other)
+        // console.log(bank)
+        // console.log(branch)
+        // console.log(department)
+        // console.log(title)
+        // console.log(status)
+        // console.log(shift)
+        // console.log(date_of_enlistment_sub)
+        // console.log(date_of_transfer_sub)
+        // console.log(date_of_promotion_sub)
+        // console.log(date_of_birth_sub)
+        // console.log(armed)
+        // console.log(section)
+        // console.log(location)
+        // console.log(on_leave)
+        // console.log(leave_start_sub)
+        // console.log(leave_end_sub)
 
     // update an employee
     // e.preventDefault()
@@ -390,6 +376,7 @@ function Battallion_edit(props) {
       nin !== null && 
       ipps !== null && 
       file_number !== null && 
+      // tin_number !== null && 
       // account_number !== null && // can be null
       // bank !== null && // can be null
       // branch !== null && // can be null
@@ -407,6 +394,7 @@ function Battallion_edit(props) {
         nin,
         ipps,
         file_number,
+        tin_number,
         battallion_value,
         account_number,
         contact,
@@ -516,11 +504,12 @@ function Battallion_edit(props) {
                   />
                 </Grid>
                  <Grid item md={6} xs={12} sm={6}>
-                  <FormLabel component="label" className={classes.formLabel}>Battalion</FormLabel>                 
+                  <FormLabel component="label" className={classes.formLabel}>Tin Number</FormLabel>                 
                   <Input
-                    placeholder="Battallion"
+                    placeholder="Tin Number"
                     disableUnderline
-                    value={battallion}
+                    value={tin_number}
+                    onChange={(e) => setTin_number(e.target.value)}
                     className={classes.inputSmall}
                     fullWidth
                   />
@@ -615,6 +604,7 @@ function Battallion_edit(props) {
                       <MenuItem value="UCE" >UCE</MenuItem>
                       <MenuItem value="UACE">UACE</MenuItem>
                       <MenuItem value="Diploma">Diploma</MenuItem>
+                      <MenuItem value="Post Graduate Diploma">Post Graduate Diploma</MenuItem>
                       <MenuItem value="Bachelors">Bachelors</MenuItem>
                       <MenuItem value="Masters">Masters</MenuItem>
                       <MenuItem value="Doctorate">Doctorate(PhD)</MenuItem>
@@ -730,6 +720,7 @@ function Battallion_edit(props) {
                       <MenuItem value="In Charge">In Charge</MenuItem>
                       <MenuItem value="2nd In Charge">2nd In charge</MenuItem>
                       <MenuItem value="Driver">Driver</MenuItem>
+                      <MenuItem value="N/A">N/A</MenuItem>
                     </Select>
                 </Grid>                 
               </Grid>
@@ -816,21 +807,6 @@ function Battallion_edit(props) {
               </Grid>
 
               <Grid container spacing={1}>
-                 <Grid item md={6} xs={12} sm={6}> 
-                  <FormLabel component="label" className={classes.formLabel}>Date of promotion</FormLabel>                 
-                  <Stack spacing={6}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DesktopDatePicker
-                          // label="Date desktop"
-                          inputFormat="MM/dd/yyyy"
-                          value={date_of_promotion}
-                          onChange={handle_date_of_promotion}
-                          className={classes.inputSmall_date}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                    </LocalizationProvider>
-                    </Stack>
-                </Grid>
                 <Grid item md={6} xs={12} sm={6}>
                   <FormLabel component="label" className={classes.formLabel}>Date of birth</FormLabel>                 
                   <Stack spacing={6}>
@@ -845,11 +821,8 @@ function Battallion_edit(props) {
                         />
                     </LocalizationProvider>
                   </Stack>
-                </Grid>               
-              </Grid>
-
-              <Grid container spacing={1}> 
-                <Grid item md={12} xs={12} sm={12}>
+                </Grid>   
+                 <Grid item md={6} xs={12} sm={6}>
                   <FormLabel component="label" className={classes.formLabel}>Armed</FormLabel>                 
                    <Select
                       labelId="demo-simple-select-label"
@@ -864,7 +837,40 @@ function Battallion_edit(props) {
                       <MenuItem value="Yes">Yes</MenuItem>
                       <MenuItem value="No" >No</MenuItem>
                     </Select>
-                </Grid>           
+                </Grid>             
+              </Grid>
+
+              <Grid container spacing={1}> 
+                <Grid item md={12} xs={12} sm={12}> 
+                  <FormLabel component="label" className={classes.formLabel}>Date of promotion<span>{
+                    employee.date_of_promotion === null ? 
+                    (
+                      <span>(Check/tick if employee has been promoted before)</span> 
+                    ): null
+                  }</span>
+                  </FormLabel> 
+                  {
+                    employee.date_of_promotion === null ? 
+                    (
+                      <Checkbox
+                         onChange={handle_check} 
+                         {...label} /> 
+                    ): null
+                  }                  
+                  <Stack spacing={6}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DesktopDatePicker
+                          // label="Date desktop"
+                          disabled={date_promotion_enabled}
+                          inputFormat="MM/dd/yyyy"
+                          value={date_of_promotion}
+                          onChange={handle_date_of_promotion}
+                          className={classes.inputSmall_date}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
+                    </Stack>
+                </Grid>      
               </Grid>
 
                <Grid container spacing={1}> 

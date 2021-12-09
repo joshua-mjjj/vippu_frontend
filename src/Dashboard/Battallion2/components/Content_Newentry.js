@@ -18,6 +18,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import Stack from '@mui/material/Stack';
+import Checkbox from '@mui/material/Checkbox';
 
 import AutocompleteSections from './AutocompleteSections';
 import AutocompleteLocations from './AutocompleteLocations';
@@ -26,6 +27,8 @@ import Spinner from "../../../components/Spinner";
  
 
 import { battallion_two_create, clear_messages, clear_errors } from '../../../actions/battallions_create';
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -102,6 +105,7 @@ function Content_Newentry(props) {
   const [nin, setNin] = React.useState(null);
   const [ipps, setIpps] = React.useState(null);
   const [file_number, setFile_number] = React.useState(null);
+  const [tin_number, setTin_number] = React.useState(null);
   const [account_number, setAccount_number] = React.useState(null);
   const [bank, setBank] = React.useState(null);
   const [branch, setBranch] = React.useState(null);
@@ -122,6 +126,7 @@ function Content_Newentry(props) {
   const [shift, setShift] = React.useState(null);
   const [status, setStatus] = React.useState(null);
   const [date_pickers_enabled, setEnable_date_pickers] = React.useState(true);
+  const [date_promotion_enabled, setEnable_promotion_pickers] = React.useState(true);
 
   const [date_of_enlistment, setDate_of_enlistment] = React.useState(new Date());
   const [date_of_enlistment_data, setDate_of_enlistment_data] = React.useState(null);
@@ -169,6 +174,15 @@ function Content_Newentry(props) {
     }
   }
 
+  const handle_check = (e) => {
+    e.preventDefault()
+    if(e.target.checked){
+      setEnable_promotion_pickers(false)
+    }else{
+      setEnable_promotion_pickers(true)
+    }
+  }
+
   const handle_Shift_Change = (e) => {
     setShift(e.target.value)
   }
@@ -211,11 +225,13 @@ function Content_Newentry(props) {
 
   const handle_date_of_promotion = (e) => {
     // console.log(e)
-    setDate_of_promotion(e)
-    let dt = new Date(e);
-    let date_object = `${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDate()}`
-    console.log(date_object)
-    setDate_of_promotion_data(date_object)
+    if(date_promotion_enabled === false){
+      setDate_of_promotion(e)
+      let dt = new Date(e);
+      let date_object = `${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDate()}`
+      console.log(date_object)
+      setDate_of_promotion_data(date_object)
+    }
   }
 
   const handle_date_of_birth = (e) => {
@@ -261,14 +277,15 @@ function Content_Newentry(props) {
     setNin("")
     setIpps("")
     setFile_number("")
+    setTin_number("")
     setAccount_number("")
     setBank(null)
     setBranch("")
     setContact("")
     setSex(null)
     setDepartment(null)
-    setSection(null)
-    setLocation(null)
+    // setSection(null)
+    // setLocation(null)
     setEducation_level(null)
     setOtherEducation_level(null)
     setArmed(null)
@@ -299,11 +316,15 @@ function Content_Newentry(props) {
     }
 
     let date_of_promotion_sub
-    if(date_of_promotion_data === null){
+    if(date_of_promotion_data === null && date_promotion_enabled === false){
       let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
       date_of_promotion_sub = date_object
     }else{
-      date_of_promotion_sub = date_of_promotion_data
+      if(date_promotion_enabled === false){
+        date_of_promotion_sub = date_of_promotion_data
+      }else{
+        date_of_promotion_sub = null
+      }
     }
 
     let date_of_birth_sub
@@ -345,6 +366,7 @@ function Content_Newentry(props) {
       (nin !== null && nin !== "") && 
       (ipps !== null && ipps !== "") && 
       (file_number !== null && file_number !== "")  && 
+      (tin_number !== null && tin_number !== "")  &&
       // account_number !== null && // can be null
       // bank !== null && // can be null
       // branch !== null && // can be null
@@ -360,6 +382,7 @@ function Content_Newentry(props) {
         nin,
         ipps,
         file_number,
+        tin_number,
         battallion_value,
         account_number,
         contact,
@@ -470,11 +493,12 @@ function Content_Newentry(props) {
                   />
                 </Grid>
                  <Grid item md={6} xs={12} sm={6}>
-                  <FormLabel component="label" className={classes.formLabel}>Battalion</FormLabel>                 
+                  <FormLabel component="label" className={classes.formLabel}>Tin Number</FormLabel>                 
                   <Input
-                    placeholder="Battallion"
+                    placeholder="Tin Number"
                     disableUnderline
-                    value={battallion}
+                    value={tin_number}
+                    onChange={(e) => setTin_number(e.target.value)}
                     className={classes.inputSmall}
                     fullWidth
                   />
@@ -569,6 +593,7 @@ function Content_Newentry(props) {
                       <MenuItem value="UCE" >UCE</MenuItem>
                       <MenuItem value="UACE">UACE</MenuItem>
                       <MenuItem value="Diploma">Diploma</MenuItem>
+                      <MenuItem value="Post Graduate Diploma">Post Graduate Diploma</MenuItem>
                       <MenuItem value="Bachelors">Bachelors</MenuItem>
                       <MenuItem value="Masters">Masters</MenuItem>
                       <MenuItem value="Doctorate">Doctorate(PhD)</MenuItem>
@@ -684,6 +709,7 @@ function Content_Newentry(props) {
                       <MenuItem value="In Charge">In Charge</MenuItem>
                       <MenuItem value="2nd In Charge">2nd In charge</MenuItem>
                       <MenuItem value="Driver">Driver</MenuItem>
+                      <MenuItem value="N/A">N/A</MenuItem>
                     </Select>
                 </Grid>                 
               </Grid>
@@ -770,21 +796,6 @@ function Content_Newentry(props) {
               </Grid>
 
               <Grid container spacing={1}>
-                 <Grid item md={6} xs={12} sm={6}> 
-                  <FormLabel component="label" className={classes.formLabel}>Date of promotion</FormLabel>                 
-                  <Stack spacing={6}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DesktopDatePicker
-                          // label="Date desktop"
-                          inputFormat="MM/dd/yyyy"
-                          value={date_of_promotion}
-                          onChange={handle_date_of_promotion}
-                          className={classes.inputSmall_date}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                    </LocalizationProvider>
-                    </Stack>
-                </Grid>
                 <Grid item md={6} xs={12} sm={6}>
                   <FormLabel component="label" className={classes.formLabel}>Date of birth</FormLabel>                 
                   <Stack spacing={6}>
@@ -799,11 +810,8 @@ function Content_Newentry(props) {
                         />
                     </LocalizationProvider>
                   </Stack>
-                </Grid>               
-              </Grid>
-
-              <Grid container spacing={1}> 
-                <Grid item md={12} xs={12} sm={12}>
+                </Grid>  
+                 <Grid item md={6} xs={12} sm={6}>
                   <FormLabel component="label" className={classes.formLabel}>Armed</FormLabel>                 
                    <Select
                       labelId="demo-simple-select-label"
@@ -818,7 +826,29 @@ function Content_Newentry(props) {
                       <MenuItem value="Yes">Yes</MenuItem>
                       <MenuItem value="No" >No</MenuItem>
                     </Select>
-                </Grid>           
+                </Grid>              
+              </Grid>
+
+              <Grid container spacing={1}> 
+                <Grid item md={12} xs={12} sm={12}> 
+                  <FormLabel component="label" className={classes.formLabel}>Date of promotion (Check/tick if employee has been promoted before)</FormLabel>                 
+                  <Checkbox
+                     onChange={handle_check} 
+                     {...label} />
+                  <Stack spacing={6}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DesktopDatePicker
+                          // label="Date desktop"
+                          disabled={date_promotion_enabled}
+                          inputFormat="MM/dd/yyyy"
+                          value={date_of_promotion}
+                          onChange={handle_date_of_promotion}
+                          className={classes.inputSmall_date}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
+                    </Stack>
+                </Grid>       
               </Grid>
 
                <Grid container spacing={1}> 
