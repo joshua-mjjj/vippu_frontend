@@ -107,6 +107,7 @@ function GenerateExcelSections(props) {
   // Implementaion code 
 
   const [filename, setFilename] = React.useState(null);
+  const [title_doc, setTitle_doc] = React.useState(null);
   const [show_alert, setShow_alert] = React.useState(false);
 
   const control_bool = () => {
@@ -169,7 +170,7 @@ function GenerateExcelSections(props) {
 
     const section = props.auth.user.section
     e.preventDefault()
-    if(filename !== null){
+    if(filename !== null && title_doc !== null){
       // console.log("General report: " + general)
       // console.log("Query by status: " + report_status)
       // console.log("Query by leave: " + report_leave)
@@ -179,20 +180,20 @@ function GenerateExcelSections(props) {
 
       // general report
       if(general === true && report_status === false && report_leave === false){
-         props.download_file_section(url_general, filename, section)
+         props.download_file_section(url_general, filename, section, title_doc)
       }
 
       // report querying by status
       if(report_status === true && general === false && report_leave === false){
          if(status_type !== null){
-           props.download_file_section_status_Bone(url_status, filename, section, status_type)
+           props.download_file_section_status_Bone(url_status, filename, section, status_type, title_doc)
          }
       }
 
       // report querying by leave
       if(report_leave === true && general === false && report_status === false){
          if(leave_type !== null){
-           props.download_file_section_leave_Bone(url_leave, filename, section, leave_type)
+           props.download_file_section_leave_Bone(url_leave, filename, section, leave_type, title_doc)
          }
       }
     }else{
@@ -204,7 +205,7 @@ function GenerateExcelSections(props) {
   // const control_bool_error = () => {
   //   props.clear_errors()
   // }
-  const content_all_fields_required = "Please provide a file name before submitting."
+  const content_all_fields_required = "Please provide a file name and document title before submitting."
 
   return (
       <Paper elevation={0}>
@@ -218,6 +219,15 @@ function GenerateExcelSections(props) {
                     value={filename}
                     disableUnderline
                     onChange={(e) => setFilename(e.target.value)}
+                    className={classes.inputSmall}
+                  />
+                  <FormLabel component="label" className={classes.formLabel}>Document title</FormLabel>                 
+                  <Input
+                    placeholder="Enter your preferred title for the report. "
+                    fullWidth
+                    value={title_doc}
+                    disableUnderline
+                    onChange={(e) => setTitle_doc(e.target.value)}
                     className={classes.inputSmall}
                   />
                   <FormLabel component="label" className={classes.formLabel}>Please specify more information about the report you want to generate . <span className={one_option_flag === true ? classes.notice_on : classes.notice_off } >(Please check one option)</span></FormLabel>  

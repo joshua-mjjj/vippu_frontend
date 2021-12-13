@@ -15,10 +15,23 @@ import {
 } from '@mui/material';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import { Scrollbar } from '../../GlobalComponents/scrollbar';
+import { makeStyles } from '@material-ui/core/styles';
 // import { statusVariants, titleVariants, departmentVariants } from './utils';
+
+const useStyles = makeStyles((theme) => ({
+  bolden:{
+      fontWeight: '600'
+  },
+  item: {
+    'fontWeight': '800',
+    'fontFamily': 'Dosis',
+    'fontSize': '18px'
+  }
+}));
 
 export const OrdersTable = (props) => {
   const { data } = props;
+  const classes = useStyles();
 
   const viewDetail = (id) => {
     // console.log(id)
@@ -32,88 +45,45 @@ export const OrdersTable = (props) => {
           <TableHead>
             <TableRow>
               <TableCell>
-                <span style={{ 
-                  'fontWeight': '800',
-                  'fontFamily': 'Dosis',
-                  'fontSize': '18px',
-                }}> First name </span>
+                <span className={classes.item}> First name </span>
               </TableCell>
               <TableCell>
-              <span style={{ 
-                  'fontWeight': '800',
-                  'fontFamily': 'Dosis',
-                  'fontSize': '18px',
-                }}> Last name </span>
+              <span className={classes.item}> Last name </span>
               </TableCell>
               <TableCell>
-               <span style={{ 
-                  'fontWeight': '800',
-                  'fontFamily': 'Dosis',
-                  'fontSize': '18px',
-                }}> Title </span>
+               <span className={classes.item}> Title </span>
               </TableCell>
               <TableCell>
-               <span style={{ 
-                  'fontWeight': '800',
-                  'fontFamily': 'Dosis',
-                  'fontSize': '18px',
-                }}> Rank </span>
+               <span className={classes.item}> Rank </span>
               </TableCell>
               <TableCell>
-               <span style={{ 
-                  'fontWeight': '800',
-                  'fontFamily': 'Dosis',
-                  'fontSize': '18px',
-                }}> Department </span>
+               <span className={classes.item}> Department </span>
               </TableCell>
               <TableCell>
-               <span style={{ 
-                  'fontWeight': '800',
-                  'fontFamily': 'Dosis',
-                  'fontSize': '18px',
-                }}> File number </span>
+               <span className={classes.item}> File number </span>
               </TableCell>
               <TableCell>
-               <span style={{ 
-                  'fontWeight': '800',
-                  'fontFamily': 'Dosis',
-                  'fontSize': '18px',
-                }}> Status </span>
+               <span className={classes.item}> Status </span>
               </TableCell>
               <TableCell>
-               <span style={{ 
-                  'fontWeight': '800',
-                  'fontFamily': 'Dosis',
-                  'fontSize': '18px',
-                }}>View</span>
+               <span className={classes.item}>View</span>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.map((employee) => {
-              // const statusVariant = statusVariants.find(
-              //   (variant) => variant.value === employee.status
-              // );
-
-              // const titleVariant = titleVariants.find(
-              //   (variant) => variant.value === employee.title
-              // );
-
-              // const departmentVariant = departmentVariants.find(
-              //   (variant) => variant.value === employee.department
-              // );
-
               return (
                 <TableRow key={employee.id}>
                   <TableCell>
                     <Link
-                      color="inherit"
+                      color={employee.notify_leave ? "error" : "inherit"}
+                      className={employee.notify_leave ? classes.bolden : null}
                       component={RouterLink}
                       to="#"
                       underline="none"
                       variant="subtitle2">
                         <Typography
-                            color="inherit"
+                            color={employee.notify_leave ? "error" : "inherit"}
                             variant="inherit">
                           {employee.first_name}
                         </Typography>
@@ -122,7 +92,8 @@ export const OrdersTable = (props) => {
                   <TableCell>
                     <Box>
                       <Typography
-                        color="inherit"
+                        color={employee.notify_leave ? "error" : "inherit"}
+                        className={employee.notify_leave ? classes.bolden : null}
                         variant="inherit"
                       >
                         {employee.last_name}
@@ -132,7 +103,8 @@ export const OrdersTable = (props) => {
                   <TableCell>
                     <Box>
                       <Typography
-                        color="inherit"
+                        color={employee.notify_leave ? "error" : "inherit"}
+                        className={employee.notify_leave ? classes.bolden : null}
                         variant="inherit"
                       >
                         {employee.title}
@@ -142,7 +114,8 @@ export const OrdersTable = (props) => {
                   <TableCell>
                     <Box>
                       <Typography
-                        color="inherit"
+                        color={employee.notify_leave ? "error" : "inherit"}
+                        className={employee.notify_leave ? classes.bolden : null}
                         variant="inherit"
                       >
                         {employee.rank}
@@ -152,7 +125,8 @@ export const OrdersTable = (props) => {
                   <TableCell>
                     <Box>
                       <Typography
-                        color="inherit"
+                        color={employee.notify_leave ? "error" : "inherit"}
+                        className={employee.notify_leave ? classes.bolden : null}
                         variant="inherit"
                       >
                         {employee.department}
@@ -160,7 +134,15 @@ export const OrdersTable = (props) => {
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {employee.file_number}
+                    <Box>
+                      <Typography
+                        color={employee.notify_leave ? "error" : "inherit"}
+                        className={employee.notify_leave ? classes.bolden : null}
+                        variant="inherit"
+                      >
+                        {employee.file_number}
+                      </Typography>
+                    </Box>
                   </TableCell>
                   <TableCell>
                    {
@@ -189,14 +171,6 @@ export const OrdersTable = (props) => {
                     }
                     {
                      employee.status === 'Dead' ? (
-                      <Chip
-                        sx={{ 'color' : 'orange', 'fontWeight' : 'bold' }}
-                        label={employee.status}
-                        variant="outlined"
-                      />): null
-                    }
-                    {
-                     employee.status === 'On leave' ? (
                       <Chip
                         sx={{ 'color' : 'orange', 'fontWeight' : 'bold' }}
                         label={employee.status}
@@ -255,6 +229,14 @@ export const OrdersTable = (props) => {
                      employee.status === 'On mission' ? (
                       <Chip
                         sx={{ 'color' : 'green', 'fontWeight' : 'bold' }}
+                        label={employee.status}
+                        variant="outlined"
+                      />): null
+                    }
+                    {
+                     employee.status === 'On leave' ? (
+                      <Chip
+                        sx={{ 'color' : 'orange', 'fontWeight' : 'bold' }}
                         label={employee.status}
                         variant="outlined"
                       />): null

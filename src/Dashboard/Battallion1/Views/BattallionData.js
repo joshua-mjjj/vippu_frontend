@@ -9,10 +9,15 @@ import GenerateExcel from '../components/GenerateExcel';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import moment from 'moment'
 
 import {
   battallion_one_fetch_data
 } from "../../../actions/battallions_fetch.js";
+
+import {
+  send_notification
+} from "../../../actions/battallions_create.js";
 
 import * as Scroll from 'react-scroll';
 var scroll = Scroll.animateScroll;
@@ -194,9 +199,30 @@ function BattallionData(props) {
   //   setTab_value(2)
   // }
 
-  // React.useEffect(() => {
-  //   console.log(props.data)
-  // }, [props.data]);
+  React.useEffect(() => {
+    if(props.data !== null){
+
+      // eslint-disable-next-line
+      props.data.filter((instance) => {
+        if(instance.on_leave !== 'Not on leave' && instance.notify_leave === false){
+
+           var end_date = moment(`${instance.leave_end_date}`);
+           console.log(instance.leave_end_date)
+           var current = moment(new Date()); // now
+           const prime_difference = (end_date.diff(current, 'days') + 1)
+           console.log(prime_difference)
+           if(prime_difference <= 0){
+             console.log("Send notification")
+             const new_notify_leave = true
+             const url = "battallion_one"
+             props.send_notification(instance.id, new_notify_leave, url)
+             // turn notify_leave to true
+           }
+        }
+     })  
+
+   }
+  }, [props]);
 
   React.useEffect(() => {
     scroll.scrollToTop();
@@ -217,7 +243,7 @@ function BattallionData(props) {
             <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
               {/* Render conditionally */}
               { 
-                tab_value === 0 ? (<BattallionList section_title={null}refetch_data={refetch_data} data={props.data !== null ? props.data : null } />) : null
+                tab_value === 0 ? (<BattallionList section_title={null} refetch_data={refetch_data} data={props.data !== null ? props.data : null } />) : null
               }
               { 
                 tab_value === 1 ? (<GenerateExcel />) : null
@@ -242,5 +268,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { 
-  battallion_one_fetch_data
+  battallion_one_fetch_data,
+  send_notification
 })(BattallionData);

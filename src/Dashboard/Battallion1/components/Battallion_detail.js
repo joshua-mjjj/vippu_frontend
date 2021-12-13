@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, Card, Container, Grid, Typography } from '@mui/material';	
 import { makeStyles } from '@material-ui/core/styles';
+import Alert from '../../GlobalComponents/Alert';
 
 // import { statusVariants, titleVariants, departmentVariants, leaveVariants, educationVariants, shiftVariants } from './utils';
 
@@ -29,46 +30,15 @@ const useStyles = makeStyles((theme) => ({
    
 }));
 
-  // account_number: "AC465768798"
-  // armed: "yes"
-  // bank: "Centenary"
-  // battallion: "battallion_two"
-  // branch: "Kampala"
-  // contact: "0754674569"
-// created_at: "2021-11-09T13:06:10.878461Z"
-	// date_of_birth: "2021-11-09"
-	// date_of_enlistment: "2021-11-09"
-	// date_of_promotion: "2021-11-09"
-	// date_of_transfer: "2021-11-09"
-  // department: "consolate"
-  // education_level: "masters"
-  // file_number: "W86574"
-  // first_name: "Maria"
-  // id: 5
-  // ipps: "W/65643"
-  // last_name: "Luzinda"
-// leave_end_date: "2021-11-09"
-// leave_start_date: "2021-11-09"
-  // location: "Plot 2 Accacia Avenue"
-  // nin: "AC00000654"
-// on_leave: "maternity_leave"
-  // other_education_level: null
-  // rank: "SCP"
-  // section: "Algerian Embassy"
-  // sex: "male"
-  // shift: "none"
-  // status: "transfered"
-  // title: "deputy_commandant"
-// updated_at: "2021-11-09T13:06:10.878519Z"
 
-
-
-// leave_end_date
-// leave_start_date
 
 export default function Battallion_detail(props){
   const classes = useStyles();
   const { employee } = props;
+
+  const control_bool_error = () => {
+    console.log("Ok")
+  }
 
  //  const statusVariant = statusVariants.find(
  //       (variant) => variant.value === employee.status
@@ -95,6 +65,14 @@ export default function Battallion_detail(props){
         pb: 2,
       }}
     >
+       <Grid md={10}xs={12}>
+          {
+            employee.notify_leave ? 
+            (
+              <Alert content={`This is an alert to notify you that ${employee.first_name}'s leave time ellapsed!`} control_bool={control_bool_error} status="error" />
+            ) : null
+          }
+        </Grid>
       <Container maxWidth="lg">
       	<div className={classes.flex} >
           <Grid md={8}xs={12}>

@@ -149,7 +149,7 @@ function Battallion_edit(props) {
   const [leave_end_data, setLeave_end_data] = React.useState(null);
 
   const [show_alert, setShow_alert] = React.useState(false);
-
+  const [notify_leave, setNotify_leave] = React.useState(employee.notify_leave);
 
   // eslint-disable-next-line
   const [battallion, setBattallion] = React.useState("Battalion 2");  // We already know this is Battallion 2 form
@@ -256,6 +256,7 @@ function Battallion_edit(props) {
    let leave_start_sub = null
    let leave_end_sub = null
    const handle_Leave_Change = (e) => {
+    setNotify_leave(false)
     if(e.target.value === "Not on leave"){
       setEnable_date_pickers(true)
       setOnLeave(e.target.value)
@@ -331,39 +332,7 @@ function Battallion_edit(props) {
     }
 
     const battallion_value = "battallion_two" // Battallion 2 form, hence we do alittle bit of hard coding
-    
-        // console.log("start here: =================================")
-        // console.log(first_name)
-        // console.log(last_name)
-        // console.log(nin)
-        // console.log(ipps)
-        // console.log(file_number)
-        // console.log(battallion_value)
-        // console.log(account_number)
-        // console.log(contact)
-        // console.log(sex)
-        // console.log(rank)
-        // console.log(education_level)
-        // console.log(education_level_other)
-        // console.log(bank)
-        // console.log(branch)
-        // console.log(department)
-        // console.log(title)
-        // console.log(status)
-        // console.log(shift)
-        // console.log(date_of_enlistment_sub)
-        // console.log(date_of_transfer_sub)
-        // console.log(date_of_promotion_sub)
-        // console.log(date_of_birth_sub)
-        // console.log(armed)
-        // console.log(section)
-        // console.log(location)
-        // console.log(on_leave)
-        // console.log(leave_start_sub)
-        // console.log(leave_end_sub)
 
-    // update an employee
-    // e.preventDefault()
     if(
       department !== null && 
       rank !== null && 
@@ -417,7 +386,8 @@ function Battallion_edit(props) {
         location,
         on_leave,
         leave_start_sub,
-        leave_end_sub)
+        leave_end_sub,
+        notify_leave)
     }else{
       setShow_alert(true)
     }

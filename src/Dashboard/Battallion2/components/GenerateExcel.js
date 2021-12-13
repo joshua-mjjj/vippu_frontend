@@ -107,6 +107,7 @@ function GenerateExcel(props) {
   // Implementaion code 
 
   const [filename, setFilename] = React.useState(null);
+  const [title_doc, setTitle_doc] = React.useState(null);
   const [show_alert, setShow_alert] = React.useState(false);
 
   const control_bool = () => {
@@ -169,7 +170,7 @@ function GenerateExcel(props) {
     const url_general = "export_excel"
     const url_leave = "export_battalion_two_leave"
     e.preventDefault()
-    if(filename !== null){
+    if(filename !== null && title_doc !== null){
       // console.log("General report: " + general)
       // console.log("Query by status: " + report_status)
       // console.log("Query by leave: " + report_leave)
@@ -179,18 +180,18 @@ function GenerateExcel(props) {
 
       // general report
       if(general === true && report_status === false && report_leave === false){
-         props.download_file(url_general, filename)
+         props.download_file(url_general, filename, title_doc)
       }
       // report querying by status
       if(report_status === true && general === false && report_leave === false){
          if(status_type !== null){
-           props.download_file_query_status(url_status, filename, status_type)
+           props.download_file_query_status(url_status, filename, status_type, title_doc)
          }
       }
       // report querying by leave
       if(report_leave === true && general === false && report_status === false){
          if(leave_type !== null){
-           props.download_file_query_leave(url_leave, filename, leave_type)
+           props.download_file_query_leave(url_leave, filename, leave_type, title_doc)
          }
       }
     }else{
@@ -198,13 +199,11 @@ function GenerateExcel(props) {
     }
   }
   
-  
-
   // const control_bool_error = () => {
   //   props.clear_errors()
   // }
 
-  const content_all_fields_required = "Please provide a file name before submitting."
+  const content_all_fields_required = "Please provide a file name and document title before submitting."
 
   return (
       <Paper elevation={0}>
@@ -218,6 +217,15 @@ function GenerateExcel(props) {
                     value={filename}
                     disableUnderline
                     onChange={(e) => setFilename(e.target.value)}
+                    className={classes.inputSmall}
+                  />
+                  <FormLabel component="label" className={classes.formLabel}>Document title</FormLabel>                 
+                  <Input
+                    placeholder="Enter your preferred title for the report. "
+                    fullWidth
+                    value={title_doc}
+                    disableUnderline
+                    onChange={(e) => setTitle_doc(e.target.value)}
                     className={classes.inputSmall}
                   />
                   <FormLabel component="label" className={classes.formLabel}>Please specify more information about the report you want to generate . <span className={one_option_flag === true ? classes.notice_on : classes.notice_off } >(Please check one option)</span></FormLabel>  

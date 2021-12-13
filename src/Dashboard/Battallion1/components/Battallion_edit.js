@@ -149,7 +149,7 @@ function Battallion_edit(props) {
   const [leave_end_data, setLeave_end_data] = React.useState(null);
 
   const [show_alert, setShow_alert] = React.useState(false);
-
+  const [notify_leave, setNotify_leave] = React.useState(employee.notify_leave);
 
   // eslint-disable-next-line
   const [battallion, setBattallion] = React.useState("Battalion 1");  // We already know this is Battallion 2 form
@@ -194,7 +194,7 @@ function Battallion_edit(props) {
     setDate_of_enlistment(e)
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDate()}`
-    console.log(date_object)
+    //console.log(date_object)
     setDate_of_enlistment_data(date_object)
   }
 
@@ -203,7 +203,7 @@ function Battallion_edit(props) {
     setDate_of_transfer(e)
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDate()}`
-    console.log(date_object)
+    //console.log(date_object)
     setDate_of_transfer_data(date_object)
   }
 
@@ -212,7 +212,7 @@ function Battallion_edit(props) {
     setDate_of_promotion(e)
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDate()}`
-    console.log(date_object)
+    //console.log(date_object)
     setDate_of_promotion_data(date_object)
   }
 
@@ -221,7 +221,7 @@ function Battallion_edit(props) {
     setDate_of_birth(e)
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDate()}`
-    console.log(date_object)
+    //console.log(date_object)
     setDate_of_birth_data(date_object)
   }
 
@@ -230,7 +230,7 @@ function Battallion_edit(props) {
     setLeave_start(e)
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDate()}`
-    console.log(date_object)
+    //console.log(date_object)
     setLeave_start_data(date_object)
   }
 
@@ -239,7 +239,7 @@ function Battallion_edit(props) {
     setLeave_end(e)
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDate()}`
-    console.log(date_object)
+    //console.log(date_object)
     setLeave_end_data(date_object)
   }
 
@@ -249,13 +249,14 @@ function Battallion_edit(props) {
   }
 
   const get_location_value = (location_value) => {
-    console.log(location_value)
+    //console.log(location_value)
     setLocation(location_value)
   }
 
    let leave_start_sub = null
    let leave_end_sub = null
    const handle_Leave_Change = (e) => {
+    setNotify_leave(false)
     if(e.target.value === "Not on leave"){
       setEnable_date_pickers(true)
       setOnLeave(e.target.value)
@@ -315,7 +316,6 @@ function Battallion_edit(props) {
       date_of_birth_sub = date_of_birth_data
     }
 
-    
     if(leave_start_data === null && on_leave !== 'Not on leave'){
       let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
       leave_start_sub = date_object
@@ -323,7 +323,6 @@ function Battallion_edit(props) {
       leave_start_sub = leave_start_data
     }
 
-    
     if(leave_end_data === null && on_leave !== 'Not on leave'){
       let date_object = `${current_date.getFullYear()}-${current_date.getMonth()+1}-${current_date.getDate()}`
       leave_end_sub = date_object
@@ -388,7 +387,8 @@ function Battallion_edit(props) {
         location,
         on_leave,
         leave_start_sub,
-        leave_end_sub)
+        leave_end_sub,
+        notify_leave)
     }else{
       setShow_alert(true)
     }
