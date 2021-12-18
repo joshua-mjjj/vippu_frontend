@@ -7,101 +7,100 @@ import { logout, notify } from '../actions/auth.js';
 
 import IdleTimer from 'react-idle-timer';
 // import LoginPage from "./LoginPage";
-import DashboardRoot from "../Dashboard/Paperbase";
-import DashboardRootBattallion2 from "../Dashboard/Battallion2/Paperbase";
-import DashboardRootBattallion1 from "../Dashboard/Battallion1/Paperbase";
+import DashboardRoot from '../Dashboard/Paperbase';
+import DashboardRootBattallion2 from '../Dashboard/Battallion2/Paperbase';
+import DashboardRootBattallion1 from '../Dashboard/Battallion1/Paperbase';
 
 import * as Scroll from 'react-scroll';
 var scroll = Scroll.animateScroll;
 
 class RenderDashboard extends React.Component {
-	        constructor(props){
-		        super(props)
+  constructor(props) {
+    super(props);
 
-		        this.state = {
-		            timeout:1000 * 900 * 1,  // idle timer 
-		            userLoggedIn: false,
-		            isTimedOut: false
-		        }
-		        this.idleTimer = null
-		        this.onAction = this._onAction.bind(this)
-		        this.onActive = this._onActive.bind(this)
-		        this.onIdle = this._onIdle.bind(this)
-    	    }
+    this.state = {
+      timeout: 1000 * 900 * 1, // idle timer
+      userLoggedIn: false,
+      isTimedOut: false
+    };
+    this.idleTimer = null;
+    this.onAction = this._onAction.bind(this);
+    this.onActive = this._onActive.bind(this);
+    this.onIdle = this._onIdle.bind(this);
+  }
 
-    	  _onAction(e) {
-		      this.setState({isTimedOut: false})
-		    }
-		   
-		    _onActive(e) {
-		      this.setState({isTimedOut: false})
-		    }
-   
-		    _onIdle(e) {
-		      const isTimedOut = this.state.isTimedOut
-		      if (isTimedOut){
-		      	this.props.notify()
-		        this.props.logout()
-		      } else {
-		        this.idleTimer.reset();
-		        this.setState({isTimedOut: true})
-		      }
-		      
-		    }
-    componentDidMount() {
-      // window.scrollTo(0, 0);
-      scroll.scrollToTop();
-      // turn loading true back to false
+  _onAction(e) {
+    this.setState({ isTimedOut: false });
+  }
+
+  _onActive(e) {
+    this.setState({ isTimedOut: false });
+  }
+
+  _onIdle(e) {
+    const isTimedOut = this.state.isTimedOut;
+    if (isTimedOut) {
+      this.props.notify();
+      this.props.logout();
+    } else {
+      this.idleTimer.reset();
+      this.setState({ isTimedOut: true });
     }
+  }
+  componentDidMount() {
+    // window.scrollTo(0, 0);
+    scroll.scrollToTop();
+    // turn loading true back to false
+  }
 
-    render(){
-      return(
- 			<>
-      	 <IdleTimer
-            ref={ref => { this.idleTimer = ref }}
-            element={document}
-            onActive={this.onActive}
-            onIdle={this.onIdle}
-            onAction={this.onAction}
-            debounce={250}
-            timeout={this.state.timeout} />	
+  render() {
+    return (
+      <>
+        <IdleTimer
+          ref={(ref) => {
+            this.idleTimer = ref;
+          }}
+          element={document}
+          onActive={this.onActive}
+          onIdle={this.onIdle}
+          onAction={this.onAction}
+          debounce={250}
+          timeout={this.state.timeout}
+        />
 
-	        <div>
-	         {  this.props.auth.user ?
-	          (<div>
-				         	{  this.props.auth.user.account_type === "admin" ? 
-				         		  (<DashboardRoot /> ):("")
-				         	}
-				         	{  
-				         		this.props.auth.user.account_type === "in_charge" ? 
-				         		      // Check Battallion 
-						         		  (<div>
-						         		  	{
-						         		  		this.props.auth.user.battallion === "battallion_two" ? 
-						         		  		(<DashboardRootBattallion2 /> ) :("")
-						         		  	}
-						         		  	{
-						         		  		this.props.auth.user.battallion === "battallion_one" ? 
-						         		  		(<DashboardRootBattallion1 /> ) :("")
-						         		  	}
-						         		   </div>
-						         		  ):("")
-
-
-				           }
-	           </div>
-	           ):('') 
-	          }
-	        </div>
-
-		     </>
-        );
-    }
+        <div>
+          {this.props.auth.user ? (
+            <div>
+              {this.props.auth.user.account_type === 'admin' ? <DashboardRoot /> : ''}
+              {this.props.auth.user.account_type === 'in_charge' ? (
+                // Check Battallion
+                <div>
+                  {this.props.auth.user.battallion === 'battallion_two' ? (
+                    <DashboardRootBattallion2 />
+                  ) : (
+                    ''
+                  )}
+                  {this.props.auth.user.battallion === 'battallion_one' ? (
+                    <DashboardRootBattallion1 />
+                  ) : (
+                    ''
+                  )}
+                </div>
+              ) : (
+                ''
+              )}
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
+      </>
+    );
+  }
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth,
+const mapStateToProps = (state) => ({
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { logout, notify })(RenderDashboard);
-

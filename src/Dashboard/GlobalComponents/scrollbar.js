@@ -7,24 +7,20 @@ import { Box } from '@mui/material';
 export const Scrollbar = forwardRef((props, ref) => {
   const { children, ...other } = props;
 
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
 
   if (isMobile) {
     return (
-      <Box
-        ref={ref}
-        sx={{ overflowX: 'auto' }}
-      >
+      <Box ref={ref} sx={{ overflowX: 'auto' }}>
         {children}
       </Box>
     );
   }
 
   return (
-    <SimpleBar
-      ref={ref}
-      {...other}
-    >
+    <SimpleBar ref={ref} {...other}>
       {children}
     </SimpleBar>
   );

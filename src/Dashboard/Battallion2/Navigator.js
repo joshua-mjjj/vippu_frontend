@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
@@ -21,10 +21,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 // import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 
-import {
-  logout
-} from "../../actions/auth.js";
-
+import { logout } from '../../actions/auth.js';
 
 function Navigator(props) {
   const { ...other } = props;
@@ -35,43 +32,46 @@ function Navigator(props) {
   const [find_employee, setFind_employee] = React.useState(false);
   const [profile, setProfile] = React.useState(false);
 
-    const categories = [
+  const categories = [
     {
-      id: props.auth.user !== null ? `${props.auth.user.first_name} ${props.auth.user.last_name}` : null,
+      id:
+        props.auth.user !== null
+          ? `${props.auth.user.first_name} ${props.auth.user.last_name}`
+          : null,
       children: [
         {
           id: 'Dashboard',
           icon: <AccountCircleIcon />,
-          active: dashboard,
+          active: dashboard
         },
         {
           id: 'Battalion data',
           icon: <StorageIcon />,
-          active: battallion_data,
+          active: battallion_data
         },
-        { 
-          id: 'New entry', 
+        {
+          id: 'New entry',
           icon: <AddBoxIcon />,
-          active: new_entry,
+          active: new_entry
         },
-        { 
-          id: 'Find employee', 
+        {
+          id: 'Find employee',
           icon: <PageviewIcon />,
-          active: find_employee, 
-        },
-      ],
+          active: find_employee
+        }
+      ]
     },
     {
       id: 'Account',
       children: [
-        { 
-          id: 'Profile', 
+        {
+          id: 'Profile',
           icon: <SettingsIcon />,
-          active: profile,  
+          active: profile
         },
         { id: 'Logout', icon: <LogoutIcon /> }
-      ],
-    },
+      ]
+    }
   ];
 
   const item = {
@@ -79,56 +79,55 @@ function Navigator(props) {
     px: 3,
     color: 'rgba(255, 255, 255, 0.7)',
     '&:hover, &:focus': {
-      bgcolor: 'rgba(255, 255, 255, 0.08)',
-    },
+      bgcolor: 'rgba(255, 255, 255, 0.08)'
+    }
   };
 
   const itemCategory = {
     boxShadow: '0 -1px 0 rgb(255,255,255,0.1) inset',
     py: 3,
-    px: 3,
+    px: 3
   };
 
   const redirect = (child) => {
-
-    if(child === "Dashboard"){
-      setDashboard(true)
-      setBattallion_data(false)
-      setNew_entry(false)
-      setFind_employee(false)
-      setProfile(false)
-    }else if(child === "Battalion data"){
-      setBattallion_data(true)
-      setDashboard(false)
-      setNew_entry(false)
-      setFind_employee(false)
-      setProfile(false)
-    }else if(child === "New entry"){
-      setNew_entry(true)
-      setDashboard(false)
-      setBattallion_data(false)
-      setFind_employee(false)
-      setProfile(false)
-    }else if(child === "Find employee"){
-      setFind_employee(true)
-      setDashboard(false)
-      setBattallion_data(false)
-      setNew_entry(false)
-      setProfile(false)
-    }else if(child === "Profile"){
-      setProfile(true)
-      setDashboard(false)
-      setBattallion_data(false)
-      setNew_entry(false)
-      setFind_employee(false)
-    }else if (child === "Logout"){
-      props.logout()
-      window.location.href = '/'
+    if (child === 'Dashboard') {
+      setDashboard(true);
+      setBattallion_data(false);
+      setNew_entry(false);
+      setFind_employee(false);
+      setProfile(false);
+    } else if (child === 'Battalion data') {
+      setBattallion_data(true);
+      setDashboard(false);
+      setNew_entry(false);
+      setFind_employee(false);
+      setProfile(false);
+    } else if (child === 'New entry') {
+      setNew_entry(true);
+      setDashboard(false);
+      setBattallion_data(false);
+      setFind_employee(false);
+      setProfile(false);
+    } else if (child === 'Find employee') {
+      setFind_employee(true);
+      setDashboard(false);
+      setBattallion_data(false);
+      setNew_entry(false);
+      setProfile(false);
+    } else if (child === 'Profile') {
+      setProfile(true);
+      setDashboard(false);
+      setBattallion_data(false);
+      setNew_entry(false);
+      setFind_employee(false);
+    } else if (child === 'Logout') {
+      props.logout();
+      window.location.href = '/';
       return;
     }
 
-    props.routing_info(child)
-  }
+    props.routing_info(child);
+  };
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -167,7 +166,7 @@ function Navigator(props) {
 const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
-  error: state.errors,
+  error: state.errors
 });
 
 export default connect(mapStateToProps, { logout })(Navigator);

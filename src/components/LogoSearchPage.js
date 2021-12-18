@@ -8,29 +8,29 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-flex',
     maxWidth: '1440px',
     '& > *': {
-      margin:'auto',
+      margin: 'auto'
     },
     // margin: '10px',
     verticalAlign: 'middle',
-    alignItems: "center",
+    alignItems: 'center'
   },
   marginAutoItem: {
     margin: 'auto',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   AvatarItem: {
-    [theme.breakpoints.down("800")]: {
-      display:'none'
-    },
+    [theme.breakpoints.down('800')]: {
+      display: 'none'
+    }
   },
   AvatarItemMobile: {
-    [theme.breakpoints.up("800")]: {
-      display:'none'
-    },
+    [theme.breakpoints.up('800')]: {
+      display: 'none'
+    }
   },
-  title:{
+  title: {
     marginLeft: '18px',
-   // width: '116.35px',
+    // width: '116.35px',
     height: '32px',
     borderRadius: '10px',
     textDecoration: 'none',
@@ -40,11 +40,11 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     fontSize: '18px',
     // lineHeight: '23px',
-    [theme.breakpoints.down("800")]: {
+    [theme.breakpoints.down('800')]: {
       width: '82px'
-    },
+    }
   },
-   title_:{
+  title_: {
     height: '32px',
     borderRadius: '10px',
     textDecoration: 'none',
@@ -54,10 +54,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     fontSize: '18px',
     // lineHeight: '23px',
-    [theme.breakpoints.down("800")]: {
+    [theme.breakpoints.down('800')]: {
       width: '82px'
-    },
-  },
+    }
+  }
 }));
 
 export default function ImageAvatars() {
@@ -66,7 +66,12 @@ export default function ImageAvatars() {
   return (
     <div className={classes.root}>
       <Box display="inline-flex">
-      <Typography variant="h6" className={classes.title}><a href="/" className={classes.title_}> VIPPU | VIS </a></Typography>
+        <Typography variant="h6" className={classes.title}>
+          <a href="/" className={classes.title_}>
+            {' '}
+            VIPPU | VIS{' '}
+          </a>
+        </Typography>
       </Box>
     </div>
   );

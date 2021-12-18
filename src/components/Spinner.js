@@ -6,7 +6,7 @@ import logo from '../assets/loading.gif';
 const useStylesFacebook = makeStyles((theme) => ({
   root: {
     position: 'relative',
-    paddingTop: '6px',
+    paddingTop: '6px'
   }
 }));
 
@@ -15,20 +15,15 @@ function FacebookCircularProgress(props) {
 
   return (
     <div className={classes.root}>
-     <img
-        src={logo}
-        alt=""
-        width="100"
-        height="100"
-      />
+      <img src={logo} alt="" width="100" height="100" />
     </div>
   );
 }
 
 const useStyles = makeStyles({
   root: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 });
 
 export default function Spinner() {

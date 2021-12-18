@@ -6,54 +6,45 @@ export const Summary = (props) => {
   const { content, icon: Icon, label } = props;
 
   return (
-    <Card
-      sx={{ height: '100%' }}
-      variant="outlined"
-    >
-   {/* eslint-disable-next-line*/}
+    <Card sx={{ height: '100%' }} variant="outlined">
+      {/* eslint-disable-next-line*/}
     <a>
-      <Box
-        sx={{
-          alignItems: 'center',
-          display: 'flex',
-          p: 2
-        }}
-        onClick={(e) => props.get_section(label)}
-      >
-        {Icon && (
-          <Box
-            sx={{
-              display: 'flex',
-              mr: 2
-            }}
-          >
-            <Avatar
+        <Box
+          sx={{
+            alignItems: 'center',
+            display: 'flex',
+            p: 2
+          }}
+          onClick={(e) => props.get_section(label)}
+        >
+          {Icon && (
+            <Box
               sx={{
-                backgroundColor: 'primary.main',
-                height: 56,
-                width: 56
+                display: 'flex',
+                mr: 2
               }}
             >
-              <Icon sx={{ color: 'primary.contrastText' }} />
-            </Avatar>
-          </Box>
-        )}
-        <div>
-          <Typography
-            color="textSecondary"
-            variant="overline"
-          >
-            {label}
-          </Typography>
-          <Typography
-            color="textPrimary"
-            variant="h6"
-          >
-            {content}
-          </Typography>
-        </div>
-      </Box>
-    </a>
+              <Avatar
+                sx={{
+                  backgroundColor: 'primary.main',
+                  height: 56,
+                  width: 56
+                }}
+              >
+                <Icon sx={{ color: 'primary.contrastText' }} />
+              </Avatar>
+            </Box>
+          )}
+          <div>
+            <Typography color="textSecondary" variant="overline">
+              {label}
+            </Typography>
+            <Typography color="textPrimary" variant="h6">
+              {content}
+            </Typography>
+          </div>
+        </Box>
+      </a>
     </Card>
   );
 };

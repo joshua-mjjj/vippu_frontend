@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
@@ -17,9 +17,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import {
-  logout
-} from "../actions/auth.js";
+import { logout } from '../actions/auth.js';
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -27,19 +25,20 @@ function Header(props) {
   const { onDrawerToggle } = props;
 
   const logout = () => {
-    props.logout()
-    window.location.href = '/'
-  }
+    props.logout();
+    window.location.href = '/';
+  };
 
   return (
     <React.Fragment>
-      <AppBar 
+      <AppBar
         // color=''
         sx={{
           backgroundColor: '#483D8B'
         }}
-        position="sticky" 
-        elevation={0}>
+        position="sticky"
+        elevation={0}
+      >
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             <Grid sx={{ display: { sm: 'none', xs: 'block' } }} item>
@@ -61,14 +60,12 @@ function Header(props) {
                   textDecoration: 'none',
                   color: 'common.white',
                   '&:hover': {
-                    color: 'common.white',
-                  },
+                    color: 'common.white'
+                  }
                 }}
                 rel="noopener noreferrer"
               >
-                {
-                  props.auth.user !== null ? (<span>{props.auth.user.username}</span>) : null
-                }
+                {props.auth.user !== null ? <span>{props.auth.user.username}</span> : null}
               </Link>
             </Grid>
             {/*<Grid item>
@@ -99,12 +96,10 @@ function Header(props) {
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs>
               <Typography color="inherit" variant="h5" component="h1">
-                {
-                  props.auth.user.account_type === "admin" ? (<span>Admin dashboard</span>) : null
-                }
-                {
-                  props.auth.user.account_type === "in_charge" ? (<span>In Charge dashboard</span>) : null
-                }
+                {props.auth.user.account_type === 'admin' ? <span>Admin dashboard</span> : null}
+                {props.auth.user.account_type === 'in_charge' ? (
+                  <span>In Charge dashboard</span>
+                ) : null}
               </Typography>
             </Grid>
             <Grid item>
@@ -128,14 +123,15 @@ function Header(props) {
           </Grid>
         </Toolbar>
       </AppBar>
-      <AppBar 
-        component="div" 
-        position="static" 
-        elevation={0} 
+      <AppBar
+        component="div"
+        position="static"
+        elevation={0}
         sx={{
           backgroundColor: '#483D8B',
           zIndex: 0
-        }}>
+        }}
+      >
         <Tabs value={0} textColor="inherit">
           <Tab label="Users" />
           <Tab label="Sign-in method" />
@@ -148,13 +144,13 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  onDrawerToggle: PropTypes.func.isRequired,
+  onDrawerToggle: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
-  error: state.errors,
+  error: state.errors
 });
 
 export default connect(mapStateToProps, {

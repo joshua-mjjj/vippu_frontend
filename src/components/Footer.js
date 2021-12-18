@@ -18,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '20px',
     lineHeight: '25px',
     color: '#000000',
-    [theme.breakpoints.down("550")]: {
+    [theme.breakpoints.down('550')]: {
       fontSize: '14px',
-      lineHeight: '17.7px',
-    },
+      lineHeight: '17.7px'
+    }
   },
   linkList: {
     display: 'flex',
@@ -35,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '15px',
     lineHeight: '25px',
     color: '#FFFFF6',
-    [theme.breakpoints.down("550")]: {
+    [theme.breakpoints.down('550')]: {
       fontSize: '14px',
-      lineHeight: '17.7px',
+      lineHeight: '17.7px'
     },
-    "&:last-child": {
+    '&:last-child': {
       marginRight: 0
     }
   }
@@ -52,7 +52,9 @@ export default function Footer() {
     <div className={classes.root}>
       {/* <h3 className={classes.copyright}>Copyright HPV</h3> */}
       <div className={classes.linkList}>
-        <a href="/about" className={classes.link}>@iCodeLab</a>
+        <a href="/about" className={classes.link}>
+          @iCodeLab
+        </a>
       </div>
     </div>
   );

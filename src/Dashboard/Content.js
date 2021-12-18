@@ -31,7 +31,7 @@ export default function Content() {
                 placeholder="Search by email address, phone number, or user UID"
                 InputProps={{
                   disableUnderline: true,
-                  sx: { fontSize: 'default' },
+                  sx: { fontSize: 'default' }
                 }}
                 variant="standard"
               />

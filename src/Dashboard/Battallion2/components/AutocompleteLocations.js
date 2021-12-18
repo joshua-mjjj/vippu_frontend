@@ -15,42 +15,42 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     margin: theme.spacing(2),
     '& .MuiInputBase-root': {
-      marginBottom: theme.spacing(2),
+      marginBottom: theme.spacing(2)
     }
   },
-  formLabel:{
-      fontSize: '15px',
-      color: 'black',
-      fontWeight: '600',
-      fontFamily: 'Dosis',
-      // margin: theme.spacing(4),
+  formLabel: {
+    fontSize: '15px',
+    color: 'black',
+    fontWeight: '600',
+    fontFamily: 'Dosis'
+    // margin: theme.spacing(4),
   },
-  inputSmall:{
+  inputSmall: {
     fontSize: '13px',
     color: '#1b1f23',
     border: '1px solid #cfd7de',
     borderRadius: '5px',
     padding: theme.spacing(1),
-   // margin: theme.spacing(2),
-    "&::after": {
-        borderBottom: '1px solid #949494',
-    },
+    // margin: theme.spacing(2),
+    '&::after': {
+      borderBottom: '1px solid #949494'
+    }
   },
-  inputSmall_:{
+  inputSmall_: {
     // fontSize: '13px',
     // color: '#1b1f23',
     // border: '1px solid #cfd7de',
     // borderRadius: '5px',
     '& .MuiInputBase-root': {
-      marginBottom: theme.spacing(0),
+      marginBottom: theme.spacing(0)
     },
-     '& .MuiFormControl-root': {
-      width: '100%',
+    '& .MuiFormControl-root': {
+      width: '100%'
     },
-    [theme.breakpoints.only('xs')]:{
-    	   '& .MuiTextField-root': {
-      width: '100%',
-  		}
+    [theme.breakpoints.only('xs')]: {
+      '& .MuiTextField-root': {
+        width: '100%'
+      }
     }
     // padding: theme.spacing(1)
     // marginBottom: theme.spacing(2),
@@ -58,17 +58,17 @@ const useStyles = makeStyles((theme) => ({
     //     borderBottom: '1px solid #949494',
     // },
   },
-  inputSmall_date:{
+  inputSmall_date: {
     fontSize: '13px',
     color: '#1b1f23',
     border: '1px solid #cfd7de',
     borderRadius: '5px',
     padding: theme.spacing(1)
-   // margin: theme.spacing(2),
+    // margin: theme.spacing(2),
   },
   submit: {
     margin: theme.spacing(3, 0, 1),
-    height: "56px",
+    height: '56px',
     textTransform: 'none',
     fontSize: '20px!important',
     background: '#101F33',
@@ -76,10 +76,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     lineHeight: '16px',
     color: '#FFFFFF!important',
-    [theme.breakpoints.up("md")]: {
-      margin: theme.spacing(2, 0),
-    },
-  },
+    [theme.breakpoints.up('md')]: {
+      margin: theme.spacing(2, 0)
+    }
+  }
 }));
 
 export default function AutocompleteLocations(props) {
@@ -129,10 +129,9 @@ export default function AutocompleteLocations(props) {
       options={options}
       loading={loading}
       onInputChange={(event, newInputValue) => {
-        props.get_section_value(newInputValue)
+        props.get_section_value(newInputValue);
       }}
       renderInput={(params) => (
-
         <TextField
           {...params}
           className={classes.inputSmall_}
@@ -148,10 +147,9 @@ export default function AutocompleteLocations(props) {
                 {loading ? <CircularProgress color="inherit" size={20} /> : null}
                 {params.InputProps.endAdornment}
               </React.Fragment>
-            ),
+            )
           }}
         />
-
       )}
     />
   );
@@ -162,43 +160,43 @@ const topFilms = [
   { title: 'Plot 2 Accacia Avenue', year: 1994 },
   { title: 'Plot 27 Kyadondo Road', year: 1972 },
   { title: 'Plot 1 Rwenzori Tower Nakasero', year: 1974 },
-  
+
   { title: 'Plot 1 Rwenzori Tower Nakasero', year: 2008 },
   { title: 'Plot 3 Kololo Hill Lane', year: 1957 },
-  { title: "Summit view Kololo", year: 1993 },
+  { title: 'Summit view Kololo', year: 1993 },
   { title: 'Plot Opp Basker Ville Road', year: 1994 },
   {
     title: 'Plot 20 Phillip Road Kololo',
-    year: 2003,
+    year: 2003
   },
   { title: 'Plot Kololo Hill Drive', year: 1966 },
   { title: 'Ntinda View Ministers Village', year: 1999 },
   {
     title: 'Plot Serunkuuma Road Mbuya',
-    year: 2001,
+    year: 2001
   },
   {
     title: 'Plot 33 Hill Prive Kololo',
-    year: 1980,
+    year: 1980
   },
   { title: 'Elizabeth Avenue Kololo', year: 1994 },
   { title: 'Plot 49B Upper Kololo Terace', year: 2010 },
   {
     title: 'Plot Basker Ville Kololo',
-    year: 2002,
+    year: 2002
   },
-  { title: "Plot 27 Prince Charles Drive", year: 1975 },
+  { title: 'Plot 27 Prince Charles Drive', year: 1975 },
   { title: 'Plot 31 Makenzie Valley', year: 1990 },
   { title: 'Plot 16 Lumumba Avenue Nakasero', year: 1999 },
   { title: 'Nakasero Opp KK Nursery School.', year: 1954 },
   {
     title: 'Plot 15 Phillip Road Kololo',
-    year: 1977,
+    year: 1977
   },
   { title: 'Hill Lane Kololo', year: 2002 },
   { title: 'Lower Kololo Terrace', year: 1995 },
   { title: 'Plot 5 Yusuf Lule Road Nakasero', year: 1991 },
-  { title: "Plot 1 Kasozi Road Kololo", year: 1946 },
+  { title: 'Plot 1 Kasozi Road Kololo', year: 1946 },
   { title: 'Plot 11 Laurdel Road Nakasero', year: 1997 },
   { title: 'Kololo Hill lane', year: 1995 },
   { title: 'Kyadondo road Nakasero', year: 1994 },
@@ -273,5 +271,5 @@ const topFilms = [
   { title: 'Plot 4B Mabua Road Kololo', year: 2014 },
   { title: 'Bunga', year: 2014 },
   { title: 'Buziga', year: 2014 },
-  { title: 'None', year: 2014 },
+  { title: 'None', year: 2014 }
 ];

@@ -6,10 +6,7 @@ export const SummaryItem = (props) => {
   const { content, icon: Icon, label } = props;
 
   return (
-    <Card
-      sx={{ height: '100%' }}
-      variant="outlined"
-    >
+    <Card sx={{ height: '100%' }} variant="outlined">
       <Box
         sx={{
           alignItems: 'center',
@@ -36,16 +33,10 @@ export const SummaryItem = (props) => {
           </Box>
         )}
         <div>
-          <Typography
-            color="textSecondary"
-            variant="overline"
-          >
+          <Typography color="textSecondary" variant="overline">
             {label}
           </Typography>
-          <Typography
-            color="textPrimary"
-            variant="h6"
-          >
+          <Typography color="textPrimary" variant="h6">
             {content}
           </Typography>
         </div>

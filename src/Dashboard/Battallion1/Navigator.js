@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
@@ -21,10 +21,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 // import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 
-import {
-  logout
-} from "../../actions/auth.js";
-
+import { logout } from '../../actions/auth.js';
 
 function Navigator(props) {
   const { ...other } = props;
@@ -34,145 +31,149 @@ function Navigator(props) {
   const [new_entry, setNew_entry] = React.useState(false);
   const [find_employee, setFind_employee] = React.useState(false);
   const [profile, setProfile] = React.useState(false);
-  
-  let categories
+
+  let categories;
   // console.log(props.auth.user.top_level_incharge)
-    if(props.auth.user.lower_level_incharge === true){
-       categories = [
+  if (props.auth.user.lower_level_incharge === true) {
+    categories = [
+      {
+        id:
+          props.auth.user !== null
+            ? `${props.auth.user.first_name} ${props.auth.user.last_name}`
+            : null,
+        children: [
           {
-            id: props.auth.user !== null ? `${props.auth.user.first_name} ${props.auth.user.last_name}` : null,
-            children: [
-              {
-                id: 'Dashboard',
-                icon: <AccountCircleIcon />,
-                active: dashboard,
-              },
-              // {  // Battalion second in charges do not have access to the entire battalion list.
-              //   id: 'New entry', 
-              //   icon: <AddBoxIcon />,
-              //   active: new_entry,
-              // },
-              { 
-                id: 'Find employee', 
-                icon: <PageviewIcon />,
-                active: find_employee, 
-              },
-              {
-                id: 'Generate report', // using the same variables, jus changing the view
-                icon: <StorageIcon />,
-                active: battallion_data,
-              }
-            ],
+            id: 'Dashboard',
+            icon: <AccountCircleIcon />,
+            active: dashboard
+          },
+          // {  // Battalion second in charges do not have access to the entire battalion list.
+          //   id: 'New entry',
+          //   icon: <AddBoxIcon />,
+          //   active: new_entry,
+          // },
+          {
+            id: 'Find employee',
+            icon: <PageviewIcon />,
+            active: find_employee
           },
           {
-            id: 'Account',
-            children: [
-              { 
-                id: 'Profile', 
-                icon: <SettingsIcon />,
-                active: profile,  
-              },
-              { id: 'Logout', icon: <LogoutIcon /> }
-            ],
-          },
-       ];
-    }else{
-       categories = [
+            id: 'Generate report', // using the same variables, jus changing the view
+            icon: <StorageIcon />,
+            active: battallion_data
+          }
+        ]
+      },
+      {
+        id: 'Account',
+        children: [
           {
-            id: props.auth.user !== null ? `${props.auth.user.first_name} ${props.auth.user.last_name}` : null,
-            children: [
-              {
-                id: 'Dashboard',
-                icon: <AccountCircleIcon />,
-                active: dashboard,
-              },
-              {
-                id: 'Battalion data',
-                icon: <StorageIcon />,
-                active: battallion_data,
-              },
-              { 
-                id: 'New entry', 
-                icon: <AddBoxIcon />,
-                active: new_entry,
-              },
-              { 
-                id: 'Find employee', 
-                icon: <PageviewIcon />,
-                active: find_employee, 
-              },
-            ],
+            id: 'Profile',
+            icon: <SettingsIcon />,
+            active: profile
+          },
+          { id: 'Logout', icon: <LogoutIcon /> }
+        ]
+      }
+    ];
+  } else {
+    categories = [
+      {
+        id:
+          props.auth.user !== null
+            ? `${props.auth.user.first_name} ${props.auth.user.last_name}`
+            : null,
+        children: [
+          {
+            id: 'Dashboard',
+            icon: <AccountCircleIcon />,
+            active: dashboard
           },
           {
-            id: 'Account',
-            children: [
-              { 
-                id: 'Profile', 
-                icon: <SettingsIcon />,
-                active: profile,  
-              },
-              { id: 'Logout', icon: <LogoutIcon /> }
-            ],
+            id: 'Battalion data',
+            icon: <StorageIcon />,
+            active: battallion_data
           },
-        ];
-    }
-  
+          {
+            id: 'New entry',
+            icon: <AddBoxIcon />,
+            active: new_entry
+          },
+          {
+            id: 'Find employee',
+            icon: <PageviewIcon />,
+            active: find_employee
+          }
+        ]
+      },
+      {
+        id: 'Account',
+        children: [
+          {
+            id: 'Profile',
+            icon: <SettingsIcon />,
+            active: profile
+          },
+          { id: 'Logout', icon: <LogoutIcon /> }
+        ]
+      }
+    ];
+  }
 
   const item = {
     py: '2px',
     px: 3,
     color: 'rgba(255, 255, 255, 0.7)',
     '&:hover, &:focus': {
-      bgcolor: 'rgba(255, 255, 255, 0.08)',
-    },
+      bgcolor: 'rgba(255, 255, 255, 0.08)'
+    }
   };
 
   const itemCategory = {
     boxShadow: '0 -1px 0 rgb(255,255,255,0.1) inset',
     py: 3,
-    px: 3,
+    px: 3
   };
 
   const redirect = (child) => {
-
-    if(child === "Dashboard"){
-      setDashboard(true)
-      setBattallion_data(false)
-      setNew_entry(false)
-      setFind_employee(false)
-      setProfile(false)
-    }else if(child === "Battalion data" || child === "Generate report"){
-      setBattallion_data(true)
-      setDashboard(false)
-      setNew_entry(false)
-      setFind_employee(false)
-      setProfile(false)
-    }else if(child === "New entry"){
-      setNew_entry(true)
-      setDashboard(false)
-      setBattallion_data(false)
-      setFind_employee(false)
-      setProfile(false)
-    }else if(child === "Find employee"){
-      setFind_employee(true)
-      setDashboard(false)
-      setBattallion_data(false)
-      setNew_entry(false)
-      setProfile(false)
-    }else if(child === "Profile"){
-      setProfile(true)
-      setDashboard(false)
-      setBattallion_data(false)
-      setNew_entry(false)
-      setFind_employee(false)
-    }else if (child === "Logout"){
-      props.logout()
-      window.location.href = '/'
+    if (child === 'Dashboard') {
+      setDashboard(true);
+      setBattallion_data(false);
+      setNew_entry(false);
+      setFind_employee(false);
+      setProfile(false);
+    } else if (child === 'Battalion data' || child === 'Generate report') {
+      setBattallion_data(true);
+      setDashboard(false);
+      setNew_entry(false);
+      setFind_employee(false);
+      setProfile(false);
+    } else if (child === 'New entry') {
+      setNew_entry(true);
+      setDashboard(false);
+      setBattallion_data(false);
+      setFind_employee(false);
+      setProfile(false);
+    } else if (child === 'Find employee') {
+      setFind_employee(true);
+      setDashboard(false);
+      setBattallion_data(false);
+      setNew_entry(false);
+      setProfile(false);
+    } else if (child === 'Profile') {
+      setProfile(true);
+      setDashboard(false);
+      setBattallion_data(false);
+      setNew_entry(false);
+      setFind_employee(false);
+    } else if (child === 'Logout') {
+      props.logout();
+      window.location.href = '/';
       return;
     }
 
-    props.routing_info(child)
-  }
+    props.routing_info(child);
+  };
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -211,7 +212,7 @@ function Navigator(props) {
 const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
-  error: state.errors,
+  error: state.errors
 });
 
 export default connect(mapStateToProps, { logout })(Navigator);

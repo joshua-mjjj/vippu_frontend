@@ -21,7 +21,7 @@ export default function TransitionAlerts(props) {
               size="small"
               onClick={() => {
                 setOpen(false);
-                props.control_bool()
+                props.control_bool();
               }}
             >
               <CloseIcon fontSize="inherit" />

@@ -15,42 +15,42 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     margin: theme.spacing(2),
     '& .MuiInputBase-root': {
-      marginBottom: theme.spacing(2),
+      marginBottom: theme.spacing(2)
     }
   },
-  formLabel:{
-      fontSize: '15px',
-      color: 'black',
-      fontWeight: '600',
-      fontFamily: 'Dosis',
-      // margin: theme.spacing(4),
+  formLabel: {
+    fontSize: '15px',
+    color: 'black',
+    fontWeight: '600',
+    fontFamily: 'Dosis'
+    // margin: theme.spacing(4),
   },
-  inputSmall:{
+  inputSmall: {
     fontSize: '13px',
     color: '#1b1f23',
     border: '1px solid #cfd7de',
     borderRadius: '5px',
     padding: theme.spacing(1),
-   // margin: theme.spacing(2),
-    "&::after": {
-        borderBottom: '1px solid #949494',
-    },
+    // margin: theme.spacing(2),
+    '&::after': {
+      borderBottom: '1px solid #949494'
+    }
   },
-  inputSmall_:{
+  inputSmall_: {
     // fontSize: '13px',
     // color: '#1b1f23',
     // border: '1px solid #cfd7de',
     // borderRadius: '5px',
     '& .MuiInputBase-root': {
-      marginBottom: theme.spacing(0),
+      marginBottom: theme.spacing(0)
     },
-     '& .MuiFormControl-root': {
-      width: '100%',
+    '& .MuiFormControl-root': {
+      width: '100%'
     },
-    [theme.breakpoints.only('xs')]:{
-    	   '& .MuiTextField-root': {
-      width: '100%',
-  		}
+    [theme.breakpoints.only('xs')]: {
+      '& .MuiTextField-root': {
+        width: '100%'
+      }
     }
     // padding: theme.spacing(1)
     // marginBottom: theme.spacing(2),
@@ -58,17 +58,17 @@ const useStyles = makeStyles((theme) => ({
     //     borderBottom: '1px solid #949494',
     // },
   },
-  inputSmall_date:{
+  inputSmall_date: {
     fontSize: '13px',
     color: '#1b1f23',
     border: '1px solid #cfd7de',
     borderRadius: '5px',
     padding: theme.spacing(1)
-   // margin: theme.spacing(2),
+    // margin: theme.spacing(2),
   },
   submit: {
     margin: theme.spacing(3, 0, 1),
-    height: "56px",
+    height: '56px',
     textTransform: 'none',
     fontSize: '20px!important',
     background: '#101F33',
@@ -76,10 +76,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     lineHeight: '16px',
     color: '#FFFFFF!important',
-    [theme.breakpoints.up("md")]: {
-      margin: theme.spacing(2, 0),
-    },
-  },
+    [theme.breakpoints.up('md')]: {
+      margin: theme.spacing(2, 0)
+    }
+  }
 }));
 
 export default function AutocompleteLocations(props) {
@@ -129,16 +129,19 @@ export default function AutocompleteLocations(props) {
       options={options}
       loading={loading}
       onInputChange={(event, newInputValue) => {
-        props.get_section_value(newInputValue)
+        props.get_section_value(newInputValue);
       }}
       renderInput={(params) => (
-
         <TextField
           {...params}
           className={classes.inputSmall_}
           // sx={{ minWidth: 450 }}
           // placeholder={props.default_value}
-          placeholder={props.default_value === undefined ? "Enter location here, if employee has no location type None" : props.default_value}
+          placeholder={
+            props.default_value === undefined
+              ? 'Enter location here, if employee has no location type None'
+              : props.default_value
+          }
           disableUnderline
           displayEmpty
           fullWidth
@@ -149,10 +152,9 @@ export default function AutocompleteLocations(props) {
                 {loading ? <CircularProgress color="inherit" size={20} /> : null}
                 {params.InputProps.endAdornment}
               </React.Fragment>
-            ),
+            )
           }}
         />
-
       )}
     />
   );
@@ -207,5 +209,5 @@ const topFilms = [
   { title: 'Moroto District', year: 1994 },
   { title: 'Arua District', year: 1994 },
   { title: 'Nakawa', year: 1994 },
-  { title: 'None', year: 2014 },
+  { title: 'None', year: 2014 }
 ];

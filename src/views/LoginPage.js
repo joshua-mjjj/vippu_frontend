@@ -1,31 +1,28 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import {
-  login,
-  loadUser,
-} from "../actions/auth.js";
+import { login, loadUser } from '../actions/auth.js';
 
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import logo from "../assets/police.png";
-import IconButton from "@material-ui/core/IconButton";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import { Box } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import logo from '../assets/police.png';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import { Box } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 import GuestNavBar from '../components/GuestNavBar';
-import Spinner from "../components/Spinner";
-import Footer from "../components/Footer"
+import Spinner from '../components/Spinner';
+import Footer from '../components/Footer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,94 +31,94 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     backgroundColor: '#F2F2F2',
     minHeight: '100vh',
-    [theme.breakpoints.down("800")]: {
-      alignItems: 'flex-start',
-    },
+    [theme.breakpoints.down('800')]: {
+      alignItems: 'flex-start'
+    }
   },
   rootGrid: {
     margin: '80px 0',
     padding: '33px 0',
     borderRadius: '10px',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-    [theme.breakpoints.down("800")]: {
+    [theme.breakpoints.down('800')]: {
       padding: '36px 0 60px 0',
       maxWidth: '347px',
-      margin: '80px 0 0',
-    },
+      margin: '80px 0 0'
+    }
   },
   image: {
     margin: theme.spacing(3, 1, 0),
-    backgroundColor: "inherit",
+    backgroundColor: 'inherit',
     width: '70px',
     height: '55px'
   },
   paper: {
-   // margin: theme.spacing(4, 8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    maxWidth: "367px",
+    // margin: theme.spacing(4, 8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    maxWidth: '367px',
     position: 'relative',
     zIndex: 0,
-    [theme.breakpoints.down("md")]: {
-      margin: theme.spacing(8, "auto"),
+    [theme.breakpoints.down('md')]: {
+      margin: theme.spacing(8, 'auto')
     },
-    [theme.breakpoints.up("lg")]: {
-      margin: theme.spacing(0, "auto"),
-      maxWidth: "367px",
+    [theme.breakpoints.up('lg')]: {
+      margin: theme.spacing(0, 'auto'),
+      maxWidth: '367px'
     },
-    [theme.breakpoints.down("800")]: {
+    [theme.breakpoints.down('800')]: {
       padding: '0 25.5px',
       margin: '0'
-    },
+    }
   },
   decor: {
     position: 'absolute',
     bottom: '-41px',
     right: '-28%',
     zIndex: -1,
-    [theme.breakpoints.down("1260")]: {
+    [theme.breakpoints.down('1260')]: {
       maxWidth: '93px',
       bottom: '-65px',
-      right: '2%',
-    },
+      right: '2%'
+    }
   },
   avatar: {
     margin: theme.spacing(1, 1, 0),
-    backgroundColor: "inherit",
+    backgroundColor: 'inherit',
     width: '70px',
     height: '75px',
-    "& img": {
+    '& img': {
       width: '56px',
-      height: '55.5px',
+      height: '55.5px'
     }
   },
-   logo: {
-    cursor: "pointer",
+  logo: {
+    cursor: 'pointer',
     width: '52px',
-    height: '72px',
+    height: '72px'
   },
-  title:{
+  title: {
     marginBottom: '3px',
     fontFamily: 'Dosis',
     fontWeight: 800,
     fontSize: '30px',
     // lineHeight: '58px',
     color: '#383F45',
-    [theme.breakpoints.down("800")]: {
+    [theme.breakpoints.down('800')]: {
       fontSize: '33px',
-      lineHeight: '42px',
-    },
+      lineHeight: '42px'
+    }
   },
   form: {
-    width: "308px", // Fix IE 11 issue.
+    width: '308px', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
-    [theme.breakpoints.up("md")]: {
-      marginTop: theme.spacing(1),
-    },
+    [theme.breakpoints.up('md')]: {
+      marginTop: theme.spacing(1)
+    }
   },
   buttonWrap: {
-    position: 'relative',
+    position: 'relative'
     // pointerEvents: 'none'
   },
   iconFacebook: {
@@ -138,28 +135,28 @@ const useStyles = makeStyles((theme) => ({
   },
   google: {
     margin: theme.spacing(1, 0, 1),
-    width: "100%",
+    width: '100%',
     background: '#346CF0!important',
     opacity: '1!important',
     height: '56px!important',
     color: '#ffffff !important',
     cursor: 'pointer!important',
     transitions: 'background 0.5s ease-in',
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-      margin: theme.spacing(1, "auto"),
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+      margin: theme.spacing(1, 'auto')
     },
-    "&:active": {
+    '&:active': {
       background: 'rgb(116 141 199)!important'
     },
-    "& span": {
-      width: "100%",
+    '& span': {
+      width: '100%',
       fontWeight: 'bold!important',
       fontSize: '19px!important',
       fontFamily: 'Dosis',
       textAlign: 'right!important',
       paddingRight: '25%!important'
-    },
+    }
   },
   or: {
     margin: '5px 0',
@@ -175,20 +172,20 @@ const useStyles = makeStyles((theme) => ({
   input: {
     margin: theme.spacing(1, 0, 1),
     borderRadius: '5px',
-    "& input": {
-      padding: '20px 42px 16px 14px',
+    '& input': {
+      padding: '20px 42px 16px 14px'
     },
-    "& label": {
+    '& label': {
       top: '8px',
       color: 'black'
     },
-    "&:first-child": {
-      marginTop: '10px',
-    },
+    '&:first-child': {
+      marginTop: '10px'
+    }
   },
   formControl: {
     width: '100%',
-    marginTop: '29px',
+    marginTop: '29px'
   },
   formLabel: {
     marginBottom: '18px',
@@ -210,14 +207,14 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '22px',
     letterSpacing: '0.4px',
     color: '#383F45',
-    "& a": {
+    '& a': {
       color: '#327287',
       textDecoration: 'none'
     }
   },
   submit: {
     margin: theme.spacing(3, 0, 1),
-    height: "56px",
+    height: '56px',
     textTransform: 'none',
     fontSize: '20px!important',
     background: '#101F33',
@@ -225,9 +222,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     lineHeight: '16px',
     color: '#FFFFFF!important',
-    [theme.breakpoints.up("md")]: {
-      margin: theme.spacing(2, 0),
-    },
+    [theme.breakpoints.up('md')]: {
+      margin: theme.spacing(2, 0)
+    }
   },
   already: {
     marginTop: '61px',
@@ -239,7 +236,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '22px',
     letterSpacing: '0.4px',
     color: '#383F45',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   alreadyText: {
     fontFamily: 'Dosis',
@@ -252,16 +249,16 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
-    justifyContent:'center',
-    "& a": {
+    justifyContent: 'center',
+    '& a': {
       fontFamily: 'Dosis',
       color: '#327287',
       fontWeight: '600',
       textDecoration: 'none',
       fontSize: '18px',
-      lineHeight: '22px',
+      lineHeight: '22px'
     },
-    "& span": {
+    '& span': {
       color: '#327287',
       textDecoration: 'none',
       cursore: 'pointer'
@@ -273,49 +270,49 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid #B5B5B5'
   },
   radioButton: {
-    minWidth: "155px",
-    [theme.breakpoints.down("800")]: {
-      minWidth: "142px",
-    },
+    minWidth: '155px',
+    [theme.breakpoints.down('800')]: {
+      minWidth: '142px'
+    }
   },
   signWrap: {
     margin: '0 auto',
     marginTop: '15px',
     maxWidth: '328px',
-    [theme.breakpoints.down("800")]: {
-      marginTop: '0px',
-    },
+    [theme.breakpoints.down('800')]: {
+      marginTop: '0px'
+    }
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(2)
   },
   social: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 2)
   },
   paper2: {
     margin: theme.spacing(8, 16),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "left",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'left'
   },
   body2: {
-    lineHeight: "1.5",
-    color: "#444444",
+    lineHeight: '1.5',
+    color: '#444444'
   },
   message: {
-    width: "100%",
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2)
+    }
   },
   checkbox: {
-    fontSize: "11px",
-    "& > *": {
-      fontSize: "11px",
-    },
+    fontSize: '11px',
+    '& > *': {
+      fontSize: '11px'
+    }
   },
   typeOfAccount: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(1)
   },
   fogot: {
     fontWeight: '600',
@@ -325,7 +322,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Dosis',
     textAlign: 'center',
     width: '100%',
-    display: 'inline-block',
+    display: 'inline-block'
     // marginBottom: '54px',
   }
 }));
@@ -337,7 +334,7 @@ function SignInSide(props) {
   const [user_type, setUser_type] = useState(props.auth.user_type !== null ? props.auth.user_type : null);
   // eslint-disable-next-line
   const [user_id, setUser_id] = useState(localStorage.getItem('current_user_id'));
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -350,10 +347,9 @@ function SignInSide(props) {
 
   React.useEffect(() => {
     if (props.auth.isAuthenticated) {
-        props.loadUser();
+      props.loadUser();
     }
   }, [props, props.auth.isAuthenticated]);
-
 
   if (props.auth.user_type === null) {
     return <Redirect to="/" />;
@@ -361,9 +357,9 @@ function SignInSide(props) {
 
   if (props.auth.isAuthenticated) {
     if (props.auth.user !== null) {
-          // Decide where to redirect user depending on there user type
-          // console.log(props.auth.user.account_type)
-          return <Redirect to="/dashboard" />;
+      // Decide where to redirect user depending on there user type
+      // console.log(props.auth.user.account_type)
+      return <Redirect to="/dashboard" />;
     }
   }
 
@@ -406,9 +402,9 @@ function SignInSide(props) {
 
   return (
     <Box>
-       <div>
-          <GuestNavBar />
-       </div> 
+      <div>
+        <GuestNavBar />
+      </div>
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         {/* <Grid item xs={false} sm={6} md={7} xl={8} className={classes.image} /> */}
@@ -425,25 +421,15 @@ function SignInSide(props) {
         >
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <img
-                src={logo}
-                alt=""
-                onClick={(e) => (window.location.href = "/")}
-                width="30"
-              />
+              <img src={logo} alt="" onClick={(e) => (window.location.href = '/')} width="30" />
             </Avatar>
             <Typography component="h1" variant="h5" className={classes.title}>
-               {
-                 user_type === "admin" ? ("Admin Sign in") : null
-               }
-               {
-                 user_type === "in_charge" ? ("In Charge Sign in") : null
-               }
-              
+              {user_type === 'admin' ? 'Admin Sign in' : null}
+              {user_type === 'in_charge' ? 'In Charge Sign in' : null}
             </Typography>
             <form className={classes.form} noValidate>
               <div className={classes.signWrap}>
-              {/*<p className={classes.or}>- or -</p>*/}
+                {/*<p className={classes.or}>- or -</p>*/}
                 <Grid item xs={12}>
                   <div className={classes.message}>{alert}</div>
                 </Grid>
@@ -470,7 +456,7 @@ function SignInSide(props) {
                   value={password}
                   name="password"
                   label="Password"
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   id="password"
                   // autoComplete="current-password"
                   onChange={(e) => setPassword(e.target.value)}
@@ -480,11 +466,12 @@ function SignInSide(props) {
                         <IconButton
                           aria-label="Toggle password visibility"
                           onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}>
+                          onMouseDown={handleMouseDownPassword}
+                        >
                           {showPassword ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                       </InputAdornment>
-                    ),
+                    )
                   }}
                 />
                 <Button
@@ -495,7 +482,7 @@ function SignInSide(props) {
                   className={classes.submit}
                   onClick={handleLogin}
                 >
-                  {props.auth.login_loading ? <Spinner /> : "Sign In"}
+                  {props.auth.login_loading ? <Spinner /> : 'Sign In'}
                 </Button>
                 <Grid container>
                   <Grid item xs>
@@ -504,7 +491,7 @@ function SignInSide(props) {
                     </Typography>
                   </Grid>
                 </Grid>
-              {/*  <Grid item>
+                {/*  <Grid item>
                   <p className={classes.alreadyText}>
                     Don’t have an account?&nbsp;
                     <Link  href="/signup" variant="body2">
@@ -516,7 +503,7 @@ function SignInSide(props) {
           </div>
         </Grid>
       </Grid>
-      <Footer/>
+      <Footer />
     </Box>
   );
 }
@@ -524,10 +511,10 @@ function SignInSide(props) {
 const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
-  error: state.errors,
+  error: state.errors
 });
 
 export default connect(mapStateToProps, {
   login,
-  loadUser,
+  loadUser
 })(SignInSide);

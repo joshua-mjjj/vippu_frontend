@@ -4,10 +4,9 @@ import { CREATE_MESSAGES, API_MESSSAGE } from './types';
 export const createMessage = (msg) => {
   return {
     type: CREATE_MESSAGES,
-    payload: msg,
+    payload: msg
   };
 };
-
 
 // CREATE MESSAGE
 export const create_api_message = (msg, type) => {
@@ -17,4 +16,3 @@ export const create_api_message = (msg, type) => {
     status_type: type
   };
 };
-
