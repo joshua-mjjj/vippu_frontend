@@ -268,6 +268,41 @@ export default function TableSingle(props) {
                     variant="outlined"
                   />
                 ) : null}
+                {employee.status === 'Interdiction' ? (
+                    <Chip
+                      sx={{ color: 'blue', fontWeight: 'bold' }}
+                      label={employee.status}
+                      variant="outlined"
+                    />
+                  ) : null}
+                  {employee.status === 'Criminal court' ? (
+                    <Chip
+                      sx={{ color: 'blue', fontWeight: 'bold' }}
+                      label={employee.status}
+                      variant="outlined"
+                    />
+                  ) : null}
+                  {employee.status === 'Displinary court' ? (
+                    <Chip
+                      sx={{ color: 'blue', fontWeight: 'bold' }}
+                      label={employee.status}
+                      variant="outlined"
+                    />
+                  ) : null}
+                  {employee.status === 'Special duty' ? (
+                    <Chip
+                      sx={{ color: 'blue', fontWeight: 'bold' }}
+                      label={employee.status}
+                      variant="outlined"
+                    />
+                  ) : null}
+                  {employee.status === 'On police course' ? (
+                    <Chip
+                      sx={{ color: 'blue', fontWeight: 'bold' }}
+                      label={employee.status}
+                      variant="outlined"
+                    />
+                  ) : null}
               </TableCell>
               <TableCell>
                 <ToggleButton value="table">

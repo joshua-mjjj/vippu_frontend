@@ -9,7 +9,14 @@ import {
   CLEAR_MESSAGES,
   CLEAR_ERRORS,
   GENERATE_REPORT_BATTALLION_TWO_LOADING,
-  GENERATE_REPORT_BATTALLION_TWO_DONE
+  GENERATE_REPORT_BATTALLION_TWO_DONE,
+  DELETE_RECORD_LOADING,
+  DELETE_RECORD_LOADED,
+  DELETE_RECORD_FALIED,
+  DELETE_LOADING,
+  DELETE_LOADED,
+  DELETE_FALIED
+
 } from './types';
 
 import { tokenConfig, global_url } from './auth';
@@ -47,7 +54,9 @@ export const battallion_two_create =
     location,
     on_leave,
     leave_start_date,
-    leave_end_date
+    leave_end_date,
+    special_duty_start_date,
+    special_duty_end_date
   ) =>
   (dispatch, getState) => {
     //Loading
@@ -83,7 +92,9 @@ export const battallion_two_create =
       location,
       on_leave,
       leave_start_date,
-      leave_end_date
+      leave_end_date,
+      special_duty_start_date,
+      special_duty_end_date
     });
     // console.log(body)
     const message = `${first_name}'s details have been saved in the database.`;
@@ -137,7 +148,9 @@ export const battallion_one_create =
     location,
     on_leave,
     leave_start_date,
-    leave_end_date
+    leave_end_date,
+    special_duty_start_date,
+    special_duty_end_date
   ) =>
   (dispatch, getState) => {
     //Loading
@@ -173,7 +186,9 @@ export const battallion_one_create =
       location,
       on_leave,
       leave_start_date,
-      leave_end_date
+      leave_end_date,
+      special_duty_start_date,
+      special_duty_end_date
     });
     // console.log(body)
     const message = `${first_name}'s details have been saved in the database.`;
@@ -229,7 +244,9 @@ export const battallion_two_update =
     on_leave,
     leave_start_date,
     leave_end_date,
-    notify_leave
+    notify_leave,
+    special_duty_start_date,
+    special_duty_end_date
   ) =>
   (dispatch, getState) => {
     //Loading
@@ -266,7 +283,9 @@ export const battallion_two_update =
       on_leave,
       leave_start_date,
       leave_end_date,
-      notify_leave
+      notify_leave,
+      special_duty_start_date,
+      special_duty_end_date
     });
     // console.log(body)
     const message = `${first_name}'s details have successfully been updated in the database.`;
@@ -299,6 +318,66 @@ export const send_notification = (id, notify_leave, url) => (dispatch, getState)
     .catch((err) => {
       console.log('Sorry, an error occured while sending the notification');
     });
+};
+
+export const delete_employee = (id, url) => (dispatch, getState) => {
+  dispatch({ type: DELETE_LOADING });
+ 
+  const error_message = "An error occured while trying to delete this employee, please try again later."
+  const message = "Employee has successfully been deleted."
+   axios
+   .delete(`${global_url}/api/${url}/${id}/`, tokenConfig(getState))
+      .then((res) => {
+        // console.log(res.data)
+        const deleted = "true"
+        localStorage.setItem("deleted", deleted);
+        dispatch(create_api_message(message, 'record_deleted'));
+        dispatch({
+          type: DELETE_LOADED
+        });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        // dispatch(returnError(err.response.data, err.response.status));
+        dispatch(create_api_message(error_message, 'delete_failed'));
+        dispatch({
+          type: DELETE_FALIED
+        });
+      });
+};
+
+export const save_delete_record = (reason, deletor_name, deletor_file_number, deleted_name, deleted_file_number, battalion) => (dispatch, getState) => {
+  
+  dispatch({ type: DELETE_RECORD_LOADING });
+
+  const body = JSON.stringify({ 
+    reason, 
+    deletor_name, 
+    deletor_file_number, 
+    deleted_name, 
+    deleted_file_number,
+    battalion 
+  });
+  // console.log(body)
+  const error_message = "An error occured while trying to delete this employee, please try again later."
+  const message = "Your reason has successfully been submitted. You can delete now."
+   axios
+   .post(`${global_url}/api/deleted_employees/`, body, tokenConfig(getState))
+      .then((res) => {
+        // console.log(res.data)
+        dispatch(create_api_message(message, 'record_delete_saved'));
+        dispatch({
+          type: DELETE_RECORD_LOADED
+        });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        // dispatch(returnError(err.response.data, err.response.status));
+        dispatch(create_api_message(error_message, 'record_delete_failed'));
+        dispatch({
+          type: DELETE_RECORD_FALIED
+        });
+      });
 };
 
 //  BATTALLION TWO UPDATE
@@ -334,7 +413,9 @@ export const battallion_one_update =
     on_leave,
     leave_start_date,
     leave_end_date,
-    notify_leave
+    notify_leave,
+    special_duty_start_date,
+    special_duty_end_date
   ) =>
   (dispatch, getState) => {
     //Loading
@@ -371,7 +452,9 @@ export const battallion_one_update =
       on_leave,
       leave_start_date,
       leave_end_date,
-      notify_leave
+      notify_leave,
+      special_duty_start_date,
+      special_duty_end_date
     });
     // console.log(body)
     const message = `${first_name}'s details have successfully been updated in the database.`;

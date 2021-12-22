@@ -18,7 +18,7 @@ import {
 } from './types';
 
 export const global_url = 'https://vippu-api.herokuapp.com';
-// export const global_url_local = 'http://127.0.0.1:8000'
+// export const global_url_local = ' http://127.0.0.1:8000 https://vippu-api.herokuapp.com' 
 
 // LOAD USER
 export const check_user_type = (username) => (dispatch) => {

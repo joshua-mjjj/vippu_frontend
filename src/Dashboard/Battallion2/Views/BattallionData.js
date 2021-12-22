@@ -200,12 +200,9 @@ function BattallionData(props) {
       props.data.filter((instance) => {
         if (instance.on_leave !== 'Not on leave' && instance.notify_leave === false) {
           var end_date = moment(`${instance.leave_end_date}`);
-          console.log(instance.leave_end_date);
           var current = moment(new Date()); // now
           const prime_difference = end_date.diff(current, 'days') + 1;
-          console.log(prime_difference);
           if (prime_difference <= 0) {
-            console.log('Send notification');
             const new_notify_leave = true;
             const url = 'battallion_two';
             props.send_notification(instance.id, new_notify_leave, url);
@@ -218,6 +215,7 @@ function BattallionData(props) {
 
   React.useEffect(() => {
     scroll.scrollToTop();
+    localStorage.removeItem("deleted");
   }, []);
 
   return (

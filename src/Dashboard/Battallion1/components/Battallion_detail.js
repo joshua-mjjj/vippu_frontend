@@ -400,6 +400,50 @@ export default function Battallion_detail(props) {
                 </Typography>
               </Grid>
             </Card>
+            {employee.special_duty_start_date !== null ? (
+              <Card
+                sx={{
+                  display: 'grid',
+                  gap: 2,
+                  mb: 0,
+                  p: 2
+                }}
+                elevation={0}
+              >
+                <Grid container spacing={2} wrap="wrap">
+                  <span className={classes.label}>Special leave start date</span>
+                </Grid>
+                <Grid container spacing={2}>
+                  <Typography variant="subtitle1" className={classes.value}>{`${new Date(
+                    employee.special_duty_start_date
+                  )
+                    .toString()
+                    .substring(0, 15)}`}</Typography>
+                </Grid>
+              </Card>
+            ) : null}
+              {employee.special_duty_end_date !== null ? (
+              <Card
+                sx={{
+                  display: 'grid',
+                  gap: 2,
+                  mb: 0,
+                  p: 2
+                }}
+                elevation={0}
+              >
+                <Grid container spacing={2} wrap="wrap">
+                  <span className={classes.label}>Special leave end date</span>
+                </Grid>
+                <Grid container spacing={2}>
+                  <Typography variant="subtitle1" className={classes.value}>{`${new Date(
+                    employee.special_duty_end_date
+                  )
+                    .toString()
+                    .substring(0, 15)}`}</Typography>
+                </Grid>
+              </Card>
+            ) : null}
             <Card
               sx={{
                 display: 'grid',

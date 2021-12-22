@@ -6,35 +6,57 @@ import Spinner from '../../../components/Spinner';
 import BattallionDetail from './Battallion_detail';
 import BattallionEdit from './Battallion_edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { battallion_two_fetch_detail } from '../../../actions/battallions_detail';
+import DeleteReason from './DeleteReason';
+
+const useStyles = makeStyles((theme) => ({
+  span: {
+    fontSize: '23px',
+    fontFamily: 'Dosis',
+    fontWeight: '800'
+  },
+  span2: {
+    fontSize: '15px',
+    fontFamily: 'Dosis',
+    fontWeight: '800'
+  },
+  title: {
+    "& .MuiCardHeader-title" : {
+      fontFamily: 'Dosis',
+      fontWeight: '800'
+    }
+  }
+}));
 
 function Battalion_two_list(props) {
+  const classes = useStyles();
   const [show_detail, setToggle] = React.useState(false);
   const [show_edit, showEdit] = React.useState(false);
+  const [disable, setDisable] = React.useState(true);
+  const battalion = "battallion_two"
 
-  // React.useEffect(() => {
-  //   // console.log(props.data)
-  // }, [props.data]);
+  React.useEffect(() => {
+    if(props.auth.user.top_level_incharge && props.detail_data !== null){
+        setDisable(false)
+    }
+  }, [props.auth, props.detail_data]);
 
   const send_detail_id = (id) => {
-    // console.log(id)
     setToggle(true);
     props.battallion_two_fetch_detail(id);
   };
 
   const toggle_UI = () => {
-    // props.refetch_data()
     setToggle(false);
   };
 
   const toggle_edit_UI = () => {
-    // props.refetch_data()
     showEdit(true);
   };
 
   const untoggle_edit_UI = () => {
-    // props.refetch_data()
     showEdit(false);
   };
 
@@ -50,7 +72,7 @@ function Battalion_two_list(props) {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             {show_detail === false ? (
-              <Card variant="outlined">
+              <Card variant="outlined" className={classes.title} >
                 <CardHeader title={`Employees total: ${props.data.length}`} />
                 <Divider />
                 <OrdersTable data={props.data} send_detail_id={send_detail_id} />
@@ -74,12 +96,7 @@ function Battalion_two_list(props) {
                         }}
                       >
                         <span
-                          style={{
-                            fontSize: '23px',
-                            fontFamily: 'Dosis',
-                            fontWeight: '800'
-                          }}
-                        >
+                          className={classes.span}>
                           {' '}
                           Employee details{' '}
                         </span>
@@ -94,22 +111,19 @@ function Battalion_two_list(props) {
                       </Button>
                       <Button
                         onClick={toggle_edit_UI}
+                        disabled={!(localStorage.getItem("deleted")) ? false : true}
                         variant="outlined"
                         sx={{ marginRight: '20px', marginTop: '15px' }}
                       >
                         <span
-                          style={{
-                            fontSize: '15px',
-                            fontFamily: 'Dosis',
-                            fontWeight: '800'
-                          }}
-                        >
+                          className={classes.span2}>
                           Edit
                         </span>
                       </Button>
-                      <Button
+                      <DeleteReason disabled={disable} battalion={battalion} employee={props.detail_data}/>
+                      {/*<Button
                         // onClick={toggle_UI}
-                        disabled
+                        disabled={disable}
                         variant="outlined"
                         sx={{ marginRight: '20px', marginTop: '15px' }}
                       >
@@ -123,7 +137,8 @@ function Battalion_two_list(props) {
                         >
                           Delete
                         </span>
-                      </Button>
+                      </Button>*/}
+
                     </Box>
 
                     {/* Detail component */}
@@ -138,6 +153,7 @@ function Battalion_two_list(props) {
                   </div>
                 ) : (
                   <div>
+
                     <Box
                       sx={{
                         alignItems: 'center',

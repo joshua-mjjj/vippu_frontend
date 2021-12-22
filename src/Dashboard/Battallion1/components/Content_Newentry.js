@@ -150,6 +150,14 @@ function Content_Newentry(props) {
   const [leave_end, setLeave_end] = React.useState(new Date());
   const [leave_end_data, setLeave_end_data] = React.useState(null);
 
+  //Special duty
+  const [special_duty, setSpecial] = React.useState(false);
+  const [special_duty_start, setSpecialDuty_start] = React.useState(new Date());
+  const [special_duty_start_data, setSpecialDuty_start_data] = React.useState(null);
+
+  const [special_duty_end, setSpecialDuty_end] = React.useState(new Date());
+  const [special_duty_end_data, setSpecialDuty_end_data] = React.useState(null);
+
   const [show_alert, setShow_alert] = React.useState(false);
 
   // eslint-disable-next-line
@@ -191,7 +199,14 @@ function Content_Newentry(props) {
   };
 
   const handle_Status_Change = (e) => {
-    setStatus(e.target.value);
+    if(e.target.value === "Special duty"){
+      setSpecial(true)
+      setStatus(e.target.value);
+    }else{
+      setSpecial(false)
+      setStatus(e.target.value);
+    }
+    
   };
 
   const handle_education_level_change = (e) => {
@@ -213,7 +228,6 @@ function Content_Newentry(props) {
     setDate_of_enlistment(e);
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    console.log(date_object);
     setDate_of_enlistment_data(date_object);
   };
 
@@ -222,7 +236,6 @@ function Content_Newentry(props) {
     setDate_of_transfer(e);
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    console.log(date_object);
     setDate_of_transfer_data(date_object);
   };
 
@@ -232,7 +245,6 @@ function Content_Newentry(props) {
       setDate_of_promotion(e);
       let dt = new Date(e);
       let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-      console.log(date_object);
       setDate_of_promotion_data(date_object);
     }
   };
@@ -242,7 +254,6 @@ function Content_Newentry(props) {
     setDate_of_birth(e);
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    console.log(date_object);
     setDate_of_birth_data(date_object);
   };
 
@@ -251,8 +262,23 @@ function Content_Newentry(props) {
     setLeave_start(e);
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    console.log(date_object);
     setLeave_start_data(date_object);
+  };
+
+  const handle_special_start = (e) => {
+    // console.log(e)
+    setSpecialDuty_start(e);
+    let dt = new Date(e);
+    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+    setSpecialDuty_start_data(date_object);
+  };
+
+  const handle_special_end = (e) => {
+    // console.log(e)
+    setSpecialDuty_end(e);
+    let dt = new Date(e);
+    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+    setSpecialDuty_end_data(date_object);
   };
 
   const handle_leave_end = (e) => {
@@ -260,7 +286,6 @@ function Content_Newentry(props) {
     setLeave_end(e);
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    console.log(date_object);
     setLeave_end_data(date_object);
   };
 
@@ -356,6 +381,16 @@ function Content_Newentry(props) {
       leave_start_sub = leave_start_data;
     }
 
+    let special_start_sub = null;
+    if (special_duty_start_data === null && status === "Special duty") { // user to use current date
+      let date_object = `${current_date.getFullYear()}-${
+        current_date.getMonth() + 1
+      }-${current_date.getDate()}`;
+      special_start_sub = date_object;
+    } else {
+      special_start_sub = special_duty_start_data;
+    }
+
     let leave_end_sub = null;
     if (leave_end_data === null && on_leave !== 'Not on leave') {
       let date_object = `${current_date.getFullYear()}-${
@@ -364,6 +399,16 @@ function Content_Newentry(props) {
       leave_end_sub = date_object;
     } else {
       leave_end_sub = leave_end_data;
+    }
+
+    let special_end_sub = null;
+    if (special_duty_end_data === null && status === "Special duty") {
+      let date_object = `${current_date.getFullYear()}-${
+        current_date.getMonth() + 1
+      }-${current_date.getDate()}`;
+      special_end_sub = date_object;
+    } else {
+      special_end_sub = special_duty_end_data;
     }
 
     const battallion_value = 'battallion_one'; // Battallion 2 form, hence we do alittle bit of hard coding
@@ -438,7 +483,9 @@ function Content_Newentry(props) {
         location,
         on_leave,
         leave_start_sub,
-        leave_end_sub
+        leave_end_sub,
+        special_start_sub,
+        special_end_sub
       );
       clearState();
     } else {
@@ -805,6 +852,11 @@ function Content_Newentry(props) {
               <MenuItem value="On course">On course</MenuItem>
               <MenuItem value="On mission">On mission</MenuItem>
               <MenuItem value="On leave">On leave</MenuItem>
+              <MenuItem value="Interdiction">Interdiction</MenuItem>
+              <MenuItem value="Criminal court">Criminal court(remand / bail)</MenuItem>
+              <MenuItem value="Displinary court">Displinary court</MenuItem>
+              <MenuItem value="Special duty">Special duty</MenuItem>
+              <MenuItem value="On police course">On police course</MenuItem>
             </Select>
           </Grid>
           <Grid item md={6} xs={12} sm={6}>
@@ -828,7 +880,44 @@ function Content_Newentry(props) {
             </Select>
           </Grid>
         </Grid>
-
+        {
+          special_duty ? (
+              <Grid container spacing={1}>
+                  <Grid item md={6} xs={12} sm={6}>
+                    <FormLabel component="label" className={classes.formLabel}>
+                      Special duty start date
+                    </FormLabel>
+                    <Stack spacing={6}>
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DesktopDatePicker
+                          inputFormat="MM/dd/yyyy"
+                          value={special_duty_start}
+                          onChange={handle_special_start}
+                          className={classes.inputSmall_date}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </LocalizationProvider>
+                    </Stack>
+                 </Grid>
+                 <Grid item md={6} xs={12} sm={6}>
+                    <FormLabel component="label" className={classes.formLabel}>
+                      Special duty end date
+                    </FormLabel>
+                    <Stack spacing={6}>
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DesktopDatePicker
+                          inputFormat="MM/dd/yyyy"
+                          value={special_duty_end}
+                          onChange={handle_special_end}
+                          className={classes.inputSmall_date}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </LocalizationProvider>
+                    </Stack>
+                 </Grid>
+              </Grid>
+            ) : null
+        }
         <Grid container spacing={1}>
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>

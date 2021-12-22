@@ -6,69 +6,60 @@ import Spinner from '../../../components/Spinner';
 import BattallionDetail from './Battallion_detail';
 import BattallionEdit from './Battallion_edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { battallion_one_fetch_detail } from '../../../actions/battallions_detail';
+import DeleteReason from './DeleteReason';
+
+const useStyles = makeStyles((theme) => ({
+  span: {
+    fontSize: '23px',
+    fontFamily: 'Dosis',
+    fontWeight: '800'
+  },
+  span2: {
+    fontSize: '15px',
+    fontFamily: 'Dosis',
+    fontWeight: '800'
+  },
+  title: {
+    "& .MuiCardHeader-title" : {
+      fontFamily: 'Dosis',
+      fontWeight: '800'
+    }
+  }
+}));
 
 function Battalion_two_list(props) {
+  const classes = useStyles();
   const [show_detail, setToggle] = React.useState(false);
   const [show_edit, showEdit] = React.useState(false);
+  const [disable, setDisable] = React.useState(true);
+  const battalion = "battallion_one"
 
-  // React.useEffect(() => {
-  //   // console.log(props.data)
-  // }, [props.data]);
+  React.useEffect(() => {
+    if(props.auth.user.top_level_incharge && props.detail_data !== null){
+        setDisable(false)
+    }
+  }, [props.auth, props.detail_data]);
 
   const send_detail_id = (id) => {
-    // console.log(id)
     setToggle(true);
     props.battallion_one_fetch_detail(id);
   };
 
   const toggle_UI = () => {
-    // props.refetch_data()
     setToggle(false);
   };
 
   const toggle_edit_UI = () => {
-    // props.refetch_data()
     showEdit(true);
   };
 
   const untoggle_edit_UI = () => {
-    // props.refetch_data()
     showEdit(false);
   };
 
-  // account_number: null
-  // armed: "yes"
-  // bank: "Standbic"
-  // battallion: "battallion_two"
-  // branch: "Kampala"
-  // contact: "0775356433"
-  // created_at: "2021-11-06T13:52:50.930266Z"
-  // date_of_birth: "2021-11-06"
-  // date_of_enlistment: "2021-11-06"
-  // date_of_promotion: "2021-11-06"
-  // date_of_transfer: "2021-11-06"
-  // department: "administration"
-  // education_level: "masters"
-  // file_number: "W/66574"
-  // first_name: "Joshua"
-  // id: 2
-  // ipps: "WE5346577"
-  // last_name: "Wafula"
-  // leave_end_date: null
-  // leave_start_date: null
-  // location: "Plot 2 Accacia Avenue"
-  // nin: "AC65789f"
-  // on_leave: "not_no_leave"
-  // other_education_level: null
-  // rank: "SCP"
-  // section: "Algerian Embassy"
-  // sex: "male"
-  // shift: "none"
-  // status: "active"
-  // title: "commandant"
-  // updated_at: "2021-11-06T13:52:50.930299Z"
 
   return (
     <Box
@@ -82,7 +73,7 @@ function Battalion_two_list(props) {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             {show_detail === false ? (
-              <Card variant="outlined">
+              <Card variant="outlined" className={classes.title}>
                 <CardHeader
                   title={
                     props.section_title !== null
@@ -132,20 +123,16 @@ function Battalion_two_list(props) {
                       </Button>
                       <Button
                         onClick={toggle_edit_UI}
+                        disabled={!(localStorage.getItem("deleted")) ? false : true }
                         variant="outlined"
                         sx={{ marginRight: '20px', marginTop: '15px' }}
                       >
-                        <span
-                          style={{
-                            fontSize: '15px',
-                            fontFamily: 'Dosis',
-                            fontWeight: '800'
-                          }}
-                        >
+                        <span className={classes.span2}>
                           Edit
                         </span>
                       </Button>
-                      <Button
+                      <DeleteReason disabled={disable} battalion={battalion} employee={props.detail_data}/>
+                      {/* <Button
                         // onClick={toggle_UI}
                         disabled
                         variant="outlined"
@@ -161,7 +148,7 @@ function Battalion_two_list(props) {
                         >
                           Delete
                         </span>
-                      </Button>
+                      </Button>*/}
                     </Box>
 
                     {/* Detail component */}

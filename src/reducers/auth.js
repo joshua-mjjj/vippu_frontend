@@ -21,7 +21,6 @@ const initialState = {
   login_loading: false,
   user: null,
   change_password_loading: false,
-
   isLoading: false
 };
 

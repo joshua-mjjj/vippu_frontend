@@ -67,8 +67,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .js,.jsx ./src",
-    "lint:fix": "eslint --fix --ext .js,.jsx ./src",
     "preinstall": "npx npm-force-resolutions"
   },
   "eslintConfig": {
@@ -87,13 +85,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.5.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-config-react-app": "^7.0.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.27.1",
-    "node-fetch": "^3.0.0-beta.9",
-    "prettier": "^2.5.1"
+    "node-fetch": "^3.0.0-beta.9"
   },
   "resolutions": {
     "bootstrap": "^4.3.1"
