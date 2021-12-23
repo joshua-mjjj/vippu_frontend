@@ -298,6 +298,11 @@ function GenerateExcelSections(props) {
                     <MenuItem value="On course">On course</MenuItem>
                     <MenuItem value="On mission">On mission</MenuItem>
                     <MenuItem value="On leave">On leave</MenuItem>
+                    <MenuItem value="Interdiction">Interdiction</MenuItem>
+                    <MenuItem value="Criminal court">Criminal court(remand / bail)</MenuItem>
+                    <MenuItem value="Displinary court">Displinary court</MenuItem>
+                    <MenuItem value="Special duty">Special duty</MenuItem>
+                    <MenuItem value="On police course">On police course</MenuItem>
                   </Select>
                 </Grid>
               </div>

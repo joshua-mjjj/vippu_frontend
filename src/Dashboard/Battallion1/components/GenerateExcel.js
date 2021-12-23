@@ -171,12 +171,6 @@ function GenerateExcel(props) {
     const url_leave = 'export_battalion_one_leave';
     e.preventDefault();
     if (filename !== null && title_doc !== null) {
-      // console.log("General report: " + general)
-      // console.log("Query by status: " + report_status)
-      // console.log("Query by leave: " + report_leave)
-
-      // console.log("Leave type: " + leave_type)
-      // console.log("Status type: " + status_type)
 
       // general report
       if (general === true && report_status === false && report_leave === false) {
@@ -285,6 +279,11 @@ function GenerateExcel(props) {
                     <MenuItem value="On course">On course</MenuItem>
                     <MenuItem value="On mission">On mission</MenuItem>
                     <MenuItem value="On leave">On leave</MenuItem>
+                    <MenuItem value="Interdiction">Interdiction</MenuItem>
+                    <MenuItem value="Criminal court">Criminal court(remand / bail)</MenuItem>
+                    <MenuItem value="Displinary court">Displinary court</MenuItem>
+                    <MenuItem value="Special duty">Special duty</MenuItem>
+                    <MenuItem value="On police course">On police course</MenuItem>
                   </Select>
                 </Grid>
               </div>
