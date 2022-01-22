@@ -355,7 +355,7 @@ function SignInSide(props) {
     return <Redirect to="/" />;
   }
 
-  if (props.auth.isAuthenticated) {
+  if (props.auth.isAuthenticated){
     if (props.auth.user !== null) {
       // Decide where to redirect user depending on there user type
       // console.log(props.auth.user.account_type)

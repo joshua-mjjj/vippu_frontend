@@ -8,11 +8,8 @@ import BattallionEdit from './Battallion_edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { battallion_one_fetch_detail } from '../../../actions/battallions_detail';
+import { battallion_one_fetch_detail, battallion_three_fetch_detail } from '../../../actions/battallions_detail';
 import DeleteReason from './DeleteReason';
-import moment from 'moment';
-
-import { send_notification } from '../../../actions/battallions_create.js';
 
 const useStyles = makeStyles((theme) => ({
   span: {
@@ -42,13 +39,14 @@ function Battalion_two_list(props) {
 
   React.useEffect(() => {
     if(props.auth.user.top_level_incharge && props.detail_data !== null){
-        setDisable(false)
+        setDisable(false) // Delete will be disabled if you do not have access rights.
     }
   }, [props.auth, props.detail_data]);
 
   const send_detail_id = (id) => {
     setToggle(true);
-    props.battallion_one_fetch_detail(id);
+    // props.battallion_one_fetch_detail(id);
+    props.battallion_three_fetch_detail(id);
   };
 
   const toggle_UI = () => {
@@ -63,45 +61,6 @@ function Battalion_two_list(props) {
     showEdit(false);
   };
 
-  React.useEffect(() => {
-    if (props.data !== null) {
-      console.log("Here")
-      // eslint-disable-next-line
-      props.data.filter((instance) => {
-        if (instance.on_leave !== 'Not on leave' && instance.notify_leave === false) {
-          var end_date = moment(`${instance.leave_end_date}`);
-          // console.log(instance.leave_end_date);
-          var current = moment(new Date()); // now
-          const prime_difference = end_date.diff(current, 'days') + 1;
-          // console.log(prime_difference);
-          if (prime_difference <= 0) {
-            // console.log('Send notification');
-            const new_notify_leave = true;
-            const url = 'battallion_one';
-            props.send_notification(instance.id, new_notify_leave, url);
-            // turn notify_leave to true
-          }
-        }
-      });
-
-      // eslint-disable-next-line
-      props.data.filter((instance) => {
-        if (instance.status === 'Special duty' && instance.notify_special_duty === false) {
-          var end_date = moment(`${instance.special_duty_end_date}`);
-          var current = moment(new Date()); // now
-          const prime_difference = end_date.diff(current, 'days') + 1;
-          if (prime_difference <= 0) {
-            const url = 'battallion_one';
-            const object = {
-              'notify_special_duty' : true
-            }
-            props.send_notification(instance.id, object, url);
-            // turn notify_leave to true
-          }
-        }
-      });
-    }
-  }, [props]);
 
   return (
     <Box
@@ -264,11 +223,11 @@ const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
   error: state.errors,
-  loading: state.battallions_detail.battalion_one_data_detail_loading,
-  detail_data: state.battallions_detail.battalion_one_detail_data
+  loading: state.battallions_detail.battalion_three_data_detail_loading,
+  detail_data: state.battallions_detail.battalion_three_detail_data
 });
 
 export default connect(mapStateToProps, {
   battallion_one_fetch_detail,
-  send_notification
+  battallion_three_fetch_detail
 })(Battalion_two_list);

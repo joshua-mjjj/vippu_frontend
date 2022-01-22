@@ -173,12 +173,14 @@ function Battallion_edit(props) {
   const [show_alert, setShow_alert] = React.useState(false);
   const [notify_leave, setNotify_leave] = React.useState(employee.notify_leave);
 
+  const [notify_special_duty, setNotify_Special_duty] = React.useState(employee.notify_special_duty);
+ 
   //Special duty
   const [special_duty, setSpecial] = React.useState(employee.status === "Special duty" ? true : false);
-  const [special_duty_start, setSpecialDuty_start] = React.useState(new Date(employee.special_duty_start_date));
+  const [special_duty_start, setSpecialDuty_start] = React.useState(employee.special_duty_start_date === null ? new Date() : new Date(employee.special_duty_start_date));
   const [special_duty_start_data, setSpecialDuty_start_data] = React.useState(null);
 
-  const [special_duty_end, setSpecialDuty_end] = React.useState(new Date(employee.special_duty_end_date));
+  const [special_duty_end, setSpecialDuty_end] = React.useState(employee.special_duty_end_date === null ? new Date() : new Date(employee.special_duty_end_date));
   const [special_duty_end_data, setSpecialDuty_end_data] = React.useState(null);
 
   // eslint-disable-next-line
@@ -201,6 +203,7 @@ function Battallion_edit(props) {
   };
 
   const handle_Status_Change = (e) => {
+    setNotify_Special_duty(false)
     if(e.target.value === "Special duty"){
       setSpecial(true)
       setStatus(e.target.value);
@@ -274,7 +277,7 @@ function Battallion_edit(props) {
   };
 
   const handle_special_start = (e) => {
-    // console.log(e)
+    setNotify_Special_duty(false)
     setSpecialDuty_start(e);
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
@@ -282,7 +285,7 @@ function Battallion_edit(props) {
   };
 
   const handle_special_end = (e) => {
-    // console.log(e)
+    setNotify_Special_duty(false)
     setSpecialDuty_end(e);
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
@@ -476,6 +479,7 @@ function Battallion_edit(props) {
         leave_start_sub,
         leave_end_sub,
         notify_leave,
+        notify_special_duty,
         special_start_sub,
         special_end_sub
       );

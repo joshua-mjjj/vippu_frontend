@@ -15,7 +15,9 @@ import {
   DELETE_RECORD_FALIED,
   DELETE_LOADING,
   DELETE_LOADED,
-  DELETE_FALIED
+  DELETE_FALIED,
+  BATTALLION_THREE_CREATE_LOADING,
+  BATTALLION_THREE_CREATED
 
 } from './types';
 
@@ -99,7 +101,7 @@ export const battallion_two_create =
     // console.log(body)
     const message = `${first_name}'s details have been saved in the database.`;
     axios
-      .post(`${global_url}/api/battallion_two/`, body, tokenConfig(getState))
+      .post(`${global_url}/battallion_two/`, body, tokenConfig(getState))
       .then((res) => {
         // console.log(res.data)
         dispatch({
@@ -116,6 +118,202 @@ export const battallion_two_create =
         });
       });
   };
+
+// BATALLION CREATE GENERAL
+export const battallion_general_create =
+  ( 
+    batallion_url,
+    first_name,
+    last_name,
+    nin,
+    ipps,
+    file_number,
+    tin_number,
+    battallion,
+    account_number,
+    contact,
+    sex,
+    rank,
+    education_level,
+    other_education_level,
+    bank,
+    branch,
+    department,
+    title,
+    status,
+    shift,
+    date_of_enlistment,
+    date_of_transfer,
+    date_of_promotion,
+    date_of_birth,
+    armed,
+    section,
+    location,
+    on_leave,
+    leave_start_date,
+    leave_end_date,
+    special_duty_start_date,
+    special_duty_end_date
+  ) =>
+  (dispatch, getState) => {
+    //Loading
+    dispatch({ type: BATTALLION_TWO_CREATE_LOADING });
+
+    // Request Body
+    const body = JSON.stringify({
+      first_name,
+      last_name,
+      nin,
+      ipps,
+      file_number,
+      tin_number,
+      battallion,
+      account_number,
+      contact,
+      sex,
+      rank,
+      education_level,
+      other_education_level,
+      bank,
+      branch,
+      department,
+      title,
+      status,
+      shift,
+      date_of_enlistment,
+      date_of_transfer,
+      date_of_promotion,
+      date_of_birth,
+      armed,
+      section,
+      location,
+      on_leave,
+      leave_start_date,
+      leave_end_date,
+      special_duty_start_date,
+      special_duty_end_date
+    });
+    // console.log(body)
+    const message = `${first_name}'s details have been saved in the database.`;
+    axios
+      .post(`${global_url}/${batallion_url}/`, body, tokenConfig(getState))
+      .then((res) => {
+        // console.log(res.data)
+        dispatch({
+          type: BATTALLION_TWO_CREATED,
+          payload: res.data
+        });
+        dispatch(create_api_message(message, 'battallion_employee_created'));
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        dispatch(returnError(err.response.data, err.response.status));
+        dispatch({
+          type: BATTALLION_TWO_CREATED
+        });
+      });
+  };
+
+//  BATTALLION THREE UPDATE
+export const battallion_three_update =
+  (
+    id,
+    first_name,
+    last_name,
+    nin,
+    ipps,
+    file_number,
+    tin_number,
+    battallion,
+    account_number,
+    contact,
+    sex,
+    rank,
+    education_level,
+    other_education_level,
+    bank,
+    branch,
+    department,
+    title,
+    status,
+    shift,
+    date_of_enlistment,
+    date_of_transfer,
+    date_of_promotion,
+    date_of_birth,
+    armed,
+    section,
+    location,
+    on_leave,
+    leave_start_date,
+    leave_end_date,
+    notify_leave,
+    notify_special_duty,
+    special_duty_start_date,
+    special_duty_end_date
+  ) =>
+  (dispatch, getState) => {
+    //Loading
+    dispatch({ type: BATTALLION_THREE_CREATE_LOADING });
+
+    // Request Body
+    const body = JSON.stringify({
+      first_name,
+      last_name,
+      nin,
+      ipps,
+      file_number,
+      tin_number,
+      battallion,
+      account_number,
+      contact,
+      sex,
+      rank,
+      education_level,
+      other_education_level,
+      bank,
+      branch,
+      department,
+      title,
+      status,
+      shift,
+      date_of_enlistment,
+      date_of_transfer,
+      date_of_promotion,
+      date_of_birth,
+      armed,
+      section,
+      location,
+      on_leave,
+      leave_start_date,
+      leave_end_date,
+      notify_leave,
+      notify_special_duty,
+      special_duty_start_date,
+      special_duty_end_date
+    });
+    // console.log(body)
+    const message = `${first_name}'s details have successfully been updated in the database.`;
+    axios
+      .put(`${global_url}/battallion_three/${id}/`, body, tokenConfig(getState))
+      .then((res) => {
+        // console.log(res.data)
+        dispatch({
+          type: BATTALLION_THREE_CREATED,
+          payload: res.data
+        });
+        dispatch(create_api_message(message, 'battallion_employee_created'));
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        dispatch(returnError(err.response.data, err.response.status));
+        dispatch({
+          type: BATTALLION_THREE_CREATED
+        });
+      });
+  };
+
+
 
 //  BATTALLION ONE CREATE
 export const battallion_one_create =
@@ -193,7 +391,7 @@ export const battallion_one_create =
     // console.log(body)
     const message = `${first_name}'s details have been saved in the database.`;
     axios
-      .post(`${global_url}/api/battallion_one/`, body, tokenConfig(getState))
+      .post(`${global_url}/battallion_one/`, body, tokenConfig(getState))
       .then((res) => {
         // console.log(res.data)
         dispatch({
@@ -245,6 +443,7 @@ export const battallion_two_update =
     leave_start_date,
     leave_end_date,
     notify_leave,
+    notify_special_duty,
     special_duty_start_date,
     special_duty_end_date
   ) =>
@@ -284,13 +483,14 @@ export const battallion_two_update =
       leave_start_date,
       leave_end_date,
       notify_leave,
+      notify_special_duty,
       special_duty_start_date,
       special_duty_end_date
     });
     // console.log(body)
     const message = `${first_name}'s details have successfully been updated in the database.`;
     axios
-      .put(`${global_url}/api/battallion_two/${id}/`, body, tokenConfig(getState))
+      .put(`${global_url}/battallion_two/${id}/`, body, tokenConfig(getState))
       .then((res) => {
         // console.log(res.data)
         dispatch({
@@ -308,10 +508,10 @@ export const battallion_two_update =
       });
   };
 
-export const send_notification = (id, notify_leave, url) => (dispatch, getState) => {
-  const body = JSON.stringify({ notify_leave });
+export const send_notification = (id, object, url) => (dispatch, getState) => {
+  // const body = JSON.stringify({ notify_leave });
   axios
-    .patch(`${global_url}/api/${url}/${id}/`, body, tokenConfig(getState))
+    .patch(`${global_url}/${url}/${id}/`, object, tokenConfig(getState))
     .then((res) => {
       console.log('Notified');
     })
@@ -326,7 +526,7 @@ export const delete_employee = (id, url) => (dispatch, getState) => {
   const error_message = "An error occured while trying to delete this employee, please try again later."
   const message = "Employee has successfully been deleted."
    axios
-   .delete(`${global_url}/api/${url}/${id}/`, tokenConfig(getState))
+   .delete(`${global_url}/${url}/${id}/`, tokenConfig(getState))
       .then((res) => {
         // console.log(res.data)
         const deleted = "true"
@@ -362,7 +562,7 @@ export const save_delete_record = (reason, deletor_name, deletor_file_number, de
   const error_message = "An error occured while trying to delete this employee, please try again later."
   const message = "Your reason has successfully been submitted. You can delete now."
    axios
-   .post(`${global_url}/api/deleted_employees/`, body, tokenConfig(getState))
+   .post(`${global_url}/deleted_employees/`, body, tokenConfig(getState))
       .then((res) => {
         // console.log(res.data)
         dispatch(create_api_message(message, 'record_delete_saved'));
@@ -414,6 +614,7 @@ export const battallion_one_update =
     leave_start_date,
     leave_end_date,
     notify_leave,
+    notify_special_duty,
     special_duty_start_date,
     special_duty_end_date
   ) =>
@@ -453,13 +654,14 @@ export const battallion_one_update =
       leave_start_date,
       leave_end_date,
       notify_leave,
+      notify_special_duty,
       special_duty_start_date,
       special_duty_end_date
     });
     // console.log(body)
     const message = `${first_name}'s details have successfully been updated in the database.`;
     axios
-      .put(`${global_url}/api/battallion_one/${id}/`, body, tokenConfig(getState))
+      .put(`${global_url}/battallion_one/${id}/`, body, tokenConfig(getState))
       .then((res) => {
         // console.log(res.data)
         dispatch({
@@ -485,7 +687,7 @@ export const download_file_section =
     // const token = getState().auth.token;
     axios
       .get(
-        `${global_url}/api/${api}/?section=${section}&title_doc=${title_doc}&unique=${unique_site_id}`,
+        `${global_url}/${api}/?section=${section}&title_doc=${title_doc}&unique=${unique_site_id}`,
         { responseType: 'blob' }
       )
       .then((res) => {
@@ -511,7 +713,7 @@ export const download_file_section_status_Bone =
     // const token = getState().auth.token;
     axios
       .get(
-        `${global_url}/api/${api}/?section=${section}&status_type=${status_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
+        `${global_url}/${api}/?section=${section}&status_type=${status_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
         { responseType: 'blob' }
       )
       .then((res) => {
@@ -537,7 +739,7 @@ export const download_file_section_leave_Bone =
     // const token = getState().auth.token;
     axios
       .get(
-        `${global_url}/api/${api}/?section=${section}&leave_type=${leave_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
+        `${global_url}/${api}/?section=${section}&leave_type=${leave_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
         { responseType: 'blob' }
       )
       .then((res) => {
@@ -560,7 +762,7 @@ export const download_file = (api, filename, title_doc) => (dispatch, getState) 
   dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
   // const token = getState().auth.token;
   axios
-    .get(`${global_url}/api/${api}/?title_doc=${title_doc}&unique=${unique_site_id}`, {
+    .get(`${global_url}/${api}/?title_doc=${title_doc}&unique=${unique_site_id}`, {
       responseType: 'blob'
     })
     .then((res) => {
@@ -588,7 +790,7 @@ export const download_file_query_status =
     // const token = getState().auth.token;
     axios
       .get(
-        `${global_url}/api/${api}/?status_type=${status_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
+        `${global_url}/${api}/?status_type=${status_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
         { responseType: 'blob' }
       )
       .then((res) => {
@@ -616,7 +818,7 @@ export const download_file_query_status_Bone =
     // const token = getState().auth.token;
     axios
       .get(
-        `${global_url}/api/${api}/?status_type=${status_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
+        `${global_url}/${api}/?status_type=${status_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
         { responseType: 'blob' }
       )
       .then((res) => {
@@ -644,7 +846,7 @@ export const download_file_query_leave_Bone =
     // const token = getState().auth.token;
     axios
       .get(
-        `${global_url}/api/${api}/?leave_type=${leave_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
+        `${global_url}/${api}/?leave_type=${leave_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
         { responseType: 'blob' }
       )
       .then((res) => {
@@ -672,7 +874,7 @@ export const download_file_query_leave =
     // const token = getState().auth.token;
     axios
       .get(
-        `${global_url}/api/${api}/?leave_type=${leave_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
+        `${global_url}/${api}/?leave_type=${leave_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
         { responseType: 'blob' }
       )
       .then((res) => {

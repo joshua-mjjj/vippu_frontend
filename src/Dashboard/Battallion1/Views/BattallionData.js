@@ -213,6 +213,23 @@ function BattallionData(props) {
           }
         }
       });
+
+      // eslint-disable-next-line
+      props.data.filter((instance) => {
+        if (instance.status === 'Special duty' && instance.notify_special_duty === false) {
+          var end_date = moment(`${instance.special_duty_end_date}`);
+          var current = moment(new Date()); // now
+          const prime_difference = end_date.diff(current, 'days') + 1;
+          if (prime_difference <= 0) {
+            const url = 'battallion_one';
+            const object = {
+              'notify_special_duty' : true
+            }
+            props.send_notification(instance.id, object, url);
+            // turn notify_leave to true
+          }
+        }
+      });
     }
   }, [props]);
 

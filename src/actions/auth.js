@@ -17,8 +17,8 @@ import {
   CHANGE_PASSWORD_FAIL
 } from './types';
 
-export const global_url = 'https://vippu-api.herokuapp.com';
-// export const global_url_local = ' http://127.0.0.1:8000 ' 
+export const global_url = 'http://127.0.0.1:8000/source';
+// export const global_url_local = 'http://127.0.0.1:8000/source   https://vippu-api.herokuapp.com/source' 
 
 // LOAD USER
 export const check_user_type = (username) => (dispatch) => {
@@ -38,7 +38,7 @@ export const check_user_type = (username) => (dispatch) => {
 
   axios
     // .get(`${process.env.REACT_APP_API_URL}users/me/`, tokenConfig(getState))
-    .post(`${global_url}/api/user_type_check/`, body, config)
+    .post(`${global_url}/user_type_check/`, body, config)
     .then((res) => {
       localStorage.setItem('current_user_id', username);
       dispatch({
@@ -70,7 +70,7 @@ export const login = (username, password) => (dispatch) => {
   const body = JSON.stringify({ username, password });
 
   axios
-    .post(`${global_url}/api/login/`, body, config)
+    .post(`${global_url}/login/`, body, config)
     .then((res) => {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -97,7 +97,7 @@ export const change_password = (old_password, new_password) => (dispatch, getSta
 
   const message = 'Your password has successfully been changed.';
   axios
-    .post(`${global_url}/api/auth/password/change/`, body, tokenConfig(getState))
+    .post(`${global_url}/auth/password/change/`, body, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: CHANGE_PASSWORD_SUCCESS
@@ -123,7 +123,7 @@ export const loadUser = () => (dispatch, getState) => {
   // user Loading
 
   axios
-    .get(`${global_url}/api/users/me/`, tokenConfig(getState))
+    .get(`${global_url}/users/me/`, tokenConfig(getState))
 
     .then((res) => {
       dispatch({

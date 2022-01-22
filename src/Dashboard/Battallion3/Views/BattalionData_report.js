@@ -191,7 +191,6 @@ function BattalionData_report(props) {
   //   console.log(props.data)
   // }, [props.data]);
 
-
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>

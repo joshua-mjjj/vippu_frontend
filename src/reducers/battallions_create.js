@@ -1,6 +1,8 @@
 import {
   BATTALLION_TWO_CREATE_LOADING,
   BATTALLION_TWO_CREATED,
+  BATTALLION_THREE_CREATE_LOADING,
+  BATTALLION_THREE_CREATED,
   GENERATE_REPORT_BATTALLION_TWO_LOADING,
   GENERATE_REPORT_BATTALLION_TWO_DONE,
   DELETE_RECORD_LOADING,
@@ -16,6 +18,7 @@ const initialState = {
   battallions_two: null,
   create_battallion_two_loading: false,
   generate_report_battallion_loading: false,
+  create_battallion_three_loading: false,
   delete_record: false,
   can_delete: false,
   delete_loading: false
@@ -76,10 +79,20 @@ export default function battallions_create(state = initialState, action) {
         ...state,
         create_battallion_two_loading: true
       };
+    case BATTALLION_THREE_CREATE_LOADING:
+      return {
+        ...state,
+        create_battallion_three_loading: true
+      };
     case BATTALLION_TWO_CREATED:
       return {
         ...state,
         create_battallion_two_loading: false
+      };
+    case BATTALLION_THREE_CREATED:
+      return {
+        ...state,
+        create_battallion_three_loading: false
       };
     default:
       return state;

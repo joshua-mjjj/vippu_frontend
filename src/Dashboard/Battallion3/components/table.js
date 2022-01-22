@@ -85,8 +85,7 @@ export const OrdersTable = (props) => {
                         variant="subtitle2"
                       >
                         <Typography
-                          color={employee.notify_leave || employee.notify_special_duty ? 'error' : 'inherit'}
-                          className={employee.notify_leave || employee.notify_special_duty ? classes.bolden : null}
+                          color={employee.notify_leave || employee.notify_special_duty || employee.notify_special_duty ? 'error' : 'inherit'}
                           variant="inherit"
                         >
                           {employee.first_name}

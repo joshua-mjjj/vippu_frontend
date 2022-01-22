@@ -71,12 +71,12 @@ export default function Battallion_detail(props) {
           />
         ) : null}
         {employee.notify_special_duty ? (
-            <Alert
-              content={`This is an alert to notify you that ${employee.first_name}'s special duty time ellapsed!`}
-              control_bool={control_bool_error}
-              status="error"
-            />
-          ) : null}
+          <Alert
+            content={`This is an alert to notify you that ${employee.first_name}'s special duty time ellapsed!`}
+            control_bool={control_bool_error}
+            status="error"
+          />
+        ) : null}
       </Grid>
       <Container maxWidth="lg">
         <div className={classes.flex}>

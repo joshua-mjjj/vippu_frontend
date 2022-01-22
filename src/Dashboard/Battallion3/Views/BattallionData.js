@@ -4,12 +4,19 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import GenerateExcelSections from '../components/GenerateExcelSections';
+import BattallionList from '../components/Battalion_list';
+import GenerateExcel from '../components/GenerateExcel';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import moment from 'moment';
 
-import { battallion_one_fetch_data } from '../../../actions/battallions_fetch.js';
+import { battallion_one_fetch_data, battallion_three_fetch_data } from '../../../actions/battallions_fetch.js';
+
+import { send_notification } from '../../../actions/battallions_create.js';
+
+import * as Scroll from 'react-scroll';
+var scroll = Scroll.animateScroll;
 
 function Copyright() {
   return (
@@ -166,7 +173,7 @@ theme = {
   }
 };
 
-function BattalionData_report(props) {
+function BattallionData(props) {
   // Implementation code
   const [tab_value, setTab_value] = React.useState(0);
 
@@ -174,35 +181,87 @@ function BattalionData_report(props) {
     setTab_value(0);
   };
 
-  // const refetch_data = () => {
-  //   console.log("Refetching battalion two data ...")
-  //   props.battallion_one_fetch_data()
-  // }
+  const refetch_data = () => {
+    // console.log('Refetching battalion two data ...');
+    // props.battallion_one_fetch_data();
+    props.battallion_three_fetch_data();
+  };
 
-  // const set_tab_1 = () => {
-  //   setTab_value(1)
-  // }
+  const set_tab_1 = () => {
+    setTab_value(1);
+  };
 
   // const set_tab_2 = () => {
   //   setTab_value(2)
   // }
 
-  // React.useEffect(() => {
-  //   console.log(props.data)
-  // }, [props.data]);
+  React.useEffect(() => {
+    if (props.data !== null) {
+      // eslint-disable-next-line
+      props.data.filter((instance) => {
+        if (instance.on_leave !== 'Not on leave' && instance.notify_leave === false) {
+          var end_date = moment(`${instance.leave_end_date}`);
+          // console.log(instance.leave_end_date);
+          var current = moment(new Date()); // now
+          const prime_difference = end_date.diff(current, 'days') + 1;
+          // console.log(prime_difference);
+          if (prime_difference <= 0) {
+            // console.log('Send notification');
+            const url = 'battallion_three';
+            const object = {
+              'notify_leave' : true
+            }
+            props.send_notification(instance.id, object, url);
+            // turn notify_leave to true
+          }
+        }
+      });
+    // eslint-disable-next-line
+      props.data.filter((instance) => {
+        if (instance.status === 'Special duty' && instance.notify_special_duty === false) {
+          var end_date = moment(`${instance.special_duty_end_date}`);
+          var current = moment(new Date()); // now
+          const prime_difference = end_date.diff(current, 'days') + 1;
+          if (prime_difference <= 0) {
+            const url = 'battallion_three';
+            const object = {
+              'notify_special_duty' : true
+            }
+            props.send_notification(instance.id, object, url);
+            // turn notify_leave to true
+          }
+        }
+      });
+    }
+  }, [props]);
 
+  React.useEffect(() => {
+    scroll.scrollToTop();
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
           <Tabs value={tab_value} textColor="inherit">
-            <Tab onClick={set_tab_0} label="Generate report" />
+            <Tab onClick={set_tab_0} label="Battalion employees" />
+            <Tab onClick={set_tab_1} label="Generate report" />
+            {/* <Tab onClick={set_tab_2} label="Find employee" />*/}
           </Tabs>
         </AppBar>
         <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
           {/* Render conditionally */}
-          {tab_value === 0 ? <GenerateExcelSections /> : null}
+          {tab_value === 0 ? (
+            <BattallionList
+              section_title={null}
+              refetch_data={refetch_data}
+              data={props.data !== null ? props.data : null}
+            />
+          ) : null}
+          {tab_value === 1 ? <GenerateExcel /> : null}
+          {/*{ 
+                tab_value === 2 ? (<Content />) : null
+              }*/}
         </Box>
         <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
           <Copyright />
@@ -216,9 +275,11 @@ const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
   error: state.errors,
-  data: state.battallions_fetch.battalion_one_data
+  data: state.battallions_fetch.battalion_three_data
 });
 
 export default connect(mapStateToProps, {
-  battallion_one_fetch_data
-})(BattalionData_report);
+  battallion_one_fetch_data,
+  battallion_three_fetch_data,
+  send_notification
+})(BattallionData);

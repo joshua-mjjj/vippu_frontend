@@ -6,7 +6,9 @@ import {
   BATTALION_TWO_DETAIL_LOADING,
   BATTALION_TWO_DETAIL_FETCHED,
   BATTALION_ONE_DETAIL_LOADING,
-  BATTALION_ONE_DETAIL_FETCHED
+  BATTALION_ONE_DETAIL_FETCHED,
+  BATTALION_THREE_DETAIL_LOADING,
+  BATTALION_THREE_DETAIL_FETCHED
 } from './types';
 
 import { tokenConfig, global_url } from './auth';
@@ -18,7 +20,7 @@ export const battallion_two_fetch_detail = (id) => (dispatch, getState) => {
 
   // const message = `${first_name}'s details have been saved in the database.`
   axios
-    .get(`${global_url}/api/battallion_two/${id}`, tokenConfig(getState))
+    .get(`${global_url}/battallion_two/${id}`, tokenConfig(getState))
     .then((res) => {
       // console.log(res.data)
       if (res.data) {
@@ -46,7 +48,7 @@ export const battallion_one_fetch_detail = (id) => (dispatch, getState) => {
 
   // const message = `${first_name}'s details have been saved in the database.`
   axios
-    .get(`${global_url}/api/battallion_one/${id}`, tokenConfig(getState))
+    .get(`${global_url}/battallion_one/${id}`, tokenConfig(getState))
     .then((res) => {
       // console.log(res.data)
       if (res.data) {
@@ -62,6 +64,34 @@ export const battallion_one_fetch_detail = (id) => (dispatch, getState) => {
       dispatch(returnError(err.response.data, err.response.status));
       dispatch({
         type: BATTALION_ONE_DETAIL_FETCHED,
+        payload: null
+      });
+    });
+};
+
+//  BATTALLION THREE CREATE
+export const battallion_three_fetch_detail = (id) => (dispatch, getState) => {
+  //Loading
+  dispatch({ type: BATTALION_THREE_DETAIL_LOADING });
+
+  // const message = `${first_name}'s details have been saved in the database.`
+  axios
+    .get(`${global_url}/battallion_three/${id}`, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      if (res.data) {
+        dispatch({
+          type: BATTALION_THREE_DETAIL_FETCHED,
+          payload: res.data
+        });
+      }
+      // dispatch(create_api_message(message, "battallion_employee_created"));
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+      dispatch(returnError(err.response.data, err.response.status));
+      dispatch({
+        type: BATTALION_THREE_DETAIL_FETCHED,
         payload: null
       });
     });

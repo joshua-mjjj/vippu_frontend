@@ -77,15 +77,16 @@ export const OrdersTable = (props) => {
                   <TableRow key={employee.id}>
                     <TableCell>
                       <Link
-                        color={employee.notify_leave ? 'error' : 'inherit'}
-                        className={employee.notify_leave ? classes.bolden : null}
+                        color={employee.notify_leave || employee.notify_special_duty ? 'error' : 'inherit'}
+                        className={employee.notify_leave || employee.notify_special_duty ? classes.bolden : null}
                         component={RouterLink}
                         to="#"
                         underline="none"
                         variant="subtitle2"
                       >
                         <Typography
-                          color={employee.notify_leave ? 'error' : 'inherit'}
+                          color={employee.notify_leave || employee.notify_special_duty ? 'error' : 'inherit'}
+                          className={employee.notify_leave || employee.notify_special_duty ? classes.bolden : null}
                           variant="inherit"
                         >
                           {employee.first_name}
@@ -95,8 +96,8 @@ export const OrdersTable = (props) => {
                     <TableCell>
                       <Box>
                         <Typography
-                          color={employee.notify_leave ? 'error' : 'inherit'}
-                          className={employee.notify_leave ? classes.bolden : null}
+                          color={employee.notify_leave || employee.notify_special_duty ? 'error' : 'inherit'}
+                          className={employee.notify_leave || employee.notify_special_duty ? classes.bolden : null}
                           variant="inherit"
                         >
                           {employee.last_name}
@@ -106,8 +107,8 @@ export const OrdersTable = (props) => {
                     <TableCell>
                       <Box>
                         <Typography
-                          color={employee.notify_leave ? 'error' : 'inherit'}
-                          className={employee.notify_leave ? classes.bolden : null}
+                          color={employee.notify_leave || employee.notify_special_duty ? 'error' : 'inherit'}
+                          className={employee.notify_leave || employee.notify_special_duty ? classes.bolden : null}
                           variant="inherit"
                         >
                           {employee.title}
@@ -117,8 +118,8 @@ export const OrdersTable = (props) => {
                     <TableCell>
                       <Box>
                         <Typography
-                          color={employee.notify_leave ? 'error' : 'inherit'}
-                          className={employee.notify_leave ? classes.bolden : null}
+                          color={employee.notify_leave || employee.notify_special_duty ? 'error' : 'inherit'}
+                          className={employee.notify_leave || employee.notify_special_duty ? classes.bolden : null}
                           variant="inherit"
                         >
                           {employee.rank}
@@ -128,8 +129,8 @@ export const OrdersTable = (props) => {
                     <TableCell>
                       <Box>
                         <Typography
-                          color={employee.notify_leave ? 'error' : 'inherit'}
-                          className={employee.notify_leave ? classes.bolden : null}
+                          color={employee.notify_leave || employee.notify_special_duty ? 'error' : 'inherit'}
+                          className={employee.notify_leave || employee.notify_special_duty ? classes.bolden : null}
                           variant="inherit"
                         >
                           {employee.department}
@@ -139,8 +140,8 @@ export const OrdersTable = (props) => {
                     <TableCell>
                       <Box>
                         <Typography
-                          color={employee.notify_leave ? 'error' : 'inherit'}
-                          className={employee.notify_leave ? classes.bolden : null}
+                          color={employee.notify_leave || employee.notify_special_duty ? 'error' : 'inherit'}
+                          className={employee.notify_leave || employee.notify_special_duty ? classes.bolden : null}
                           variant="inherit"
                         >
                           {employee.file_number}

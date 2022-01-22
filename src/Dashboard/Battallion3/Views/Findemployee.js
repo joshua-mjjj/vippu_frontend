@@ -1,15 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import * as React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import GenerateExcelSections from '../components/GenerateExcelSections';
+import Findemploye from '../components/Findemploye';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-
-import { battallion_one_fetch_data } from '../../../actions/battallions_fetch.js';
 
 function Copyright() {
   return (
@@ -166,7 +163,7 @@ theme = {
   }
 };
 
-function BattalionData_report(props) {
+export default function Findemployee() {
   // Implementation code
   const [tab_value, setTab_value] = React.useState(0);
 
@@ -174,35 +171,17 @@ function BattalionData_report(props) {
     setTab_value(0);
   };
 
-  // const refetch_data = () => {
-  //   console.log("Refetching battalion two data ...")
-  //   props.battallion_one_fetch_data()
-  // }
-
-  // const set_tab_1 = () => {
-  //   setTab_value(1)
-  // }
-
-  // const set_tab_2 = () => {
-  //   setTab_value(2)
-  // }
-
-  // React.useEffect(() => {
-  //   console.log(props.data)
-  // }, [props.data]);
-
-
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
           <Tabs value={tab_value} textColor="inherit">
-            <Tab onClick={set_tab_0} label="Generate report" />
+            <Tab onClick={set_tab_0} label="Find employee" />
           </Tabs>
         </AppBar>
         <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
           {/* Render conditionally */}
-          {tab_value === 0 ? <GenerateExcelSections /> : null}
+          {tab_value === 0 ? <Findemploye /> : null}
         </Box>
         <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
           <Copyright />
@@ -211,14 +190,3 @@ function BattalionData_report(props) {
     </ThemeProvider>
   );
 }
-
-const mapStateToProps = (state) => ({
-  messages: state.messages,
-  auth: state.auth,
-  error: state.errors,
-  data: state.battallions_fetch.battalion_one_data
-});
-
-export default connect(mapStateToProps, {
-  battallion_one_fetch_data
-})(BattalionData_report);

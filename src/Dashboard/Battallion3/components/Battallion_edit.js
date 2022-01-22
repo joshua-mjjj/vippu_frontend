@@ -27,7 +27,7 @@ import Spinner from '../../../components/Spinner';
 
 import {
   battallion_one_update,
-  battallion_two_update,
+  battallion_three_update,
   clear_messages,
   clear_errors
 } from '../../../actions/battallions_create';
@@ -174,7 +174,7 @@ function Battallion_edit(props) {
   const [notify_leave, setNotify_leave] = React.useState(employee.notify_leave);
 
   const [notify_special_duty, setNotify_Special_duty] = React.useState(employee.notify_special_duty);
- 
+
   //Special duty
   const [special_duty, setSpecial] = React.useState(employee.status === "Special duty" ? true : false);
   const [special_duty_start, setSpecialDuty_start] = React.useState(employee.special_duty_start_date === null ? new Date() : new Date(employee.special_duty_start_date));
@@ -277,6 +277,7 @@ function Battallion_edit(props) {
   };
 
   const handle_special_start = (e) => {
+    // console.log(e)
     setNotify_Special_duty(false)
     setSpecialDuty_start(e);
     let dt = new Date(e);
@@ -286,6 +287,7 @@ function Battallion_edit(props) {
 
   const handle_special_end = (e) => {
     setNotify_Special_duty(false)
+    // console.log(e)
     setSpecialDuty_end(e);
     let dt = new Date(e);
     let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
@@ -421,7 +423,7 @@ function Battallion_edit(props) {
       leave_end_sub = leave_end_data;
     }
 
-    const battallion_value = 'battallion_one'; // Battallion 2 form, hence we do alittle bit of hard coding
+    const battallion_value = 'battallion_three'; // Battallion 3 form, hence we do alittle bit of hard coding
 
     // update an employee
     // e.preventDefault()
@@ -448,7 +450,7 @@ function Battallion_edit(props) {
       section !== null &&
       location !== null
     ) {
-      props.battallion_one_update(
+      props.battallion_three_update(
         employee.id,
         first_name,
         last_name,
@@ -787,9 +789,18 @@ function Battallion_edit(props) {
               className={classes.inputSmall_}
               onChange={handle_Department_Change}
             >
-              <MenuItem value="UN Agencies">UN Agencies</MenuItem>
-              <MenuItem value="Administration">Administration</MenuItem>
-              <MenuItem value="Drivers">Drivers</MenuItem>
+              <MenuItem value="Anti-corruption & War Crime division">Anti-corruption & War Crime division</MenuItem>
+              <MenuItem value="Buganda Road Court">Buganda Road Court</MenuItem>
+              <MenuItem value="Commercial court">Commercial court</MenuItem>
+              <MenuItem value="Supreme Court">Supreme Court</MenuItem>
+              <MenuItem value="High Court Offices Kampala">High Court Offices Kampala</MenuItem>
+              <MenuItem value="High Court Residence">High Court Residence</MenuItem>
+              <MenuItem value="Family Court Division Makindye">Family Court Division Makindye</MenuItem>
+              <MenuItem value="Court of Appeal">Court of Appeal</MenuItem>
+              <MenuItem value="Residence of Justice of Court Appeal">Residence of Justice of Court Appeal</MenuItem>
+              <MenuItem value="DPP Office">DPP Office</MenuItem>
+              <MenuItem value="IGG">IGG</MenuItem>
+              <MenuItem value="Police Establishment">Police Establishment</MenuItem>
             </Select>
           </Grid>
 
@@ -1162,12 +1173,12 @@ const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
   error: state.errors,
-  loading: state.battallions_create.create_battallion_two_loading
+  loading: state.battallions_create.create_battallion_three_loading
 });
 
 export default connect(mapStateToProps, {
   battallion_one_update,
   clear_messages,
   clear_errors,
-  battallion_two_update
+  battallion_three_update
 })(Battallion_edit);
