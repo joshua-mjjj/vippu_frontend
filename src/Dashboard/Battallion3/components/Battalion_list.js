@@ -35,7 +35,7 @@ function Battalion_two_list(props) {
   const [show_detail, setToggle] = React.useState(false);
   const [show_edit, showEdit] = React.useState(false);
   const [disable, setDisable] = React.useState(true);
-  const battalion = "battallion_one"
+  const battalion = "battallion_three"
 
   React.useEffect(() => {
     if(props.auth.user.top_level_incharge && props.detail_data !== null){

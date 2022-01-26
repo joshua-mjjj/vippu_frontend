@@ -12,7 +12,7 @@ import Tabs from '@mui/material/Tabs';
 import Alert from '../../GlobalComponents/Alert';
 import { clear_messages } from '../../../actions/battallions_create';
 
-import { battallion_section_query } from '../../../actions/battallions_fetch.js';
+import { battallion_three_deprtmnt_query } from '../../../actions/battallions_fetch.js';
 
 import { auth_message } from '../../../actions/auth.js';
 
@@ -190,29 +190,29 @@ function Dashboard(props) {
     props.clear_messages();
   };
 
-  const get_section = (section) => {
-    setSection(section);
+  const get_section = (department) => {
+    // console.log(department)
+    setSection(department);
     // true
     // false
     // in_charge
     // None
     if (props.auth.user.top_level_incharge === true || props.auth.user.account_type === 'admin') {
-      props.battallion_section_query(section);
+      props.battallion_three_deprtmnt_query(department);
       setTab_value(1);
     }
     if (props.auth.user.lower_level_incharge === true) {
-      if (props.auth.user.section === section) {
-        props.battallion_section_query(section);
+      console.log(props.auth.user.department)
+      if (props.auth.user.department === department) {
+        props.battallion_three_deprtmnt_query(department);
         setTab_value(1);
       } else {
         scroll.scrollToTop();
-        props.auth_message();
-        console.log("You are not to view this Section's data");
+        const key_word = "department"
+        props.auth_message(key_word);
+        console.log("You are allowed not to view this Section's data");
       }
     }
-    // console.log(props.auth.user.top_level_incharge)
-    // console.log(props.auth.user.lower_level_incharge)
-    // console.log(props.auth.user.section)
   };
 
   return (
@@ -261,12 +261,11 @@ const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
   error: state.errors,
-  overrall_data: state.battallions_fetch.battalion_two_overrall_data,
-  data: state.battallions_fetch.battalion_sectionquery
+  data: state.battallions_fetch.battalion3_department_query
 });
 
 export default connect(mapStateToProps, {
-  battallion_section_query,
+  battallion_three_deprtmnt_query,
   auth_message,
   clear_messages
 })(Dashboard);

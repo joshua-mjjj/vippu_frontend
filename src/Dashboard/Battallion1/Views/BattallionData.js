@@ -209,6 +209,7 @@ function BattallionData(props) {
             const new_notify_leave = true;
             const url = 'battallion_one';
             props.send_notification(instance.id, new_notify_leave, url);
+            props.battallion_one_fetch_data();
             // turn notify_leave to true
           }
         }
@@ -226,6 +227,7 @@ function BattallionData(props) {
               'notify_special_duty' : true
             }
             props.send_notification(instance.id, object, url);
+            props.battallion_one_fetch_data();
             // turn notify_leave to true
           }
         }

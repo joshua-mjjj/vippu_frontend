@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import GenerateExcelSections from '../components/GenerateExcelSections';
+import GenerateExcelDepartments from '../components/GenerateExcelDepartments';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -201,7 +201,7 @@ function BattalionData_report(props) {
         </AppBar>
         <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
           {/* Render conditionally */}
-          {tab_value === 0 ? <GenerateExcelSections /> : null}
+          {tab_value === 0 ? <GenerateExcelDepartments /> : null}
         </Box>
         <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
           <Copyright />

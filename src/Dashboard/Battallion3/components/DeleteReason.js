@@ -81,7 +81,7 @@ function DeleteReason(props) {
     if(reason !== null && reason.length >= 10){
     	const deletor_name = props.auth.user.first_name + " " + props.auth.user.last_name
     	const deletor_file_number = props.auth.user.username
-    	const battalion = "1"
+    	const battalion = "3"
     	const deleted_file_number = props.employee.file_number
     	const deleted_name = props.employee.first_name + " " + props.employee.last_name
 

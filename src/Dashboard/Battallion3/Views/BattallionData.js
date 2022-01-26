@@ -182,8 +182,6 @@ function BattallionData(props) {
   };
 
   const refetch_data = () => {
-    // console.log('Refetching battalion two data ...');
-    // props.battallion_one_fetch_data();
     props.battallion_three_fetch_data();
   };
 
@@ -212,6 +210,7 @@ function BattallionData(props) {
               'notify_leave' : true
             }
             props.send_notification(instance.id, object, url);
+            props.battallion_three_fetch_data();
             // turn notify_leave to true
           }
         }
@@ -228,6 +227,7 @@ function BattallionData(props) {
               'notify_special_duty' : true
             }
             props.send_notification(instance.id, object, url);
+            props.battallion_three_fetch_data();
             // turn notify_leave to true
           }
         }

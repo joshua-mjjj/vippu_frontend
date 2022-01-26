@@ -789,7 +789,7 @@ function Battallion_edit(props) {
               className={classes.inputSmall_}
               onChange={handle_Department_Change}
             >
-              <MenuItem value="Anti-corruption & War Crime division">Anti-corruption & War Crime division</MenuItem>
+              <MenuItem value="Anti-corruption and War Crime division">Anti-corruption and War Crime division</MenuItem>
               <MenuItem value="Buganda Road Court">Buganda Road Court</MenuItem>
               <MenuItem value="Commercial court">Commercial court</MenuItem>
               <MenuItem value="Supreme Court">Supreme Court</MenuItem>

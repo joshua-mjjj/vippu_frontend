@@ -206,8 +206,9 @@ function Dashboard(props) {
         setTab_value(1);
       } else {
         scroll.scrollToTop();
-        props.auth_message();
-        console.log("You are not to view this Section's data");
+        const key_word = "section"
+        props.auth_message(key_word);
+        console.log("You are not allowed to view this Section's data");
       }
     }
     // console.log(props.auth.user.top_level_incharge)
@@ -226,13 +227,13 @@ function Dashboard(props) {
         </AppBar>
         <Box component="main" sx={{ flex: 1, py: 3, px: 4, bgcolor: '#eaeff1' }}>
           {props.messages.api_message !== null &&
-          props.messages.message_type === 'user_error_section_data_access' ? (
-            <Alert
-              content={props.messages.api_message}
-              control_bool={control_bool_api_message}
-              status="info"
-            />
-          ) : null}
+            props.messages.message_type === 'user_error_section_data_access' ? (
+              <Alert
+                content={props.messages.api_message}
+                control_bool={control_bool_api_message}
+                status="info"
+              />
+            ) : null}
           {/* Render conditionally */}
           {tab_value === 0 ? <ContentDashboard get_child_section={get_section} /> : null}
 
@@ -261,7 +262,7 @@ const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
   error: state.errors,
-  overrall_data: state.battallions_fetch.battalion_two_overrall_data,
+  overrall_data: state.battallions_fetch.battalion_one_overrall_data,
   data: state.battallions_fetch.battalion_sectionquery
 });
 

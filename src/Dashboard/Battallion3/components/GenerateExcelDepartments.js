@@ -18,9 +18,9 @@ import Checkbox from '@mui/material/Checkbox';
 import {
   clear_messages,
   clear_errors,
-  download_file_section_status_Bone,
-  download_file_section_leave_Bone,
-  download_file_section
+  download_file_department_status,
+  download_file_department_leave,
+  download_file_department
 } from '../../../actions/battallions_create';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -166,32 +166,29 @@ function GenerateExcelSections(props) {
   };
 
   const handle_submit_data = (e) => {
-    const url_general = 'export_battalion_one_section';
-    const url_status = 'export_battalion_one_section_status';
-    const url_leave = 'export_battalion_one_section_leave';
+    // const url_general = 'export_battalion_one_section';
+    // const url_status = 'export_battalion_one_section_status';
+    // const url_leave = 'export_battalion_one_section_leave';
 
-    const section = props.auth.user.section;
+    const url_general = 'export_battalion_three_department';
+    const url_status = 'export_battalion_three_department_status';
+    const url_leave = 'export_battalion_three_department_leave';
+
+    const department = props.auth.user.department;
     e.preventDefault();
     if (filename !== null && title_doc !== null) {
-      // console.log("General report: " + general)
-      // console.log("Query by status: " + report_status)
-      // console.log("Query by leave: " + report_leave)
-
-      // console.log("Leave type: " + leave_type)
-      // console.log("Status type: " + status_type)
-
       // general report
       if (general === true && report_status === false && report_leave === false) {
-        props.download_file_section(url_general, filename, section, title_doc);
+        props.download_file_department(url_general, filename, department, title_doc);
       }
 
       // report querying by status
       if (report_status === true && general === false && report_leave === false) {
         if (status_type !== null) {
-          props.download_file_section_status_Bone(
+          props.download_file_department_status(
             url_status,
             filename,
-            section,
+            department,
             status_type,
             title_doc
           );
@@ -201,10 +198,10 @@ function GenerateExcelSections(props) {
       // report querying by leave
       if (report_leave === true && general === false && report_status === false) {
         if (leave_type !== null) {
-          props.download_file_section_leave_Bone(
+          props.download_file_department_leave(
             url_leave,
             filename,
-            section,
+            department,
             leave_type,
             title_doc
           );
@@ -389,7 +386,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   clear_messages,
   clear_errors,
-  download_file_section,
-  download_file_section_status_Bone,
-  download_file_section_leave_Bone
+  download_file_department,
+  download_file_department_status,
+  download_file_department_leave
 })(GenerateExcelSections);

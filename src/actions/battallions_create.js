@@ -679,6 +679,33 @@ export const battallion_one_update =
       });
   };
 
+// DEPARTMENT DATA
+export const download_file_department =
+  (api, filename, department, title_doc) => (dispatch, getState) => {
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    console.log(department)
+    // const token = getState().auth.token;
+    axios
+      .get(
+        `${global_url}/${api}/?department=${department}&title_doc=${title_doc}&unique=${unique_site_id}`,
+        { responseType: 'blob' }
+      )
+      .then((res) => {
+        const message =
+          'Your report will soon be downloaded, please find it in your downloads folder.';
+        dispatch(create_api_message(message, 'file_downloaded'));
+        fileDownload(res.data, `${filename}.xls`);
+        // fileDownload(res.data, "filename.xls");
+        dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+        // console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      });
+  };
+
 // SECTION DATA
 export const download_file_section =
   (api, filename, section, title_doc) => (dispatch, getState) => {
@@ -688,6 +715,32 @@ export const download_file_section =
     axios
       .get(
         `${global_url}/${api}/?section=${section}&title_doc=${title_doc}&unique=${unique_site_id}`,
+        { responseType: 'blob' }
+      )
+      .then((res) => {
+        const message =
+          'Your report will soon be downloaded, please find it in your downloads folder.';
+        dispatch(create_api_message(message, 'file_downloaded'));
+        fileDownload(res.data, `${filename}.xls`);
+        // fileDownload(res.data, "filename.xls");
+        dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+        // console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      });
+  };
+
+// DEPARTMENT DATA
+export const download_file_department_status =
+  (api, filename, department, status_type, title_doc) => (dispatch, getState) => {
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    // const token = getState().auth.token;
+    axios
+      .get(
+        `${global_url}/${api}/?department=${department}&status_type=${status_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
         { responseType: 'blob' }
       )
       .then((res) => {
@@ -731,6 +784,31 @@ export const download_file_section_status_Bone =
       });
   };
 
+// DEPARTMENT DATA
+export const download_file_department_leave =
+  (api, filename, department, leave_type, title_doc) => (dispatch, getState) => {
+    // generating
+    dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_LOADING });
+    // const token = getState().auth.token;
+    axios
+      .get(
+        `${global_url}/${api}/?department=${department}&leave_type=${leave_type}&title_doc=${title_doc}&unique=${unique_site_id}`,
+        { responseType: 'blob' }
+      )
+      .then((res) => {
+        const message =
+          'Your report will soon be downloaded, please find it in your downloads folder.';
+        dispatch(create_api_message(message, 'file_downloaded'));
+        fileDownload(res.data, `${filename}.xls`);
+        // fileDownload(res.data, "filename.xls");
+        dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+        // console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err.response);
+        dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
+      });
+  };
 // SECTION DATA
 export const download_file_section_leave_Bone =
   (api, filename, section, leave_type, title_doc) => (dispatch, getState) => {
@@ -756,6 +834,7 @@ export const download_file_section_leave_Bone =
         dispatch({ type: GENERATE_REPORT_BATTALLION_TWO_DONE });
       });
   };
+
 // GETTING FILES
 export const download_file = (api, filename, title_doc) => (dispatch, getState) => {
   // generating

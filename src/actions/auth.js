@@ -17,7 +17,8 @@ import {
   CHANGE_PASSWORD_FAIL
 } from './types';
 
-export const global_url = 'http://127.0.0.1:8000/source';
+
+export const global_url = process.env.REACT_APP_API_URL;
 // export const global_url_local = 'http://127.0.0.1:8000/source   https://vippu-api.herokuapp.com/source' 
 
 // LOAD USER
@@ -113,9 +114,9 @@ export const change_password = (old_password, new_password) => (dispatch, getSta
 };
 
 // USER NOT ALLOWED TO VIEW SECTION
-export const auth_message = () => (dispatch, getState) => {
+export const auth_message = (key_word) => (dispatch, getState) => {
   const message =
-    'Your are not authorized to view data for this section, Contact the admin for more information.';
+    `Your are not authorized to view data for this ${key_word}, Contact the admin for more information.`;
   dispatch(create_api_message(message, 'user_error_section_data_access'));
 };
 // LOAD USER

@@ -257,7 +257,7 @@ const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
   error: state.errors,
-  overrall_data: state.battallions_fetch.battalion_two_overrall_data
+  overrall_data: state.battallions_fetch.battalion_one_overrall_data
 });
 
 export default connect(mapStateToProps, null)(Content_Dashboard);

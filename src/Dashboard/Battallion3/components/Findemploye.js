@@ -33,9 +33,9 @@ function Findemploye(props) {
       // console.log(input)
       const trimmed_input = input.trim();
       props.battallion_three_query(
-        trimmed_input
-        // props.auth.user.section,
-        // props.auth.user.lower_level_incharge
+        trimmed_input,
+        props.auth.user.department,
+        props.auth.user.lower_level_incharge
       );
     } else return;
   };
