@@ -85,6 +85,11 @@ function Content_Dashboard(props) {
           label: 'IGG'
         },
         {
+          content: props.overrall_data_three.aog === undefined ? '' : `${props.overrall_data_three.aog}`,
+          icon: AccountBalanceIcon,
+          label: 'AOG'
+        },
+        {
           content: props.overrall_data_three.police_establishment === undefined ? '' : `${props.overrall_data_three.police_establishment}`,
           icon: AccountBalanceIcon,
           label: 'Police Establishment'
@@ -145,6 +150,11 @@ function Content_Dashboard(props) {
           // content: `${props.overrall_data.administration}`,
           icon: AccountBalanceIcon,
           label: 'IGG'
+        },
+        {
+          content: '',
+          icon: AccountBalanceIcon,
+          label: 'AOG'
         },
         {
           // content: `${props.overrall_data.administration}`,
@@ -212,6 +222,11 @@ function Content_Dashboard(props) {
         content: '',
         icon: AccountBalanceIcon,
         label: 'IGG'
+      },
+      {
+          content: '',
+          icon: AccountBalanceIcon,
+          label: 'AOG'
       },
       {
         content: '',

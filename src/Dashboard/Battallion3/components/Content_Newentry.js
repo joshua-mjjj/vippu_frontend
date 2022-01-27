@@ -805,6 +805,7 @@ function Content_Newentry(props) {
               <MenuItem value="Residence of Justice of Court Appeal">Residence of Justice of Court Appeal</MenuItem>
               <MenuItem value="DPP Office">DPP Office</MenuItem>
               <MenuItem value="IGG">IGG</MenuItem>
+              <MenuItem value="AOG">AOG</MenuItem>
               <MenuItem value="Police Establishment">Police Establishment</MenuItem>
             </Select>
           </Grid>
