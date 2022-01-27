@@ -13,7 +13,7 @@ jobs:
       # install dependencies
       - run:
           name: Install Dependencies
-          command: npm install --no-package-lock
+          command: npm cache --force clean && npm install --force node-sass && npm install --no-package-lock
 
 workflows:
   heroku_deploy:
