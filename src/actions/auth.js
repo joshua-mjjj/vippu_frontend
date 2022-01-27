@@ -19,7 +19,8 @@ import {
 
 
 export const global_url = process.env.REACT_APP_API_URL;
-// export const global_url_local = 'http://127.0.0.1:8000/source   https://vippu-api.herokuapp.com/source' 
+// export const global_url_local = 'http://127.0.0.1:8000/source ' 
+// export const global_url_local = 'https://vippu-api.herokuapp.com/source' 
 
 // LOAD USER
 export const check_user_type = (username) => (dispatch) => {
