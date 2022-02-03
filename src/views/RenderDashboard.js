@@ -11,6 +11,8 @@ import DashboardRoot from '../Dashboard/Paperbase';
 import DashboardRootBattallion2 from '../Dashboard/Battallion2/Paperbase';
 import DashboardRootBattallion1 from '../Dashboard/Battallion1/Paperbase';
 import DashboardRootBattallion3 from '../Dashboard/Battallion3/Paperbase';
+import DashboardRootBattallion4 from '../Dashboard/Battallion4/Paperbase';
+import DashboardRootBattallion5 from '../Dashboard/Battallion5/Paperbase';
 
 import * as Scroll from 'react-scroll';
 var scroll = Scroll.animateScroll;
@@ -88,6 +90,16 @@ class RenderDashboard extends React.Component {
                   )}
                   {this.props.auth.user.battallion === 'battallion_three' ? (
                     <DashboardRootBattallion3 />
+                  ) : (
+                    ''
+                  )}
+                  {this.props.auth.user.battallion === 'battallion_four' ? (
+                    <DashboardRootBattallion4 />
+                  ) : (
+                    ''
+                  )}
+                  {this.props.auth.user.battallion === 'battallion_five' ? (
+                    <DashboardRootBattallion5 />
                   ) : (
                     ''
                   )}

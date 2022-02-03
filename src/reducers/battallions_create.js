@@ -11,7 +11,11 @@ import {
 
   DELETE_LOADING,
   DELETE_LOADED,
-  DELETE_FALIED
+  DELETE_FALIED,
+
+  BATTALLION_GENERAL_CREATE_LOADING,
+  BATTALLION_GENERAL_CREATED
+
 } from '../actions/types';
 
 const initialState = {
@@ -19,6 +23,7 @@ const initialState = {
   create_battallion_two_loading: false,
   generate_report_battallion_loading: false,
   create_battallion_three_loading: false,
+  create_battallion_general_loading: false,
   delete_record: false,
   can_delete: false,
   delete_loading: false
@@ -84,6 +89,11 @@ export default function battallions_create(state = initialState, action) {
         ...state,
         create_battallion_three_loading: true
       };
+    case BATTALLION_GENERAL_CREATE_LOADING:
+      return {
+        ...state,
+        create_battallion_general_loading: true
+      };
     case BATTALLION_TWO_CREATED:
       return {
         ...state,
@@ -93,6 +103,11 @@ export default function battallions_create(state = initialState, action) {
       return {
         ...state,
         create_battallion_three_loading: false
+      };
+    case BATTALLION_GENERAL_CREATED:
+      return {
+        ...state,
+        create_battallion_general_loading: false
       };
     default:
       return state;

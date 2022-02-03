@@ -8,6 +8,8 @@ import {
   BATTALION_TWO_OVERRALL_FETCHED,
   BATTALION_ONE_OVERRALL_FETCHED,
   BATTALION_THREE_OVERRALL_FETCHED,
+  BATTALION_FOUR_OVERRALL_FETCHED,
+  BATTALION_FIVE_OVERRALL_FETCHED,
   BATTALION_TWO_QUERY_LOADING,
   BATTALION_SECTION_QUERY_LOADING,
   BATTALION_SECTION_QUERY_FETCHED,
@@ -17,9 +19,18 @@ import {
   BATTALION_ONE_DATA_FETCHED,
   BATTALION_THREE_DATA_LOADING,
   BATTALION_THREE_DATA_FETCHED,
+  BATTALION_FOUR_DATA_FETCHED,
+  BATTALION_FOUR_DATA_LOADING,
+  BATTALION_FIVE_DATA_LOADING,
+  BATTALION_FIVE_DATA_FETCHED,
   BATTALION3_DEPARTEMENT_QUERY_LOADING,
   BATTALION3_DEPARTEMENT_QUERY_FETCHED,
-  BATTALION3_DEPARTEMENT_QUERY_FAILED
+  BATTALION3_DEPARTEMENT_QUERY_FAILED,
+
+  BATTALION_GENERAL_DEPARTEMENT_QUERY_LOADING,
+  BATTALION_GENERAL_DEPARTEMENT_QUERY_FETCHED,
+  BATTALION_GENERAL_DEPARTEMENT_QUERY_FAILED
+
 } from './types';
 
 import { tokenConfig, global_url } from './auth';
@@ -108,6 +119,63 @@ export const battallion_three_fetch_data = () => (dispatch, getState) => {
     });
 };
 
+//  BATTALLION FIVE CREATE
+export const battallion_five_fetch_data = () => (dispatch, getState) => {
+  //Loading
+  dispatch({ type: BATTALION_FIVE_DATA_LOADING });
+
+  // const message = `${first_name}'s details have been saved in the database.`
+  axios
+    .get(`${global_url}/battallion_five/`, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      if (res.data.results) {
+        dispatch({
+          type: BATTALION_FIVE_DATA_FETCHED,
+          payload: res.data.results
+        });
+      }
+      // dispatch(create_api_message(message, "battallion_employee_created"));
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+      dispatch(returnError(err.response.data, err.response.status));
+      dispatch({
+        type: BATTALION_FIVE_DATA_FETCHED,
+        payload: null
+      });
+    });
+};
+
+
+//  BATTALLION FOUR CREATE
+export const battallion_four_fetch_data = () => (dispatch, getState) => {
+  //Loading
+  dispatch({ type: BATTALION_FOUR_DATA_LOADING });
+
+  // const message = `${first_name}'s details have been saved in the database.`
+  axios
+    .get(`${global_url}/battallion_four/`, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      if (res.data.results) {
+        dispatch({
+          type: BATTALION_FOUR_DATA_FETCHED,
+          payload: res.data.results
+        });
+      }
+      // dispatch(create_api_message(message, "battallion_employee_created"));
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+      dispatch(returnError(err.response.data, err.response.status));
+      dispatch({
+        type: BATTALION_FOUR_DATA_FETCHED,
+        payload: null
+      });
+    });
+};
+
 //  BATTALLION TWO CREATE
 export const battallion_two_query = (file_number) => (dispatch, getState) => {
   //Loading
@@ -138,7 +206,7 @@ export const battallion_two_query = (file_number) => (dispatch, getState) => {
 };
 
 //  BATTALLION TWO CREATE
-export const battallion_three_query = (file_number, department, low_level_incharge) => (dispatch, getState) => {
+export const battallion_three_query = (file_number, department, low_level_incharge, url) => (dispatch, getState) => {
   //Loading
   dispatch({ type: BATTALION_TWO_QUERY_LOADING });
 
@@ -146,15 +214,15 @@ export const battallion_three_query = (file_number, department, low_level_inchar
   const body = JSON.stringify({ file_number });
   // console.log(body)
 
-  console.log(low_level_incharge);
-  console.log(department);
+  // console.log(low_level_incharge);
+  // console.log(department);
 
   const error_message =
       "Employee with this file number doesn't exit in the database, please try again with a valid file number.";
   const error_message2 =
     'Your are not authorized to view data for this employee, Contact the admin for more information.';
   axios
-    .post(`${global_url}/battalionquery_three/`, body, tokenConfig(getState))
+    .post(`${global_url}/${url}/`, body, tokenConfig(getState))
     .then((res) => {
      if (res.data) {
        // console.log(res.data)
@@ -271,7 +339,7 @@ export const battallion_three_deprtmnt_query = (department) => (dispatch, getSta
   // console.log(body)
 
   const error_message =
-    "Section doesn't exit in the database, please try again with a valid file number.";
+    "Department doesn't exit in the database, please try again with a valid file number.";
   axios
     .post(`${global_url}/battalion3_section_query/`, body, tokenConfig(getState))
     .then((res) => {
@@ -289,6 +357,39 @@ export const battallion_three_deprtmnt_query = (department) => (dispatch, getSta
       dispatch({ type: BATTALION3_DEPARTEMENT_QUERY_FAILED });
     });
 };
+
+// battalion_general_department_query_loading
+// battalion_general_department_query
+
+//  BATTALLION GENERAL DEPARTEMENT QUERY
+export const battallion_general_deprtmnt_query = (department, url) => (dispatch, getState) => {
+  //Loading
+  dispatch({ type: BATTALION_GENERAL_DEPARTEMENT_QUERY_LOADING });
+
+  // Request Body
+  const body = JSON.stringify({ department });
+  // console.log(body)
+
+  const error_message =
+    "Department doesn't exit in the database, please try again with a valid file number.";
+  axios
+    .post(`${global_url}/${url}/`, body, tokenConfig(getState))
+    .then((res) => {
+      if (res.data) {
+        // console.log(res.data);
+        dispatch({
+          type: BATTALION_GENERAL_DEPARTEMENT_QUERY_FETCHED,
+          payload: res.data
+        });
+      }
+    })
+    .catch((err) => {
+      // console.log(err.response.data)
+      dispatch(create_api_message(error_message, 'battallion_query_fail'));
+      dispatch({ type: BATTALION_GENERAL_DEPARTEMENT_QUERY_FAILED });
+    });
+};
+
 
 //  BATTALLION TWO DATA SUMMARY
 export const battallion_two_overrall_data = () => (dispatch, getState) => {
@@ -335,6 +436,42 @@ export const battallion_three_overrall_data = () => (dispatch, getState) => {
       if (res.data) {
         dispatch({
           type: BATTALION_THREE_OVERRALL_FETCHED,
+          payload: res.data
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
+
+//  BATTALLION FOUR DATA SUMMARY
+export const battallion_four_overrall_data = () => (dispatch, getState) => {
+  axios
+    .get(`${global_url}/battalionfour_overrall/`, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      if (res.data) {
+        dispatch({
+          type: BATTALION_FOUR_OVERRALL_FETCHED,
+          payload: res.data
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
+
+//  BATTALLION FOUR DATA SUMMARY
+export const battallion_five_overrall_data = () => (dispatch, getState) => {
+  axios
+    .get(`${global_url}/battalionfive_overrall/`, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      if (res.data) {
+        dispatch({
+          type: BATTALION_FIVE_OVERRALL_FETCHED,
           payload: res.data
         });
       }

@@ -1,12 +1,24 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import Content from '../components/Content_Dashboard';
+import ContentDashboard from '../components/Content_Dashboard';
+import BattallionList from '../components/Battalion_two_list';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import Alert from '../../GlobalComponents/Alert';
+import { clear_messages } from '../../../actions/battallions_create';
+
+import { battallion_three_deprtmnt_query, battallion_general_deprtmnt_query } from '../../../actions/battallions_fetch.js';
+
+import { auth_message } from '../../../actions/auth.js';
+
+import Backdrop from '../../GlobalComponents/Backdrop.js';
+// import * as Scroll from 'react-scroll';
+// var scroll = Scroll.animateScroll;
 
 function Copyright() {
   return (
@@ -163,25 +175,81 @@ theme = {
   }
 };
 
-export default function Dashboard() {
+function Dashboard(props) {
   // Implementation code
+  const [tab_value, setTab_value] = React.useState(0);
+  const [section, setSection] = React.useState(null);
   // const [tab_value, setTab_value] = React.useState(0);
 
-  // const set_tab_0 = () => {
-  //   setTab_value(0)
-  // }
+  const set_tab_0 = () => {
+    setTab_value(0);
+  };
+
+  const control_bool_api_message = () => {
+    props.clear_messages();
+  };
+
+  const get_section = (department) => {
+    console.log(department)
+    setSection(department);
+    const url = "battalion2_department_query"
+    // true
+    // false
+    // in_charge
+    // None
+    // if (props.auth.user.top_level_incharge === true || props.auth.user.account_type === 'admin') {
+    if (props.auth.user) {
+      // props.battallion_three_deprtmnt_query(department);
+      props.battallion_general_deprtmnt_query(department, url);
+      setTab_value(1);
+    }
+    // if (props.auth.user.lower_level_incharge === true) {
+    //   console.log(props.auth.user.department)
+    //   if (props.auth.user.department === department) {
+    //     props.battallion_general_deprtmnt_query(department, url);
+    //     setTab_value(1);
+    //   } else {
+    //     scroll.scrollToTop();
+    //     const key_word = "department"
+    //     props.auth_message(key_word);
+    //     console.log("You are allowed not to view this Section's data");
+    //   }
+    // }
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
-          <Tabs value={0} textColor="inherit">
-            <Tab label="Program summary" />
+          <Tabs value={tab_value} textColor="inherit">
+            <Tab onClick={set_tab_0} label="Program summary" />
+            <Tab disabled={tab_value === 0 ? true : false} label="Section data" />
           </Tabs>
         </AppBar>
         <Box component="main" sx={{ flex: 1, py: 3, px: 4, bgcolor: '#eaeff1' }}>
+          {props.messages.api_message !== null &&
+          props.messages.message_type === 'user_error_section_data_access' ? (
+            <Alert
+              content={props.messages.api_message}
+              control_bool={control_bool_api_message}
+              status="info"
+            />
+          ) : null}
           {/* Render conditionally */}
-          <Content />
+          {tab_value === 0 ? <ContentDashboard get_child_section={get_section} /> : null}
+
+          {tab_value === 1 ? (
+            <div>
+              {props.data !== null ? (
+                <BattallionList
+                  section_title={section}
+                  data={props.data !== null ? props.data : null}
+                />
+              ) : (
+                <Backdrop />
+              )}
+            </div>
+          ) : null}
         </Box>
         <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
           <Copyright />
@@ -190,3 +258,19 @@ export default function Dashboard() {
     </ThemeProvider>
   );
 }
+
+const mapStateToProps = (state) => ({
+  messages: state.messages,
+  auth: state.auth,
+  error: state.errors,
+  data: state.battallions_fetch.battalion_general_department_query ,
+  // general_data: state.battallions_fetch.battalion_general_department_query 
+
+});
+
+export default connect(mapStateToProps, {
+  battallion_three_deprtmnt_query,
+  battallion_general_deprtmnt_query,
+  auth_message,
+  clear_messages
+})(Dashboard);

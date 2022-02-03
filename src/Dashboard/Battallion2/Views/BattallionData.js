@@ -252,6 +252,7 @@ function BattallionData(props) {
           {/* Render conditionally */}
           {tab_value === 0 ? (
             <BattallionList
+              section_title={null}
               refetch_data={refetch_data}
               data={props.data !== null ? props.data : null}
             />

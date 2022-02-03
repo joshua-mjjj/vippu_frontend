@@ -334,7 +334,7 @@ function StartPage(props) {
     props.check_user_type(user_id);
   };
 
-  if (props.auth.user_type === 'admin' || props.auth.user_type === 'in_charge') {
+  if (props.auth.user_type === 'admin' || props.auth.user_type === 'in_charge' || props.auth.user_type === 'commander') {
     return <Redirect to="/login" />;
   }
   if (props.auth.user_type === 'none') {

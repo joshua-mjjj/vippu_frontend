@@ -8,7 +8,10 @@ import BattallionEdit from './Battallion_edit';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { battallion_two_fetch_detail } from '../../../actions/battallions_detail';
+import { battallion_one_fetch_detail, 
+  battallion_three_fetch_detail,
+  battallion_general_fetch_detail
+} from '../../../actions/battallions_detail';
 import DeleteReason from './DeleteReason';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,16 +39,19 @@ function Battalion_two_list(props) {
   const [show_edit, showEdit] = React.useState(false);
   const [disable, setDisable] = React.useState(true);
   const battalion = "battallion_two"
+  const battalion_url = "battallion_two"
 
   React.useEffect(() => {
     if(props.auth.user.top_level_incharge && props.detail_data !== null){
-        setDisable(false)
+        setDisable(false) // Delete will be disabled if you do not have access rights.
     }
   }, [props.auth, props.detail_data]);
 
   const send_detail_id = (id) => {
     setToggle(true);
-    props.battallion_two_fetch_detail(id);
+    // props.battallion_one_fetch_detail(id);
+    // props.battallion_three_fetch_detail(id);
+    props.battallion_general_fetch_detail(id, battalion_url);
   };
 
   const toggle_UI = () => {
@@ -60,6 +66,7 @@ function Battalion_two_list(props) {
     showEdit(false);
   };
 
+
   return (
     <Box
       sx={{
@@ -72,8 +79,14 @@ function Battalion_two_list(props) {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             {show_detail === false ? (
-              <Card variant="outlined" className={classes.title} >
-                <CardHeader title={`Employees total: ${props.data.length}`} />
+              <Card variant="outlined" className={classes.title}>
+                <CardHeader
+                  title={
+                    props.section_title !== null
+                      ? `${props.section_title} total: ${props.data.length}`
+                      : `Employees total: ${props.data.length}`
+                  }
+                />
                 <Divider />
                 <OrdersTable data={props.data} send_detail_id={send_detail_id} />
               </Card>
@@ -96,7 +109,12 @@ function Battalion_two_list(props) {
                         }}
                       >
                         <span
-                          className={classes.span}>
+                          style={{
+                            fontSize: '23px',
+                            fontFamily: 'Dosis',
+                            fontWeight: '800'
+                          }}
+                        >
                           {' '}
                           Employee details{' '}
                         </span>
@@ -111,19 +129,18 @@ function Battalion_two_list(props) {
                       </Button>
                       <Button
                         onClick={toggle_edit_UI}
-                        disabled={!(localStorage.getItem("deleted")) ? false : true}
+                        disabled={!(localStorage.getItem("deleted")) ? false : true }
                         variant="outlined"
                         sx={{ marginRight: '20px', marginTop: '15px' }}
                       >
-                        <span
-                          className={classes.span2}>
+                        <span className={classes.span2}>
                           Edit
                         </span>
                       </Button>
                       <DeleteReason disabled={disable} battalion={battalion} employee={props.detail_data}/>
-                      {/*<Button
+                      {/* <Button
                         // onClick={toggle_UI}
-                        disabled={disable}
+                        disabled
                         variant="outlined"
                         sx={{ marginRight: '20px', marginTop: '15px' }}
                       >
@@ -138,7 +155,6 @@ function Battalion_two_list(props) {
                           Delete
                         </span>
                       </Button>*/}
-
                     </Box>
 
                     {/* Detail component */}
@@ -153,7 +169,6 @@ function Battalion_two_list(props) {
                   </div>
                 ) : (
                   <div>
-
                     <Box
                       sx={{
                         alignItems: 'center',
@@ -213,10 +228,13 @@ const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
   error: state.errors,
-  loading: state.battallions_detail.battalion_two_data_detail_loading,
-  detail_data: state.battallions_detail.battalion_two_detail_data
+
+  loading: state.battallions_detail.battalion_general_data_detail_loading,
+  detail_data: state.battallions_detail.battalion_general_detail_data
 });
 
 export default connect(mapStateToProps, {
-  battallion_two_fetch_detail
+  battallion_one_fetch_detail,
+  battallion_three_fetch_detail,
+  battallion_general_fetch_detail
 })(Battalion_two_list);

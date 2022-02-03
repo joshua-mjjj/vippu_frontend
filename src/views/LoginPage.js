@@ -425,6 +425,7 @@ function SignInSide(props) {
             </Avatar>
             <Typography component="h1" variant="h5" className={classes.title}>
               {user_type === 'admin' ? 'Admin Sign in' : null}
+              {user_type === 'commander' ? 'Commander Sign in' : null}
               {user_type === 'in_charge' ? 'In Charge Sign in' : null}
             </Typography>
             <form className={classes.form} noValidate>

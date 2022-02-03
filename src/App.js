@@ -19,7 +19,6 @@ class App extends Component {
     if (token) {
       store.dispatch(loadUser());
       // store.dispatch(battallion_two_overrall_data());
-      console.log('Calling');
     }
   }
 

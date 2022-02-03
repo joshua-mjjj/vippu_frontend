@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormLabel from '@mui/material/FormLabel';
 import { connect } from 'react-redux';
 import { Box, Container, Grid } from '@mui/material';
-import { SummaryItem } from '../../GlobalComponents/summary-item';
+// import { SummaryItem } from '../../GlobalComponents/summary-item';
+import { Summary } from './summary';
 import HouseSidingIcon from '@mui/icons-material/HouseSiding';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import FlagIcon from '@mui/icons-material/Flag';
@@ -89,6 +90,12 @@ function Content_Dashboard(props) {
         }
       ]);
 
+    // Getting department
+    const get_section = (section) => {
+      // onsole.log(section)
+      props.get_child_section(section);
+    };
+
   return (
     <Box
       sx={{
@@ -106,7 +113,13 @@ function Content_Dashboard(props) {
         <Grid container spacing={1}>
           {stats.map((item) => (
             <Grid item key={item.label} md={4} xs={12}>
-              <SummaryItem content={item.content} icon={item.icon} label={item.label} />
+              {/*<SummaryItem content={item.content} icon={item.icon} label={item.label} />*/}
+              <Summary
+                get_section={get_section}
+                content={item.content}
+                icon={item.icon}
+                label={item.label}
+              />
             </Grid>
           ))}
         </Grid>

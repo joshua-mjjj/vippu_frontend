@@ -30,12 +30,14 @@ function Findemploye(props) {
 
   const handle_submit = () => {
     if (input) {
+      const url = "battalionquery_three"
       // console.log(input)
       const trimmed_input = input.trim();
       props.battallion_three_query(
         trimmed_input,
         props.auth.user.department,
-        props.auth.user.lower_level_incharge
+        props.auth.user.lower_level_incharge,
+        url
       );
     } else return;
   };

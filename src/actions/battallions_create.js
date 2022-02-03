@@ -17,7 +17,9 @@ import {
   DELETE_LOADED,
   DELETE_FALIED,
   BATTALLION_THREE_CREATE_LOADING,
-  BATTALLION_THREE_CREATED
+  BATTALLION_THREE_CREATED,
+  BATTALLION_GENERAL_CREATE_LOADING,
+  BATTALLION_GENERAL_CREATED
 
 } from './types';
 
@@ -255,7 +257,6 @@ export const battallion_three_update =
   (dispatch, getState) => {
     //Loading
     dispatch({ type: BATTALLION_THREE_CREATE_LOADING });
-
     // Request Body
     const body = JSON.stringify({
       first_name,
@@ -309,6 +310,107 @@ export const battallion_three_update =
         dispatch(returnError(err.response.data, err.response.status));
         dispatch({
           type: BATTALLION_THREE_CREATED
+        });
+      });
+  };
+
+
+//  BATTALLION GENERAL UPDATE
+export const battallion_general_update =
+  ( 
+    battallion_url,
+    id,
+    first_name,
+    last_name,
+    nin,
+    ipps,
+    file_number,
+    tin_number,
+    battallion,
+    account_number,
+    contact,
+    sex,
+    rank,
+    education_level,
+    other_education_level,
+    bank,
+    branch,
+    department,
+    title,
+    status,
+    shift,
+    date_of_enlistment,
+    date_of_transfer,
+    date_of_promotion,
+    date_of_birth,
+    armed,
+    section,
+    location,
+    on_leave,
+    leave_start_date,
+    leave_end_date,
+    notify_leave,
+    notify_special_duty,
+    special_duty_start_date,
+    special_duty_end_date
+  ) =>
+  (dispatch, getState) => {
+    //Loading
+    dispatch({ type: BATTALLION_GENERAL_CREATE_LOADING });
+
+    // Request Body
+    const body = JSON.stringify({
+      first_name,
+      last_name,
+      nin,
+      ipps,
+      file_number,
+      tin_number,
+      battallion,
+      account_number,
+      contact,
+      sex,
+      rank,
+      education_level,
+      other_education_level,
+      bank,
+      branch,
+      department,
+      title,
+      status,
+      shift,
+      date_of_enlistment,
+      date_of_transfer,
+      date_of_promotion,
+      date_of_birth,
+      armed,
+      section,
+      location,
+      on_leave,
+      leave_start_date,
+      leave_end_date,
+      notify_leave,
+      notify_special_duty,
+      special_duty_start_date,
+      special_duty_end_date
+    });
+    // console.log(body)
+    const message = `${first_name}'s details have successfully been updated in the database.`;
+    axios
+      .put(`${global_url}/${battallion_url}/${id}/`, body, tokenConfig(getState))
+      .then((res) => {
+        // console.log(res.data)
+        dispatch({
+          type: BATTALLION_GENERAL_CREATED,
+          payload: res.data
+        });
+        dispatch(create_api_message(message, 'battallion_employee_created'));
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        dispatch(returnError(err.response.data, err.response.status));
+        dispatch({
+          type: BATTALLION_GENERAL_CREATED
         });
       });
   };
