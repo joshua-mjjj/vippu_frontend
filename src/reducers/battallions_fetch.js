@@ -6,6 +6,7 @@ import {
   BATTALION_THREE_OVERRALL_FETCHED,
   BATTALION_FOUR_OVERRALL_FETCHED,
   BATTALION_FIVE_OVERRALL_FETCHED,
+  BATTALION_SIX_OVERRALL_FETCHED,
   BATTALION_TWO_QUERY_LOADING,
   BATTALION_TWO_QUERY_FETCHED,
   BATTALION_TWO_QUERY_FAILED,
@@ -22,6 +23,9 @@ import {
 
   BATTALION_FIVE_DATA_LOADING,
   BATTALION_FIVE_DATA_FETCHED,
+
+  BATTALION_SIX_DATA_LOADING,
+  BATTALION_SIX_DATA_FETCHED,
 
   BATTALION3_DEPARTEMENT_QUERY_LOADING,
   BATTALION3_DEPARTEMENT_QUERY_FETCHED,
@@ -58,10 +62,15 @@ const initialState = {
   battalion_four_data: false,
   battalion_four_overrall_data: null,
 
-  // battalion four
+  // battalion five
   battalion_five_data_loading: false,
   battalion_five_data: null,
   battalion_five_overrall_data: null,
+
+  //battalion six 
+  battalion_six_data_loading: false,
+  battalion_six_data: null,
+  battalion_six_overrall_data: null,
 
   // general 
   battalion_general_department_query_loading: false,
@@ -129,6 +138,11 @@ export default function battallions_fetch(state = initialState, action) {
         ...state,
         battalion_five_data_loading: true
       };
+    case BATTALION_SIX_DATA_LOADING:
+      return {
+        ...state,
+        battalion_six_data_loading: true
+      };
     case BATTALION_TWO_DATA_FETCHED:
       return {
         ...state,
@@ -158,6 +172,12 @@ export default function battallions_fetch(state = initialState, action) {
         ...state,
         battalion_five_data: action.payload,
         battalion_five_data_loading: false
+      };
+    case BATTALION_SIX_DATA_FETCHED:
+      return {
+        ...state,
+        battalion_six_data: action.payload,
+        battalion_six_data_loading: false
       };
     case BATTALION_TWO_QUERY_LOADING:
       return {
@@ -209,6 +229,11 @@ export default function battallions_fetch(state = initialState, action) {
     return {
       ...state,
       battalion_five_overrall_data: action.payload
+    };
+  case BATTALION_SIX_OVERRALL_FETCHED:
+    return {
+      ...state,
+      battalion_six_overrall_data: action.payload
     };
     default:
       return state;

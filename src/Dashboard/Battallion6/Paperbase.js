@@ -21,6 +21,8 @@ import Profile from './Views/Profile';
 
 import {
   battallion_five_fetch_data,
+  battallion_six_fetch_data,
+  battallion_six_overrall_data,
   battallion_five_overrall_data
 } from '../../actions/battallions_fetch.js';
 
@@ -188,7 +190,9 @@ function Paperbase(props) {
   React.useEffect(() => {
     // console.log("Fetching dashboard data before rendering... ")
     props.battallion_five_fetch_data();
+    props.battallion_six_fetch_data();
     props.battallion_five_overrall_data();
+    props.battallion_six_overrall_data();
   }, [props]);
 
   return (
@@ -265,5 +269,7 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   battallion_five_fetch_data,
+  battallion_six_fetch_data,
+  battallion_six_overrall_data,
   battallion_five_overrall_data
 })(Paperbase);

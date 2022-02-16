@@ -27,8 +27,8 @@ import Alert from '../../GlobalComponents/Alert';
 import Spinner from '../../../components/Spinner';
 
 import {
-  battallion_one_create,
-  battallion_general_create,
+  battallion_one_update,
+  battallion_general_update,
   clear_messages,
   clear_errors
 } from '../../../actions/battallions_create';
@@ -103,67 +103,89 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Content_Newentry(props) {
+function Battallion_edit(props) {
   const classes = useStyles();
-
+  const { employee } = props;
   // Implementaion code
 
-  const [first_name, setFirst_name] = React.useState(null);
-  const [last_name, setLast_name] = React.useState(null);
-  const [nin, setNin] = React.useState(null);
-  const [ipps, setIpps] = React.useState(null);
-  const [file_number, setFile_number] = React.useState(null);
-  const [tin_number, setTin_number] = React.useState(null);
-  const [account_number, setAccount_number] = React.useState(null);
-  const [bank, setBank] = React.useState(null);
-  const [branch, setBranch] = React.useState(null);
-  const [contact, setContact] = React.useState(null);
-  const [sex, setSex] = React.useState(null);
+  const [first_name, setFirst_name] = React.useState(employee.first_name);
+  const [last_name, setLast_name] = React.useState(employee.last_name);
+  const [nin, setNin] = React.useState(employee.nin);
+  const [ipps, setIpps] = React.useState(employee.ipps);
+  const [file_number, setFile_number] = React.useState(employee.file_number);
+  const [tin_number, setTin_number] = React.useState(employee.tin_number);
+  const [account_number, setAccount_number] = React.useState(employee.account_number);
+  const [bank, setBank] = React.useState(employee.bank);
+  const [branch, setBranch] = React.useState(employee.branch);
+  const [contact, setContact] = React.useState(employee.contact);
+  const [sex, setSex] = React.useState(employee.sex);
 
-  const [department, setDepartment] = React.useState(null);
-  const [section, setSection] = React.useState(null);
-  const [location, setLocation] = React.useState(null);
+  const [department, setDepartment] = React.useState(employee.department);
+  const [section, setSection] = React.useState(employee.section);
+  const [location, setLocation] = React.useState(employee.location);
 
-  const [education_level, setEducation_level] = React.useState(null);
-  const [education_level_other, setOtherEducation_level] = React.useState(null);
-  const [other_education_level, setEducation_level_bool] = React.useState(true);
+  const [education_level, setEducation_level] = React.useState(employee.education_level);
+  const [education_level_other, setOtherEducation_level] = React.useState(
+    employee.other_education_level
+  );
+  const [other_education_level, setEducation_level_bool] = React.useState(
+    employee.education_level === 'Other' ? false : true
+  );
 
-  const [armed, setArmed] = React.useState(null);
-  const [rank, setRank] = React.useState(null);
-  const [title, setTitle] = React.useState(null);
-  const [shift, setShift] = React.useState(null);
-  const [status, setStatus] = React.useState(null);
-  const [date_pickers_enabled, setEnable_date_pickers] = React.useState(true);
-  const [date_promotion_enabled, setEnable_promotion_pickers] = React.useState(true);
+  const [armed, setArmed] = React.useState(employee.armed);
+  const [rank, setRank] = React.useState(employee.rank);
+  const [title, setTitle] = React.useState(employee.title);
+  const [shift, setShift] = React.useState(employee.shift);
+  const [status, setStatus] = React.useState(employee.status);
 
-  const [date_of_enlistment, setDate_of_enlistment] = React.useState(new Date());
+  const [date_of_enlistment, setDate_of_enlistment] = React.useState(
+    new Date(employee.date_of_enlistment)
+  );
   const [date_of_enlistment_data, setDate_of_enlistment_data] = React.useState(null);
 
-  const [date_of_transfer, setDate_of_transfer] = React.useState(new Date());
+  const [date_of_transfer, setDate_of_transfer] = React.useState(
+    new Date(employee.date_of_transfer)
+  );
   const [date_of_transfer_data, setDate_of_transfer_data] = React.useState(null);
 
-  const [date_of_promotion, setDate_of_promotion] = React.useState(new Date());
+  const [date_of_promotion, setDate_of_promotion] = React.useState(
+    new Date(employee.date_of_promotion)
+  );
   const [date_of_promotion_data, setDate_of_promotion_data] = React.useState(null);
 
-  const [date_of_birth, setDate_of_birth] = React.useState(new Date());
+  const [date_of_birth, setDate_of_birth] = React.useState(new Date(employee.date_of_birth));
   const [date_of_birth_data, setDate_of_birth_data] = React.useState(null);
 
-  const [on_leave, setOnLeave] = React.useState(null);
-  const [leave_start, setLeave_start] = React.useState(new Date());
+  const [date_promotion_enabled, setEnable_promotion_pickers] = React.useState(
+    employee.date_of_promotion === null ? true : false
+  );
+  const [date_pickers_enabled, setEnable_date_pickers] = React.useState(
+    employee.on_leave === 'Not on leave' ? true : false
+  );
+  const [on_leave, setOnLeave] = React.useState(employee.on_leave);
+
+  const [leave_start, setLeave_start] = React.useState(
+    new Date(employee.on_leave !== 'Not on leave' ? employee.leave_start_date : null)
+  );
   const [leave_start_data, setLeave_start_data] = React.useState(null);
 
-  const [leave_end, setLeave_end] = React.useState(new Date());
+  const [leave_end, setLeave_end] = React.useState(
+    new Date(employee.on_leave !== 'Not on leave' ? employee.leave_end_date : null)
+  );
   const [leave_end_data, setLeave_end_data] = React.useState(null);
 
+  const [show_alert, setShow_alert] = React.useState(false);
+  const [notify_leave, setNotify_leave] = React.useState(employee.notify_leave);
+
+  const [notify_special_duty, setNotify_Special_duty] = React.useState(employee.notify_special_duty);
+
   //Special duty
-  const [special_duty, setSpecial] = React.useState(false);
-  const [special_duty_start, setSpecialDuty_start] = React.useState(new Date());
+  const [special_duty, setSpecial] = React.useState(employee.status === "Special duty" ? true : false);
+  const [special_duty_start, setSpecialDuty_start] = React.useState(employee.special_duty_start_date === null ? new Date() : new Date(employee.special_duty_start_date));
   const [special_duty_start_data, setSpecialDuty_start_data] = React.useState(null);
 
-  const [special_duty_end, setSpecialDuty_end] = React.useState(new Date());
+  const [special_duty_end, setSpecialDuty_end] = React.useState(employee.special_duty_end_date === null ? new Date() : new Date(employee.special_duty_end_date));
   const [special_duty_end_data, setSpecialDuty_end_data] = React.useState(null);
-
-  const [show_alert, setShow_alert] = React.useState(false);
 
   // eslint-disable-next-line
   const [battallion, setBattallion] = React.useState("Battalion 1");  // We already know this is Battallion 2 form
@@ -180,10 +202,131 @@ function Content_Newentry(props) {
     setTitle(e.target.value);
   };
 
+  const handle_Shift_Change = (e) => {
+    setShift(e.target.value);
+  };
+
+  const handle_Status_Change = (e) => {
+    setNotify_Special_duty(false)
+    if(e.target.value === "Special duty"){
+      setSpecial(true)
+      setStatus(e.target.value);
+    }else{
+      setSpecial(false)
+      setStatus(e.target.value);
+      setSpecialDuty_start_data(null)
+      setSpecialDuty_end_data(null)
+    } 
+  };
+
+  const handle_education_level_change = (e) => {
+    if (e.target.value === 'Other') {
+      setEducation_level_bool(false);
+      setEducation_level(e.target.value);
+    } else {
+      setEducation_level_bool(true);
+      setOtherEducation_level(null);
+      setEducation_level(e.target.value);
+    }
+  };
+
+  const handle_other_education_level = (e) => {
+    setOtherEducation_level(e.target.value);
+  };
+
+  const handle_date_of_enlistment_Change = (e) => {
+    // console.log(e)
+    setDate_of_enlistment(e);
+    let dt = new Date(e);
+    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+    //console.log(date_object)
+    setDate_of_enlistment_data(date_object);
+  };
+
+  const handle_date_of_transfer = (e) => {
+    // console.log(e)
+    setDate_of_transfer(e);
+    let dt = new Date(e);
+    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+    //console.log(date_object)
+    setDate_of_transfer_data(date_object);
+  };
+
+  const handle_date_of_promotion = (e) => {
+    // console.log(e)
+    setDate_of_promotion(e);
+    let dt = new Date(e);
+    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+    //console.log(date_object)
+    setDate_of_promotion_data(date_object);
+  };
+
+  const handle_date_of_birth = (e) => {
+    // console.log(e)
+    setDate_of_birth(e);
+    let dt = new Date(e);
+    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+    //console.log(date_object)
+    setDate_of_birth_data(date_object);
+  };
+
+  const handle_leave_start = (e) => {
+    setNotify_leave(false);
+    // console.log(e)
+    setLeave_start(e);
+    let dt = new Date(e);
+    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+    //console.log(date_object)
+    setLeave_start_data(date_object);
+  };
+
+  const handle_special_start = (e) => {
+    // console.log(e)
+    setNotify_Special_duty(false)
+    setSpecialDuty_start(e);
+    let dt = new Date(e);
+    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+    setSpecialDuty_start_data(date_object);
+  };
+
+  const handle_special_end = (e) => {
+    setNotify_Special_duty(false)
+    // console.log(e)
+    setSpecialDuty_end(e);
+    let dt = new Date(e);
+    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+    setSpecialDuty_end_data(date_object);
+  };
+
+  const handle_leave_end = (e) => {
+    // console.log(e)
+    setNotify_leave(false);
+    setLeave_end(e);
+    let dt = new Date(e);
+    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+    //console.log(date_object)
+    setLeave_end_data(date_object);
+  };
+
+  const get_section_value = (section_value) => {
+    console.log(section_value);
+    setSection(section_value);
+  };
+
+  const get_location_value = (location_value) => {
+    //console.log(location_value)
+    setLocation(location_value);
+  };
+
+  let leave_start_sub = null;
+  let leave_end_sub = null;
   const handle_Leave_Change = (e) => {
+    setNotify_leave(false);
     if (e.target.value === 'Not on leave') {
       setEnable_date_pickers(true);
       setOnLeave(e.target.value);
+      leave_start_sub = null;
+      leave_end_sub = null;
     } else {
       setEnable_date_pickers(false);
       setOnLeave(e.target.value);
@@ -199,144 +342,14 @@ function Content_Newentry(props) {
     }
   };
 
-  const handle_Shift_Change = (e) => {
-    setShift(e.target.value);
-  };
-
-  const handle_Status_Change = (e) => {
-    if(e.target.value === "Special duty"){
-      setSpecial(true)
-      setStatus(e.target.value);
-    }else{
-      setSpecial(false)
-      setStatus(e.target.value);
-    }
-    
-  };
-
-  const handle_education_level_change = (e) => {
-    if (e.target.value === 'Other') {
-      setEducation_level_bool(false);
-      setEducation_level(e.target.value);
-    } else {
-      setEducation_level_bool(true);
-      setEducation_level(e.target.value);
-    }
-  };
-
-  const handle_other_education_level = (e) => {
-    setOtherEducation_level(e.target.value);
-  };
-
-  const handle_date_of_enlistment_Change = (e) => {
-    // console.log(e)
-    setDate_of_enlistment(e);
-    let dt = new Date(e);
-    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    setDate_of_enlistment_data(date_object);
-  };
-
-  const handle_date_of_transfer = (e) => {
-    // console.log(e)
-    setDate_of_transfer(e);
-    let dt = new Date(e);
-    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    setDate_of_transfer_data(date_object);
-  };
-
-  const handle_date_of_promotion = (e) => {
-    // console.log(e)
-    if (date_promotion_enabled === false) {
-      setDate_of_promotion(e);
-      let dt = new Date(e);
-      let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-      setDate_of_promotion_data(date_object);
-    }
-  };
-
-  const handle_date_of_birth = (e) => {
-    // console.log(e)
-    setDate_of_birth(e);
-    let dt = new Date(e);
-    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    setDate_of_birth_data(date_object);
-  };
-
-  const handle_leave_start = (e) => {
-    // console.log(e)
-    setLeave_start(e);
-    let dt = new Date(e);
-    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    setLeave_start_data(date_object);
-  };
-
-  const handle_special_start = (e) => {
-    // console.log(e)
-    setSpecialDuty_start(e);
-    let dt = new Date(e);
-    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    setSpecialDuty_start_data(date_object);
-  };
-
-  const handle_special_end = (e) => {
-    // console.log(e)
-    setSpecialDuty_end(e);
-    let dt = new Date(e);
-    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    setSpecialDuty_end_data(date_object);
-  };
-
-  const handle_leave_end = (e) => {
-    // console.log(e)
-    setLeave_end(e);
-    let dt = new Date(e);
-    let date_object = `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-    setLeave_end_data(date_object);
-  };
-
-  const get_section_value = (section_value) => {
-    console.log(section_value);
-    setSection(section_value);
-  };
-
-  const get_location_value = (location_value) => {
-    console.log(location_value);
-    setLocation(location_value);
-  };
-
-  const clearState = () => {
-    setFirst_name('');
-    setLast_name('');
-    setNin('');
-    setIpps('');
-    setFile_number('');
-    setTin_number('');
-    setAccount_number('');
-    setBank(null);
-    setBranch('');
-    setContact('');
-    setSex(null);
-    setDepartment(null);
-    // setSection(null)
-    // setLocation(null)
-    setEducation_level(null);
-    setOtherEducation_level(null);
-    setArmed(null);
-    setRank(null);
-    setTitle(null);
-    setShift(null);
-    setStatus(null);
-    setOnLeave(null);
-  };
-
   const handle_submit_data = (e) => {
     const current_date = new Date();
 
     let date_of_enlistment_sub;
     if (date_of_enlistment_data === null) {
-      let date_object = `${current_date.getFullYear()}-${
-        current_date.getMonth() + 1
-      }-${current_date.getDate()}`;
+      let date_object = `${date_of_enlistment.getFullYear()}-${
+        date_of_enlistment.getMonth() + 1
+      }-${date_of_enlistment.getDate()}`;
       date_of_enlistment_sub = date_object;
     } else {
       date_of_enlistment_sub = date_of_enlistment_data;
@@ -344,9 +357,9 @@ function Content_Newentry(props) {
 
     let date_of_transfer_sub;
     if (date_of_transfer_data === null) {
-      let date_object = `${current_date.getFullYear()}-${
-        current_date.getMonth() + 1
-      }-${current_date.getDate()}`;
+      let date_object = `${date_of_transfer.getFullYear()}-${
+        date_of_transfer.getMonth() + 1
+      }-${date_of_transfer.getDate()}`;
       date_of_transfer_sub = date_object;
     } else {
       date_of_transfer_sub = date_of_transfer_data;
@@ -354,9 +367,9 @@ function Content_Newentry(props) {
 
     let date_of_promotion_sub;
     if (date_of_promotion_data === null && date_promotion_enabled === false) {
-      let date_object = `${current_date.getFullYear()}-${
-        current_date.getMonth() + 1
-      }-${current_date.getDate()}`;
+      let date_object = `${date_of_promotion.getFullYear()}-${
+        date_of_promotion.getMonth() + 1
+      }-${date_of_promotion.getDate()}`;
       date_of_promotion_sub = date_object;
     } else {
       if (date_promotion_enabled === false) {
@@ -368,22 +381,12 @@ function Content_Newentry(props) {
 
     let date_of_birth_sub;
     if (date_of_birth_data === null) {
-      let date_object = `${current_date.getFullYear()}-${
-        current_date.getMonth() + 1
-      }-${current_date.getDate()}`;
+      let date_object = `${date_of_birth.getFullYear()}-${
+        date_of_birth.getMonth() + 1
+      }-${date_of_birth.getDate()}`;
       date_of_birth_sub = date_object;
     } else {
       date_of_birth_sub = date_of_birth_data;
-    }
-
-    let leave_start_sub = null;
-    if (leave_start_data === null && on_leave !== 'Not on leave') {
-      let date_object = `${current_date.getFullYear()}-${
-        current_date.getMonth() + 1
-      }-${current_date.getDate()}`;
-      leave_start_sub = date_object;
-    } else {
-      leave_start_sub = leave_start_data;
     }
 
     let special_start_sub = null;
@@ -395,17 +398,7 @@ function Content_Newentry(props) {
     } else {
       special_start_sub = special_duty_start_data;
     }
-
-    let leave_end_sub = null;
-    if (leave_end_data === null && on_leave !== 'Not on leave') {
-      let date_object = `${current_date.getFullYear()}-${
-        current_date.getMonth() + 1
-      }-${current_date.getDate()}`;
-      leave_end_sub = date_object;
-    } else {
-      leave_end_sub = leave_end_data;
-    }
-
+    
     let special_end_sub = null;
     if (special_duty_end_data === null && status === "Special duty") {
       let date_object = `${current_date.getFullYear()}-${
@@ -416,52 +409,54 @@ function Content_Newentry(props) {
       special_end_sub = special_duty_end_data;
     }
 
-    const battallion_value = 'battallion_five'; // Battallion 3 form, hence we do alittle bit of hard coding
-    const battallion_url = 'battallion_five';
-    // Create an employee
-    e.preventDefault();
+    if (leave_start_data === null && on_leave !== 'Not on leave') {
+      let date_object = `${current_date.getFullYear()}-${
+        current_date.getMonth() + 1
+      }-${current_date.getDate()}`;
+      leave_start_sub = date_object;
+    } else {
+      leave_start_sub = leave_start_data;
+    }
+
+    if (leave_end_data === null && on_leave !== 'Not on leave') {
+      let date_object = `${current_date.getFullYear()}-${
+        current_date.getMonth() + 1
+      }-${current_date.getDate()}`;
+      leave_end_sub = date_object;
+    } else {
+      leave_end_sub = leave_end_data;
+    }
+
+    const battallion_value = 'battallion_six'; // Battallion 3 form, hence we do alittle bit of hard coding
+    const battallion_url = 'battallion_six';
+    // update an employee
+    // e.preventDefault()
     if (
       department !== null &&
-      department !== '' &&
       rank !== null &&
-      rank !== '' &&
       title !== null &&
-      title !== '' &&
       shift !== null &&
-      shift !== '' &&
       status !== null &&
-      status !== '' &&
       on_leave !== null &&
-      on_leave !== '' &&
       first_name !== null &&
-      first_name !== '' &&
       last_name !== null &&
-      last_name !== '' &&
       nin !== null &&
-      nin !== '' &&
       ipps !== null &&
-      ipps !== '' &&
       file_number !== null &&
-      file_number !== '' &&
-      tin_number !== null &&
-      tin_number !== '' &&
+      // tin_number !== null &&
       // account_number !== null && // can be null
       // bank !== null && // can be null
       // branch !== null && // can be null
       // contact !== null && // can be null
       sex !== null &&
-      sex !== '' &&
       education_level !== null &&
-      education_level !== '' &&
       armed !== null &&
-      armed !== '' &&
       section !== null &&
-      section !== '' &&
-      location !== null &&
-      location !== ''
+      location !== null
     ) {
-      props.battallion_general_create(
+      props.battallion_general_update(
         battallion_url,
+        employee.id,
         first_name,
         last_name,
         nin,
@@ -491,10 +486,11 @@ function Content_Newentry(props) {
         on_leave,
         leave_start_sub,
         leave_end_sub,
+        notify_leave,
+        notify_special_duty,
         special_start_sub,
         special_end_sub
       );
-      clearState();
     } else {
       setShow_alert(true);
     }
@@ -526,10 +522,10 @@ function Content_Newentry(props) {
             <Input
               placeholder="First name * "
               fullWidth
-              autoFocus
-              autoComplete
               value={first_name}
               disableUnderline
+              autoFocus
+              autoComplete
               onChange={(e) => setFirst_name(e.target.value)}
               className={classes.inputSmall}
             />
@@ -814,20 +810,38 @@ function Content_Newentry(props) {
               className={classes.inputSmall_}
               onChange={handle_Department_Change}
             >
-              <MenuItem value="UCC">UCC</MenuItem>
-              <MenuItem value="EC">EC</MenuItem>
-              <MenuItem value="IRA">IRA</MenuItem>
-              <MenuItem value="URA">URA</MenuItem>
-              <MenuItem value="UNRA">UNRA</MenuItem>
-              <MenuItem value="NPA">NPA</MenuItem>
-              <MenuItem value="ULC">ULC</MenuItem>
-              <MenuItem value="PSC">PSC</MenuItem>
-              <MenuItem value="NSSF">NSSF</MenuItem>
-              <MenuItem value="KCCA">KCCA</MenuItem>
-              <MenuItem value="SENIOR CITIZENS">SENIOR CITIZENS</MenuItem>
-              <MenuItem value="JSC">JSC</MenuItem>
-              <MenuItem value="EOC">EOC</MenuItem>
               <MenuItem value="Administration">Administration</MenuItem>
+              <MenuItem value="Ministry for Presidency">Ministry for Presidency</MenuItem>
+              <MenuItem value="Ministry of Science, Technology and Innovation">Ministry of Science, Technology and Innovation</MenuItem>
+              <MenuItem value="Ministry of Water and Environment">Ministry of Water and Environment</MenuItem>
+              <MenuItem value="Ministry for East African Affairs">Ministry for East African Affairs</MenuItem>
+              <MenuItem value="Ministry of Internal Affairs">Ministry of Internal Affairs</MenuItem>
+              <MenuItem value="Ministry of Works and Transport">Ministry of Works and Transport</MenuItem>
+              <MenuItem value="Office of the Prime Minister">Office of the Prime Minister</MenuItem>
+              <MenuItem value="Ministry of Finance">Ministry of Finance</MenuItem>
+              <MenuItem value="Ministry of Health">Ministry of Health</MenuItem>
+              <MenuItem value="Ministry of Gender, Labor and Social Development">Ministry of Gender, Labor and Social Development</MenuItem>
+              <MenuItem value="Ministry of Lands, Housing and Urban Development">Ministry of Lands, Housing and Urban Development</MenuItem>
+              <MenuItem value="Ministry for Kampala">Ministry for Kampala</MenuItem>
+              <MenuItem value="Ministry of ICT and National Guidance">Ministry of ICT and National Guidance</MenuItem>
+              <MenuItem value="Ministry of Justice and Constitutional Affairs">Ministry of Justice and Constitutional Affairs</MenuItem>
+              <MenuItem value="Ministry of Local Government">Ministry of Local Government</MenuItem>
+              <MenuItem value="Ministry for Foreign Affairs">Ministry for Foreign Affairs</MenuItem>
+              <MenuItem value="Ministry of Energy">Ministry of Energy</MenuItem>
+              <MenuItem value="Ministry of Tourism Wildlife and Antiquities">Ministry of Tourism Wildlife and Antiquities</MenuItem>
+              <MenuItem value="Ministry of Trade Industry and Cooperatives">Ministry of Trade Industry and Cooperatives</MenuItem>
+              <MenuItem value="Ministry of Education">Ministry of Education</MenuItem>
+              <MenuItem value="Ministry of Public Service">Ministry of Public Service</MenuItem>
+              <MenuItem value="Ministry of Agriculture Animal Industry and Fisheries">Ministry of Agriculture Animal Industry and Fisheries</MenuItem>
+              <MenuItem value="Education Institution">Education Institution</MenuItem>
+              <MenuItem value="Religious Leaders">Religious Leaders</MenuItem>
+              <MenuItem value="Senior Citizens">Senior Citizens</MenuItem>
+              <MenuItem value="Political Leaders">Political Leaders</MenuItem>
+              <MenuItem value="Members of Parliament">Members of Parliament</MenuItem>
+              <MenuItem value="Business Parks">Business Parks</MenuItem>
+              <MenuItem value="UIRI">UIRI</MenuItem>
+              <MenuItem value="New Vision">New Vision</MenuItem>
+              <MenuItem value="UBC">UBC</MenuItem>
             </Select>
           </Grid>
 
@@ -952,6 +966,7 @@ function Content_Newentry(props) {
               </Grid>
             ) : null
         }
+
         <Grid container spacing={1}>
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
@@ -1007,7 +1022,6 @@ function Content_Newentry(props) {
               </LocalizationProvider>
             </Stack>
           </Grid>
-
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
               Armed
@@ -1031,9 +1045,16 @@ function Content_Newentry(props) {
         <Grid container spacing={1}>
           <Grid item md={12} xs={12} sm={12}>
             <FormLabel component="label" className={classes.formLabel}>
-              Date of promotion (Check/tick if employee has been promoted before)
+              Date of promotion{' '}
+              <span>
+                {employee.date_of_promotion === null ? (
+                  <span>(Check/tick if employee has been promoted before)</span>
+                ) : null}
+              </span>
             </FormLabel>
-            <Checkbox onChange={handle_check} {...label} />
+            {employee.date_of_promotion === null ? (
+              <Checkbox onChange={handle_check} {...label} />
+            ) : null}
             <Stack spacing={6}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DesktopDatePicker
@@ -1062,7 +1083,7 @@ function Content_Newentry(props) {
                     className={classes.inputSmall}
                     fullWidth
                   />*/}
-            <AutocompleteSections get_section_value={get_section_value} />
+            <AutocompleteSections default_value={section} get_section_value={get_section_value} />
           </Grid>
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
@@ -1075,7 +1096,10 @@ function Content_Newentry(props) {
                     className={classes.inputSmall}
                     fullWidth
                   />*/}
-            <AutocompleteLocations get_section_value={get_location_value} />
+            <AutocompleteLocations
+              default_value={location}
+              get_section_value={get_location_value}
+            />
           </Grid>
         </Grid>
 
@@ -1190,12 +1214,12 @@ const mapStateToProps = (state) => ({
   messages: state.messages,
   auth: state.auth,
   error: state.errors,
-  loading: state.battallions_create.create_battallion_two_loading
+  loading: state.battallions_create.create_battallion_three_loading
 });
 
 export default connect(mapStateToProps, {
-  battallion_one_create,
-  battallion_general_create,
+  battallion_one_update,
   clear_messages,
-  clear_errors
-})(Content_Newentry);
+  clear_errors,
+  battallion_general_update
+})(Battallion_edit);

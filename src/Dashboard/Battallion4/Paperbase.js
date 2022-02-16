@@ -189,9 +189,7 @@ function Paperbase(props) {
 
   React.useEffect(() => {
     // console.log("Fetching dashboard data before rendering... ")
-    // props.battallion_three_fetch_data();
     props.battallion_four_fetch_data();
-    // props.battallion_three_overrall_data();
     props.battallion_four_overrall_data();
   }, [props]);
 

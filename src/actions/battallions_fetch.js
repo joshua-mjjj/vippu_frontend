@@ -10,6 +10,7 @@ import {
   BATTALION_THREE_OVERRALL_FETCHED,
   BATTALION_FOUR_OVERRALL_FETCHED,
   BATTALION_FIVE_OVERRALL_FETCHED,
+  BATTALION_SIX_OVERRALL_FETCHED,
   BATTALION_TWO_QUERY_LOADING,
   BATTALION_SECTION_QUERY_LOADING,
   BATTALION_SECTION_QUERY_FETCHED,
@@ -23,6 +24,8 @@ import {
   BATTALION_FOUR_DATA_LOADING,
   BATTALION_FIVE_DATA_LOADING,
   BATTALION_FIVE_DATA_FETCHED,
+  BATTALION_SIX_DATA_LOADING,
+  BATTALION_SIX_DATA_FETCHED,
   BATTALION3_DEPARTEMENT_QUERY_LOADING,
   BATTALION3_DEPARTEMENT_QUERY_FETCHED,
   BATTALION3_DEPARTEMENT_QUERY_FAILED,
@@ -147,6 +150,33 @@ export const battallion_five_fetch_data = () => (dispatch, getState) => {
     });
 };
 
+//  BATTALLION SIX CREATE
+export const battallion_six_fetch_data = () => (dispatch, getState) => {
+  //Loading
+  dispatch({ type: BATTALION_SIX_DATA_LOADING });
+
+  // const message = `${first_name}'s details have been saved in the database.`
+  axios
+    .get(`${global_url}/battallion_six/`, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      if (res.data.results) {
+        dispatch({
+          type: BATTALION_SIX_DATA_FETCHED,
+          payload: res.data.results
+        });
+      }
+      // dispatch(create_api_message(message, "battallion_employee_created"));
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+      dispatch(returnError(err.response.data, err.response.status));
+      dispatch({
+        type: BATTALION_SIX_DATA_FETCHED,
+        payload: null
+      });
+    });
+};
 
 //  BATTALLION FOUR CREATE
 export const battallion_four_fetch_data = () => (dispatch, getState) => {
@@ -463,7 +493,7 @@ export const battallion_four_overrall_data = () => (dispatch, getState) => {
     });
 };
 
-//  BATTALLION FOUR DATA SUMMARY
+//  BATTALLION FIVE DATA SUMMARY
 export const battallion_five_overrall_data = () => (dispatch, getState) => {
   axios
     .get(`${global_url}/battalionfive_overrall/`, tokenConfig(getState))
@@ -472,6 +502,24 @@ export const battallion_five_overrall_data = () => (dispatch, getState) => {
       if (res.data) {
         dispatch({
           type: BATTALION_FIVE_OVERRALL_FETCHED,
+          payload: res.data
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
+
+//  BATTALLION SIX DATA SUMMARY
+export const battallion_six_overrall_data = () => (dispatch, getState) => {
+  axios
+    .get(`${global_url}/battalionsix_overrall/`, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res.data)
+      if (res.data) {
+        dispatch({
+          type: BATTALION_SIX_OVERRALL_FETCHED,
           payload: res.data
         });
       }

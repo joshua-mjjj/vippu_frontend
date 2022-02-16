@@ -416,8 +416,8 @@ function Content_Newentry(props) {
       special_end_sub = special_duty_end_data;
     }
 
-    const battallion_value = 'battallion_five'; // Battallion 3 form, hence we do alittle bit of hard coding
-    const battallion_url = 'battallion_five';
+    const battallion_value = 'battallion_six'; // Battallion 3 form, hence we do alittle bit of hard coding
+    const battallion_url = 'battallion_six';
     // Create an employee
     e.preventDefault();
     if (
@@ -814,20 +814,38 @@ function Content_Newentry(props) {
               className={classes.inputSmall_}
               onChange={handle_Department_Change}
             >
-              <MenuItem value="UCC">UCC</MenuItem>
-              <MenuItem value="EC">EC</MenuItem>
-              <MenuItem value="IRA">IRA</MenuItem>
-              <MenuItem value="URA">URA</MenuItem>
-              <MenuItem value="UNRA">UNRA</MenuItem>
-              <MenuItem value="NPA">NPA</MenuItem>
-              <MenuItem value="ULC">ULC</MenuItem>
-              <MenuItem value="PSC">PSC</MenuItem>
-              <MenuItem value="NSSF">NSSF</MenuItem>
-              <MenuItem value="KCCA">KCCA</MenuItem>
-              <MenuItem value="SENIOR CITIZENS">SENIOR CITIZENS</MenuItem>
-              <MenuItem value="JSC">JSC</MenuItem>
-              <MenuItem value="EOC">EOC</MenuItem>
               <MenuItem value="Administration">Administration</MenuItem>
+              <MenuItem value="Ministry for Presidency">Ministry for Presidency</MenuItem>
+              <MenuItem value="Ministry of Science, Technology and Innovation">Ministry of Science, Technology and Innovation</MenuItem>
+              <MenuItem value="Ministry of Water and Environment">Ministry of Water and Environment</MenuItem>
+              <MenuItem value="Ministry for East African Affairs">Ministry for East African Affairs</MenuItem>
+              <MenuItem value="Ministry of Internal Affairs">Ministry of Internal Affairs</MenuItem>
+              <MenuItem value="Ministry of Works and Transport">Ministry of Works and Transport</MenuItem>
+              <MenuItem value="Office of the Prime Minister">Office of the Prime Minister</MenuItem>
+              <MenuItem value="Ministry of Finance">Ministry of Finance</MenuItem>
+              <MenuItem value="Ministry of Health">Ministry of Health</MenuItem>
+              <MenuItem value="Ministry of Gender, Labor and Social Development">Ministry of Gender, Labor and Social Development</MenuItem>
+              <MenuItem value="Ministry of Lands, Housing and Urban Development">Ministry of Lands, Housing and Urban Development</MenuItem>
+              <MenuItem value="Ministry for Kampala">Ministry for Kampala</MenuItem>
+              <MenuItem value="Ministry of ICT and National Guidance">Ministry of ICT and National Guidance</MenuItem>
+              <MenuItem value="Ministry of Justice and Constitutional Affairs">Ministry of Justice and Constitutional Affairs</MenuItem>
+              <MenuItem value="Ministry of Local Government">Ministry of Local Government</MenuItem>
+              <MenuItem value="Ministry for Foreign Affairs">Ministry for Foreign Affairs</MenuItem>
+              <MenuItem value="Ministry of Energy">Ministry of Energy</MenuItem>
+              <MenuItem value="Ministry of Tourism Wildlife and Antiquities">Ministry of Tourism Wildlife and Antiquities</MenuItem>
+              <MenuItem value="Ministry of Trade Industry and Cooperatives">Ministry of Trade Industry and Cooperatives</MenuItem>
+              <MenuItem value="Ministry of Education">Ministry of Education</MenuItem>
+              <MenuItem value="Ministry of Public Service">Ministry of Public Service</MenuItem>
+              <MenuItem value="Ministry of Agriculture Animal Industry and Fisheries">Ministry of Agriculture Animal Industry and Fisheries</MenuItem>
+              <MenuItem value="Education Institution">Education Institution</MenuItem>
+              <MenuItem value="Religious Leaders">Religious Leaders</MenuItem>
+              <MenuItem value="Senior Citizens">Senior Citizens</MenuItem>
+              <MenuItem value="Political Leaders">Political Leaders</MenuItem>
+              <MenuItem value="Members of Parliament">Members of Parliament</MenuItem>
+              <MenuItem value="Business Parks">Business Parks</MenuItem>
+              <MenuItem value="UIRI">UIRI</MenuItem>
+              <MenuItem value="New Vision">New Vision</MenuItem>
+              <MenuItem value="UBC">UBC</MenuItem>
             </Select>
           </Grid>
 
