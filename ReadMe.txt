@@ -1,6 +1,6 @@
-HomePetVet Frontend
+VIPPU UI
 
-Frontend files for react 
+UI files for react 
 
  - Pull files from git
 
