@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -8,44 +10,13 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
-import PeopleIcon from '@mui/icons-material/People';
-import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
-import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
-import PublicIcon from '@mui/icons-material/Public';
-import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet';
-import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
-import TimerIcon from '@mui/icons-material/Timer';
-import SettingsIcon from '@mui/icons-material/Settings';
-import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 
-const categories = [
-  {
-    id: 'Build',
-    children: [
-      {
-        id: 'Authentication',
-        icon: <PeopleIcon />,
-        active: true
-      },
-      { id: 'Database', icon: <DnsRoundedIcon /> },
-      { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
-      { id: 'Hosting', icon: <PublicIcon /> },
-      { id: 'Functions', icon: <SettingsEthernetIcon /> },
-      {
-        id: 'Machine learning',
-        icon: <SettingsInputComponentIcon />
-      }
-    ]
-  },
-  {
-    id: 'Quality',
-    children: [
-      { id: 'Analytics', icon: <SettingsIcon /> },
-      { id: 'Performance', icon: <TimerIcon /> },
-      { id: 'Test Lab', icon: <PhonelinkSetupIcon /> }
-    ]
-  }
-];
+// import TimerIcon from '@mui/icons-material/Timer';
+import SettingsIcon from '@mui/icons-material/Settings';
+import StorageIcon from '@mui/icons-material/Storage';
+// import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
+
+import { logout } from '../actions/auth.js';
 
 const item = {
   py: '2px',
@@ -62,8 +33,140 @@ const itemCategory = {
   px: 3
 };
 
-export default function Navigator(props) {
+function Navigator(props) {
   const { ...other } = props;
+  // console.log(props.auth)
+
+  const [battallion_one, setBattalionOne] = React.useState(true);
+  const [battallion_two, setBattalionTwo] = React.useState(false);
+  const [battallion_three, setBattalionThree] = React.useState(false);
+  const [battallion_four, setBattalionFour] = React.useState(false);
+  const [battallion_five, setBattalionFive] = React.useState(false);
+  const [battallion_six, setBattalionSix] = React.useState(false);
+  const [profile, setProfile] = React.useState(false);
+
+  const categories = [
+      {
+        id: 
+          props.auth.user !== null
+            ? `${props.auth.user.first_name} ${props.auth.user.last_name}`
+            : null,
+        children: [
+          {
+            id: 'Battalion One',
+            icon: <StorageIcon />,
+            active: battallion_one
+          },
+          { 
+            id: 'Battalion Two', 
+            icon: <StorageIcon />,
+            active: battallion_two
+          },
+          { 
+            id: 'Battalion Three', 
+            icon: <StorageIcon />,
+            active: battallion_three
+          },
+          { 
+            id: 'Battalion Four', 
+            icon: <StorageIcon />,
+            active: battallion_four
+          },
+          { 
+            id: 'Battalion Five', 
+            icon: <StorageIcon />,
+            active: battallion_five
+          },
+          { 
+            id: 'Battalion Six', 
+            icon: <StorageIcon />,
+            active: battallion_six
+          },
+          // {
+          //   id: 'Deleted Employees',
+          //   icon: <SettingsInputComponentIcon />
+          // }
+        ]
+      },
+      {
+        id: 'Account',
+        children: [
+          { 
+            id: 'Profile', 
+            icon: <SettingsIcon />,
+            active: profile
+          },
+         //  { id: 'Logout', icon: <TimerIcon /> },
+         // { id: 'Test Lab', icon: <PhonelinkSetupIcon /> }
+        ]
+      }
+    ];
+
+  const redirect = (child) => {
+    if (child === 'Battalion One') {
+      setBattalionOne(true)
+      setBattalionTwo(false)
+      setBattalionThree(false)
+      setBattalionFour(false)
+      setBattalionFive(false)
+      setBattalionSix(false)
+      setProfile(false)
+    } else if (child === 'Battalion Two') {
+      setBattalionOne(false)
+      setBattalionTwo(true)
+      setBattalionThree(false)
+      setBattalionFour(false)
+      setBattalionFive(false)
+      setBattalionSix(false)
+      setProfile(false)
+    } else if (child === 'Battalion Three') {
+      setBattalionOne(false)
+      setBattalionTwo(false)
+      setBattalionThree(true)
+      setBattalionFour(false)
+      setBattalionFive(false)
+      setBattalionSix(false)
+      setProfile(false)
+    } else if (child === 'Battalion Four') {
+      setBattalionOne(false)
+      setBattalionTwo(false)
+      setBattalionThree(false)
+      setBattalionFour(true)
+      setBattalionFive(false)
+      setBattalionSix(false)
+      setProfile(false)
+    } else if (child === 'Battalion Five') {
+      setBattalionOne(false)
+      setBattalionTwo(false)
+      setBattalionThree(false)
+      setBattalionFour(false)
+      setBattalionFive(true)
+      setBattalionSix(false)
+      setProfile(false)
+    } else if (child === 'Battalion Six') {
+      setBattalionOne(false)
+      setBattalionTwo(false)
+      setBattalionThree(false)
+      setBattalionFour(false)
+      setBattalionFive(false)
+      setBattalionSix(true)
+      setProfile(false)
+    } else if (child === 'Profile') {
+      setBattalionOne(false)
+      setBattalionTwo(false)
+      setBattalionThree(false)
+      setBattalionFour(false)
+      setBattalionFive(false)
+      setBattalionSix(false)
+      setProfile(true)
+    }else if (child === 'Logout') {
+      props.logout();
+      window.location.href = '/';
+      return;
+    }
+
+    props.routing_info(child);
+  };
 
   return (
     <Drawer variant="permanent" {...other}>
@@ -75,7 +178,7 @@ export default function Navigator(props) {
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText>Project Overview</ListItemText>
+          <ListItemText>Administrator Dashboard</ListItemText>
         </ListItem>
         {categories.map(({ id, children }) => (
           <Box key={id} sx={{ bgcolor: '#101F33' }}>
@@ -84,7 +187,7 @@ export default function Navigator(props) {
             </ListItem>
             {children.map(({ id: childId, icon, active }) => (
               <ListItem disablePadding key={childId}>
-                <ListItemButton selected={active} sx={item}>
+                <ListItemButton onClick={() => redirect(childId)} selected={active} sx={item}>
                   <ListItemIcon>{icon}</ListItemIcon>
                   <ListItemText>{childId}</ListItemText>
                 </ListItemButton>
@@ -98,3 +201,11 @@ export default function Navigator(props) {
     </Drawer>
   );
 }
+
+const mapStateToProps = (state) => ({
+  messages: state.messages,
+  auth: state.auth,
+  error: state.errors
+});
+
+export default connect(mapStateToProps, { logout })(Navigator);

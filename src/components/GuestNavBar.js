@@ -171,7 +171,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function GuestNavBar() {
+const GuestNavBar = () => {
   const classes = useStyles();
   // const [showLinks, setShowLinks] = React.useState(false)
 
@@ -182,6 +182,8 @@ export default function GuestNavBar() {
   const redirect = (e) => {
     window.location.href = '/';
   };
+
+  console.log("Navbar re-rendering...")
 
   return (
     <div className={classes.root}>
@@ -200,3 +202,5 @@ export default function GuestNavBar() {
     </div>
   );
 }
+
+export default React.memo(GuestNavBar)

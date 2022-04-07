@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from "react-redux"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -163,7 +164,7 @@ theme = {
   }
 };
 
-export default function Findemployee() {
+function Findemployee(props) {
   // Implementation code
   const [tab_value, setTab_value] = React.useState(0);
 
@@ -174,7 +175,15 @@ export default function Findemployee() {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
+        <AppBar 
+          component="div" 
+          position="static" 
+          elevation={0} 
+          sx={{ 
+            zIndex: 0,
+            backgroundColor: props.auth.user.admin_request_access === true ? '#483D8B' : "primary"
+          }}
+        >
           <Tabs value={tab_value} textColor="inherit">
             <Tab onClick={set_tab_0} label="Find employee" />
           </Tabs>
@@ -190,3 +199,10 @@ export default function Findemployee() {
     </ThemeProvider>
   );
 }
+const mapStateToProps = (state) => ({
+  messages: state.messages,
+  auth: state.auth,
+  error: state.errors,
+});
+
+export default connect(mapStateToProps, null)(Findemployee);

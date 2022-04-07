@@ -335,7 +335,14 @@ function StartPage(props) {
   };
 
   if (props.auth.user_type === 'admin' || props.auth.user_type === 'in_charge' || props.auth.user_type === 'commander') {
-    return <Redirect to="/login" />;
+    if(props.auth.user_type === 'admin'){
+      const current_dashboard = "admin_dashboard"
+      localStorage.setItem("admin_current_dashboard", current_dashboard)
+      return <Redirect to="/login" />;
+    }else{
+      return <Redirect to="/login" />;
+    }
+    
   }
   if (props.auth.user_type === 'none') {
     alert = (
@@ -387,6 +394,8 @@ function StartPage(props) {
       </div>
     );
   }
+
+  // console.log("Login page re-rendering...")
 
   return (
     <Box>

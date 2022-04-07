@@ -243,7 +243,15 @@ function BattallionData(props) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
+        <AppBar 
+          component="div" 
+          position="static" 
+          elevation={0} 
+          sx={{ 
+            zIndex: 0,
+            backgroundColor: props.auth.user.admin_request_access === true ? '#483D8B' : "primary"
+          }}
+        >
           <Tabs value={tab_value} textColor="inherit">
             <Tab onClick={set_tab_0} label="Battalion employees" />
             <Tab onClick={set_tab_1} label="Generate report" />

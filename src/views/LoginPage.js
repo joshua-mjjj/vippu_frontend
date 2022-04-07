@@ -400,6 +400,8 @@ function SignInSide(props) {
     );
   }
 
+  // console.log("Login page re-rendering...")
+
   return (
     <Box>
       <div>

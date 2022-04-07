@@ -219,7 +219,14 @@ function Dashboard(props) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
+        <AppBar 
+            component="div" 
+            position="static" 
+            elevation={0} 
+            sx={{ 
+              zIndex: 0,
+              backgroundColor: props.auth.user.admin_request_access === true ? '#483D8B' : "primary"
+            }}>
           <Tabs value={tab_value} textColor="inherit">
             <Tab onClick={set_tab_0} label="Program summary" />
             <Tab disabled={tab_value === 0 ? true : false} label="Section data" />

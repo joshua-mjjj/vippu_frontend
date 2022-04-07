@@ -14,7 +14,10 @@ import {
   AUTH_ERROR,
   CHANGE_PASSWORD_LOADING,
   CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_FAIL
+  CHANGE_PASSWORD_FAIL,
+  ADMIN_REQUEST_ACCESS_LOADING,
+  ADMIN_REQUEST_ACCESS_SUCCESS,
+  ADMIN_REQUEST_ACCESS_FAIL
 } from './types';
 
 
@@ -112,6 +115,68 @@ export const change_password = (old_password, new_password) => (dispatch, getSta
         type: CHANGE_PASSWORD_FAIL
       });
     });
+};
+
+// export const sendUserData = (data, user_id) => async (dispatch, getState) => {
+//   //dispatch({ type: FORM_LOADING });
+//   dispatch({ type: FORM_LOADING_DATA });
+
+//   await axios
+//     .patch(`${process.env.REACT_APP_API_URL}users/${user_id}/`, data, tokenConfig(getState))
+//     .then((res) => {
+//       dispatch({ type: SENDING_DATA });
+//       // console.log("Done")
+//       dispatch({ type: FORM_LOADED_DATA });
+//       dispatch({ type: GO_TO_NEXT });
+//     })
+//     .catch((e) => {
+//       dispatch({ type: FORM_LOADED_DATA });
+//       dispatch(returnError(e.response.data, e.response.status));
+//       console.log(e);
+//     });
+// };
+
+// ADMIN GRANT OTHER DASHBOARDS ACCESS
+export const grant_access = (admin_request_access, admin_request_battalion, user_id) => async (dispatch, getState) => {
+  //Loading
+  dispatch({ type: ADMIN_REQUEST_ACCESS_LOADING });
+
+  // Request Body
+  const body = JSON.stringify({ admin_request_access, admin_request_battalion });
+  console.log(body)
+
+  await axios
+    .patch(`${process.env.REACT_APP_API_URL}/users/${user_id}/`, body, tokenConfig(getState))
+    .then((res) => {
+      if(res.data.admin_request_access === true){
+        dispatch({
+          type: ADMIN_REQUEST_ACCESS_SUCCESS
+        });
+      }
+    })
+    .catch((e) => {
+       dispatch({
+          type: ADMIN_REQUEST_ACCESS_FAIL
+        });
+      console.log(e);
+    });
+
+
+  // const message = 'Your password has successfully been changed.';
+  // await axios
+  //   .post(`${global_url}/auth/password/change/`, body, tokenConfig(getState))
+  //   .then((res) => {
+  //     dispatch({
+  //       type: ADMIN_REQUEST_ACCESS_SUCCESS
+  //     });
+  //     dispatch(create_api_message(message, 'change_password_success'));
+  //   })
+  //   .catch((err) => {
+  //     dispatch(returnError(err.response.data, err.response.status));
+  //     dispatch({
+  //       type: ADMIN_REQUEST_ACCESS_FAIL
+  //     });
+  //   });
 };
 
 // USER NOT ALLOWED TO VIEW SECTION

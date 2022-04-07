@@ -114,7 +114,8 @@ function Navigator(props) {
             icon: <SettingsIcon />,
             active: profile
           },
-          { id: 'Logout', icon: <LogoutIcon /> }
+          props.auth.user.admin_request_access === false ? 
+          { id: 'Logout', icon: <LogoutIcon /> } : {}
         ]
       }
     ];

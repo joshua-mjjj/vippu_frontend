@@ -13,6 +13,9 @@ import store from './store';
 
 var hist = createBrowserHistory();
 
+// All admins are Top level users 
+// Remove Logout on all dashboard for admins, they can only logout from home 
+
 class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem('token');

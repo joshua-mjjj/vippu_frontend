@@ -29,9 +29,21 @@ function Header(props) {
     window.location.href = '/';
   };
 
+  const back_to_admin = () => {
+    const current_dashboard = 'admin_dashboard'
+    localStorage.setItem("admin_current_dashboard", current_dashboard)
+    window.location.href = '/dashboard';
+  }
+
   return (
     <React.Fragment>
-      <AppBar color="primary" position="sticky" elevation={0}>
+      <AppBar 
+        // color={props.auth.user.admin_request_access === true ? '' : "primary"}
+        sx={{
+          backgroundColor: props.auth.user.admin_request_access === true ? '#483D8B' : "primary"
+        }}
+        position="sticky" 
+        elevation={0}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             <Grid sx={{ display: { sm: 'none', xs: 'block' } }} item>
@@ -94,7 +106,11 @@ function Header(props) {
           </Grid>
         </Toolbar>
       </AppBar>
-      <AppBar component="div" color="primary" position="static" elevation={0} sx={{ zIndex: 0 }}>
+      <AppBar component="div" position="static" elevation={0} 
+         sx={{ 
+          zIndex: 0,
+          backgroundColor: props.auth.user.admin_request_access === true ? '#483D8B' : "primary"
+      }}>
         <Toolbar>
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs>
@@ -102,17 +118,38 @@ function Header(props) {
                 {props.title ? <span>{props.title}</span> : null}
               </Typography>
             </Grid>
-            <Grid item>
-              <Button
-                sx={{ borderColor: lightColor }}
-                onClick={logout}
-                variant="outlined"
-                color="inherit"
-                size="small"
-              >
-                logout
-              </Button>
-            </Grid>
+            {
+              props.auth.user.admin_request_access === true ?
+              (
+                <Grid item>
+                  <Button
+                    sx={{ borderColor: lightColor }}
+                    onClick={back_to_admin}
+                    variant="outlined"
+                    color="inherit"
+                    size="small"
+                  >
+                    Back to admin
+                  </Button>
+                </Grid>
+              ):null
+            }
+            {
+              props.auth.user.admin_request_access === false ?
+              (
+                 <Grid item>
+                  <Button
+                    sx={{ borderColor: lightColor }}
+                    onClick={logout}
+                    variant="outlined"
+                    color="inherit"
+                    size="small"
+                  >
+                    logout
+                  </Button>
+                </Grid>
+              ):null
+            }
             {/*<Grid item>
               <Tooltip title="Help">
                 <IconButton color="inherit">

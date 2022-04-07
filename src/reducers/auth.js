@@ -10,7 +10,11 @@ import {
   AUTH_ERROR,
   CHANGE_PASSWORD_LOADING,
   CHANGE_PASSWORD_SUCCESS,
-  CHANGE_PASSWORD_FAIL
+  CHANGE_PASSWORD_FAIL,
+  ADMIN_REQUEST_ACCESS_LOADING,
+  ADMIN_REQUEST_ACCESS_SUCCESS,
+  ADMIN_REQUEST_ACCESS_FAIL,
+  ADMIN_LOGOUT_LOADING
 } from '../actions/types';
 
 const initialState = {
@@ -21,7 +25,9 @@ const initialState = {
   login_loading: false,
   user: null,
   change_password_loading: false,
-  isLoading: false
+  isLoading: false,
+  admin_request_access_loading: false,
+  admin_access_granted: false,
 };
 
 export default function auth(state = initialState, action) {
@@ -30,6 +36,28 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         loading_check_user_type: true
+      };
+    case ADMIN_LOGOUT_LOADING:
+      return {
+        ...state,
+        admin_request_access_loading: true
+      };
+    case ADMIN_REQUEST_ACCESS_LOADING:
+      return {
+        ...state,
+        admin_request_access_loading: true
+      };
+    case ADMIN_REQUEST_ACCESS_FAIL:
+      return {
+        ...state,
+        admin_request_access_loading: false,
+        admin_access_granted: false
+      };
+    case ADMIN_REQUEST_ACCESS_SUCCESS:
+      return {
+        ...state,
+        admin_request_access_loading: false,
+        admin_access_granted: true
       };
     case CHANGE_PASSWORD_LOADING:
       return {

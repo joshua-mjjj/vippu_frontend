@@ -20,10 +20,8 @@ import BattalionDataReport from './Views/BattalionData_report';
 import Profile from './Views/Profile';
 
 import {
-  battallion_five_fetch_data,
   battallion_six_fetch_data,
   battallion_six_overrall_data,
-  battallion_five_overrall_data
 } from '../../actions/battallions_fetch.js';
 
 let theme = createTheme({
@@ -189,9 +187,7 @@ function Paperbase(props) {
 
   React.useEffect(() => {
     // console.log("Fetching dashboard data before rendering... ")
-    props.battallion_five_fetch_data();
     props.battallion_six_fetch_data();
-    props.battallion_five_overrall_data();
     props.battallion_six_overrall_data();
   }, [props]);
 
@@ -220,7 +216,7 @@ function Paperbase(props) {
           {/* Render conditionally */}
           {active_page === 'Dashboard' ? (
             <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <Header title="Database Overview" onDrawerToggle={handleDrawerToggle} />
+              <Header title="Overview" onDrawerToggle={handleDrawerToggle} />
               <Dashboard />
             </Box>
           ) : null}
@@ -268,8 +264,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  battallion_five_fetch_data,
   battallion_six_fetch_data,
   battallion_six_overrall_data,
-  battallion_five_overrall_data
 })(Paperbase);

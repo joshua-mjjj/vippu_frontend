@@ -7,6 +7,7 @@ import { logout, notify } from '../actions/auth.js';
 
 import IdleTimer from 'react-idle-timer';
 // import LoginPage from "./LoginPage";
+import LazyLoad from 'react-lazyload';
 import DashboardRoot from '../Dashboard/Paperbase';
 import DashboardRootBattallion2 from '../Dashboard/Battallion2/Paperbase';
 import DashboardRootBattallion1 from '../Dashboard/Battallion1/Paperbase';
@@ -58,6 +59,9 @@ class RenderDashboard extends React.Component {
   }
 
   render() {
+
+    const current_dashboard = localStorage.getItem("admin_current_dashboard")
+
     return (
       <>
         <IdleTimer
@@ -75,37 +79,105 @@ class RenderDashboard extends React.Component {
         <div>
           {this.props.auth.user ? (
             <div>
-              {this.props.auth.user.account_type === 'admin' ? <DashboardRoot /> : ''}
+
+              {this.props.auth.user.account_type === 'admin' ? 
+                (
+                  <div>
+                  {
+                    this.props.auth.user.admin_request_access === true && 
+                    this.props.auth.user.admin_request_battalion === 'battallion_six' &&
+                    current_dashboard === "dashboard_six"
+                     ?
+                    (<DashboardRootBattallion6 />): (null)
+                  }
+                  {
+                    this.props.auth.user.admin_request_access === true && 
+                    this.props.auth.user.admin_request_battalion === 'battallion_five' &&
+                    current_dashboard === "dashboard_five"
+                     ?
+                    (<DashboardRootBattallion5 />): (null)
+                  }
+                  {
+                    this.props.auth.user.admin_request_access === true && 
+                    this.props.auth.user.admin_request_battalion === 'battallion_four' &&
+                    current_dashboard === "battallion_four"
+                     ?
+                    (<DashboardRootBattallion4 />): (null)
+                  }
+                  {
+                    this.props.auth.user.admin_request_access === true && 
+                    this.props.auth.user.admin_request_battalion === 'battallion_three' &&
+                    current_dashboard === "battallion_three"
+                     ?
+                    (<DashboardRootBattallion3 />): (null)
+                  }
+                  {
+                    this.props.auth.user.admin_request_access === true && 
+                    this.props.auth.user.admin_request_battalion === 'battallion_two' &&
+                    current_dashboard === "battallion_two"
+                     ?
+                    (<DashboardRootBattallion2 />): (null)
+                  }
+                  {
+                    this.props.auth.user.admin_request_access === true && 
+                    this.props.auth.user.admin_request_battalion === 'battallion_one' &&
+                    current_dashboard === "battallion_one"
+                     ?
+                    (<DashboardRootBattallion1 />): (null)
+                  }
+                  
+                  {
+                    current_dashboard === "admin_dashboard"?
+                    (<DashboardRoot />) : (null)
+                  }
+                  </div>
+                ) 
+              : ''}
+
+
+
               {this.props.auth.user.account_type === 'in_charge' ? (
                 // Check Battallion
                 <div>
                   {this.props.auth.user.battallion === 'battallion_two' ? (
-                    <DashboardRootBattallion2 />
+                    <LazyLoad>
+                       <DashboardRootBattallion2 />
+                    </LazyLoad>
                   ) : (
                     ''
                   )}
                   {this.props.auth.user.battallion === 'battallion_one' ? (
-                    <DashboardRootBattallion1 />
+                    <LazyLoad>
+                       <DashboardRootBattallion1 />
+                    </LazyLoad>
                   ) : (
                     ''
                   )}
                   {this.props.auth.user.battallion === 'battallion_three' ? (
-                    <DashboardRootBattallion3 />
+                    <LazyLoad>
+                        <DashboardRootBattallion3 />
+                    </LazyLoad>
                   ) : (
                     ''
                   )}
                   {this.props.auth.user.battallion === 'battallion_four' ? (
-                    <DashboardRootBattallion4 />
+                     <LazyLoad>
+                        <DashboardRootBattallion4 />
+                     </LazyLoad>
                   ) : (
                     ''
                   )}
                   {this.props.auth.user.battallion === 'battallion_five' ? (
-                    <DashboardRootBattallion5 />
+                    <LazyLoad>
+                        <DashboardRootBattallion5 />
+                     </LazyLoad>
                   ) : (
                     ''
                   )}
                   {this.props.auth.user.battallion === 'battallion_six' ? (
-                    <DashboardRootBattallion6 />
+                    <LazyLoad>
+                       <DashboardRootBattallion6 />
+                    </LazyLoad>
                   ) : (
                     ''
                   )}

@@ -11,8 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
@@ -77,7 +75,7 @@ function Header(props) {
             </Grid>*/}
             <Grid item>
               <IconButton color="inherit" sx={{ p: 0.5 }}>
-                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
+                <Avatar src="/static/images/avatar/1.jpg" alt={props.auth.user.username} />
               </IconButton>
             </Grid>
           </Grid>
@@ -96,10 +94,7 @@ function Header(props) {
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs>
               <Typography color="inherit" variant="h5" component="h1">
-                {props.auth.user.account_type === 'admin' ? <span>Admin dashboard</span> : null}
-                {props.auth.user.account_type === 'in_charge' ? (
-                  <span>In Charge dashboard</span>
-                ) : null}
+                {props.title ? <span>{props.title}</span> : null}
               </Typography>
             </Grid>
             <Grid item>
@@ -123,7 +118,7 @@ function Header(props) {
           </Grid>
         </Toolbar>
       </AppBar>
-      <AppBar
+      {/*<AppBar
         component="div"
         position="static"
         elevation={0}
@@ -138,7 +133,7 @@ function Header(props) {
           <Tab label="Templates" />
           <Tab label="Usage" />
         </Tabs>
-      </AppBar>
+      </AppBar>*/}
     </React.Fragment>
   );
 }

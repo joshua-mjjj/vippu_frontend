@@ -10,7 +10,7 @@ const useStylesFacebook = makeStyles((theme) => ({
   }
 }));
 
-function FacebookCircularProgress(props) {
+function FacebookCircularProgress() {
   const classes = useStylesFacebook();
 
   return (

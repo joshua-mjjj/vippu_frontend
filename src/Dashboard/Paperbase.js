@@ -1,25 +1,34 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+// import Typography from '@mui/material/Typography';
+// import Link from '@mui/material/Link';
 import Navigator from './Navigator';
-import Content from './Content';
+// import Content from './Content';
 import Header from './Header';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-}
+// Views
+import BattalionSixOverview from './views/Battalion_six_overview';
+import BattalionFiveOverview from './views/Battalion_five_overview';
+import BattalionFourOverview from './views/Battalion_four_overview';
+import BattalionThreeOverview from './views/Battalion_three_overview';
+import BattalionTwoOverview from './views/Battalion_two_overview';
+import BattalionOneOverview from './views/Battalion_one_overview';
+import Profile from './views/Profile';
+
+// importing api functions
+import {
+  battallion_six_overrall_data,
+  battallion_five_overrall_data,
+  battallion_four_overrall_data,
+  battallion_three_overrall_data,
+  battallion_two_overrall_data,
+  battallion_one_overrall_data,
+} from '../actions/battallions_fetch.js';
+
 
 let theme = createTheme({
   palette: {
@@ -166,13 +175,31 @@ theme = {
 
 const drawerWidth = 256;
 
-export default function Paperbase() {
+function Paperbase(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  // Implementation code
+  const [active_page, setActive_page] = React.useState('Battalion One');
+
+  const routing_info = (page) => {
+    console.log(page);
+    setActive_page(page);
+  };
+
+  React.useEffect(() => {
+    // Fetching Overall dashboard data for all battalions...
+    props.battallion_six_overrall_data();
+    props.battallion_five_overrall_data();
+    props.battallion_four_overrall_data();
+    props.battallion_three_overrall_data();
+    props.battallion_two_overrall_data();
+    props.battallion_one_overrall_data();
+  }, [props]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -182,6 +209,7 @@ export default function Paperbase() {
           {isSmUp ? null : (
             <Navigator
               PaperProps={{ style: { width: drawerWidth } }}
+              routing_info={routing_info}
               variant="temporary"
               open={mobileOpen}
               onClose={handleDrawerToggle}
@@ -190,19 +218,73 @@ export default function Paperbase() {
 
           <Navigator
             PaperProps={{ style: { width: drawerWidth } }}
+            routing_info={routing_info}
             sx={{ display: { sm: 'block', xs: 'none' } }}
           />
         </Box>
+
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Header onDrawerToggle={handleDrawerToggle} />
-          <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
-            <Content />
-          </Box>
-          <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
-            <Copyright />
-          </Box>
+          {/* Render conditionally */}
+          {active_page === 'Battalion One' ? (
+              <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <Header title="Battalion One Overview" onDrawerToggle={handleDrawerToggle} />
+                <BattalionOneOverview />
+              </Box>
+          ) : null}
+          {active_page === 'Battalion Two' ? (
+              <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <Header title="Battalion Two Overview" onDrawerToggle={handleDrawerToggle} />
+                <BattalionTwoOverview />
+              </Box>
+          ) : null}
+          {active_page === 'Battalion Three' ? (
+              <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <Header title="Battalion Three Overview" onDrawerToggle={handleDrawerToggle} />
+                <BattalionThreeOverview />
+              </Box>
+          ) : null}
+          {active_page === 'Battalion Four' ? (
+              <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <Header title="Battalion Four Overview" onDrawerToggle={handleDrawerToggle} />
+                <BattalionFourOverview />
+              </Box>
+          ) : null}
+          {active_page === 'Battalion Five' ? (
+              <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <Header title="Battalion Five Overview" onDrawerToggle={handleDrawerToggle} />
+                <BattalionFiveOverview />
+              </Box>
+          ) : null}
+          {active_page === 'Battalion Six' ? (
+              <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <Header title="Battalion Six Overview" onDrawerToggle={handleDrawerToggle} />
+                <BattalionSixOverview />
+              </Box>
+          ) : null}
+          {active_page === 'Profile' ? (
+              <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <Header title="Account profile" onDrawerToggle={handleDrawerToggle} />
+                <Profile />
+              </Box>
+          ) : null}
         </Box>
       </Box>
     </ThemeProvider>
   );
 }
+
+const mapStateToProps = (state) => ({
+  messages: state.messages,
+  auth: state.auth,
+  error: state.errors
+  // loading : state.battallions_create.create_battallion_one_loading,
+});
+
+export default connect(mapStateToProps, {
+  battallion_five_overrall_data,
+  battallion_six_overrall_data,
+  battallion_four_overrall_data,
+  battallion_three_overrall_data,
+  battallion_two_overrall_data,
+  battallion_one_overrall_data,
+})(Paperbase);

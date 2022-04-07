@@ -216,7 +216,7 @@ function Paperbase(props) {
           {/* Render conditionally */}
           {active_page === 'Dashboard' ? (
             <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <Header title="Database Overview" onDrawerToggle={handleDrawerToggle} />
+              <Header title="Overview" onDrawerToggle={handleDrawerToggle} />
               <Dashboard />
             </Box>
           ) : null}

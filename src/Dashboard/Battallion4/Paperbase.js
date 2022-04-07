@@ -20,9 +20,7 @@ import BattalionDataReport from './Views/BattalionData_report';
 import Profile from './Views/Profile';
 
 import {
-  battallion_three_fetch_data,
   battallion_four_fetch_data,
-  battallion_three_overrall_data,
   battallion_four_overrall_data
 } from '../../actions/battallions_fetch.js';
 
@@ -218,7 +216,7 @@ function Paperbase(props) {
           {/* Render conditionally */}
           {active_page === 'Dashboard' ? (
             <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-              <Header title="Database Overview" onDrawerToggle={handleDrawerToggle} />
+              <Header title="Overview" onDrawerToggle={handleDrawerToggle} />
               <Dashboard />
             </Box>
           ) : null}
@@ -266,8 +264,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  battallion_three_fetch_data,
   battallion_four_fetch_data,
-  battallion_three_overrall_data,
   battallion_four_overrall_data
 })(Paperbase);

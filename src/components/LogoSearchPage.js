@@ -60,8 +60,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ImageAvatars() {
+const ImageAvatars = () => {
   const classes = useStyles();
+
+  console.log("VIPPU logo re-rendering...")
 
   return (
     <div className={classes.root}>
@@ -76,3 +78,5 @@ export default function ImageAvatars() {
     </div>
   );
 }
+
+export default React.memo(ImageAvatars)
