@@ -55,6 +55,12 @@ const Footer = () => {
         <a href="/about" className={classes.link}>
           @iCodeLab
         </a>
+        <a href="/about" className={classes.link}>
+          Terms of Use
+        </a>
+        <a href="/about" className={classes.link}>
+          Privacy Policy
+        </a>
       </div>
     </div>
   );

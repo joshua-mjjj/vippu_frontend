@@ -60,6 +60,33 @@ export const check_user_type = (username) => (dispatch) => {
     });
 };
 
+
+//  LOGIN PET PROVIDER / OWNER WITH GOOGLE
+export const login_google = (googleObject) => (dispatch) => {
+  //Loading
+  console.log(googleObject)
+
+  axios
+    .post("http://127.0.0.1:8000/source/login/google/", {
+      access_token: googleObject.accessToken
+    })
+    .then((res) => {
+      console.log("Flag: ")
+      console.log(res.data)
+      // dispatch({
+      //   type: LOGIN_SUCCESS_GOOGLE,
+      //   payload: res.data
+      // });
+    })
+    .catch((err) => {
+      console.log(err)
+      // dispatch({
+      //   type: USER_UPDATE_FAIL
+      // });
+    });
+};
+
+
 //  LOGIN
 export const login = (username, password) => (dispatch) => {
   //Loading

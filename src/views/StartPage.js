@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { check_user_type, loadUser } from '../actions/auth.js';
+import { check_user_type, loadUser, login_google } from '../actions/auth.js';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -15,10 +15,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import logo from '../assets/police.png';
 import { Box } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+import GoogleLogin from "react-google-login";
 
 import GuestNavBar from '../components/GuestNavBar';
 import Spinner from '../components/Spinner';
 import Footer from '../components/Footer';
+import Google from "../assets/google.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -323,6 +325,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const googleClientId = "1072160595836-ac6sqqr2fkruuidb48dkl9mnht5h6gis.apps.googleusercontent.com"
+
 function StartPage(props) {
   const classes = useStyles();
 
@@ -332,6 +336,13 @@ function StartPage(props) {
     e.preventDefault();
     // console.log(user_id)
     props.check_user_type(user_id);
+  };
+
+  const responseGoogle = (response) => {
+    if (response.profileObj.email) {
+      console.log(response.profileObj)
+      props.login_google(response);
+    }
   };
 
   if (props.auth.user_type === 'admin' || props.auth.user_type === 'in_charge' || props.auth.user_type === 'commander') {
@@ -451,6 +462,23 @@ function StartPage(props) {
                 >
                   {props.auth.loading_check_user_type === true ? <Spinner /> : 'Submit'}
                 </Button>
+                {/* Testing */}
+
+              <div className={classes.buttonWrap}>
+                  <GoogleLogin
+                    clientId={googleClientId}
+                    buttonText="Sign in with Google"
+                    onSuccess={responseGoogle}
+                    className={classes.google}
+                    icon=""
+                  />
+                  <img
+                    className={classes.iconGoogle}
+                    src={Google}
+                    alt="Google Icon"
+                  />
+              </div>
+
                 <Grid container>
                   <Grid item xs>
                     <Typography className={classes.fogot} href="/forgot_password" variant="body2">
@@ -476,5 +504,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   check_user_type,
-  loadUser
+  loadUser,
+  login_google
 })(StartPage);
