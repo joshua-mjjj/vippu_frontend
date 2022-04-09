@@ -15,12 +15,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import logo from '../assets/police.png';
 import { Box } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import GoogleLogin from "react-google-login";
+// import GoogleLogin from "react-google-login";
 
 import GuestNavBar from '../components/GuestNavBar';
 import Spinner from '../components/Spinner';
 import Footer from '../components/Footer';
-import Google from "../assets/google.svg";
+// import Google from "../assets/google.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -325,7 +325,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const googleClientId = "1072160595836-ac6sqqr2fkruuidb48dkl9mnht5h6gis.apps.googleusercontent.com"
+// const googleClientId = "1072160595836-ac6sqqr2fkruuidb48dkl9mnht5h6gis.apps.googleusercontent.com"
 
 function StartPage(props) {
   const classes = useStyles();
@@ -338,12 +338,12 @@ function StartPage(props) {
     props.check_user_type(user_id);
   };
 
-  const responseGoogle = (response) => {
-    if (response.profileObj.email) {
-      console.log(response.profileObj)
-      props.login_google(response);
-    }
-  };
+  // const responseGoogle = (response) => {
+  //   if (response.profileObj.email) {
+  //     console.log(response.profileObj)
+  //     props.login_google(response);
+  //   }
+  // };
 
   if (props.auth.user_type === 'admin' || props.auth.user_type === 'in_charge' || props.auth.user_type === 'commander') {
     if(props.auth.user_type === 'admin'){
@@ -464,7 +464,7 @@ function StartPage(props) {
                 </Button>
                 {/* Testing */}
 
-              <div className={classes.buttonWrap}>
+              {/*<div className={classes.buttonWrap}>
                   <GoogleLogin
                     clientId={googleClientId}
                     buttonText="Sign in with Google"
@@ -478,7 +478,7 @@ function StartPage(props) {
                     alt="Google Icon"
                   />
               </div>
-
+*/}
                 <Grid container>
                   <Grid item xs>
                     <Typography className={classes.fogot} href="/forgot_password" variant="body2">
