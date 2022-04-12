@@ -17,6 +17,7 @@ import BattalionFourOverview from './views/Battalion_four_overview';
 import BattalionThreeOverview from './views/Battalion_three_overview';
 import BattalionTwoOverview from './views/Battalion_two_overview';
 import BattalionOneOverview from './views/Battalion_one_overview';
+import AdminOverview from './views/Battalion_admin_overview';
 import Profile from './views/Profile';
 
 // importing api functions
@@ -27,6 +28,7 @@ import {
   battallion_three_overrall_data,
   battallion_two_overrall_data,
   battallion_one_overrall_data,
+  vippu_overrall_data,
 } from '../actions/battallions_fetch.js';
 
 
@@ -184,7 +186,7 @@ function Paperbase(props) {
   };
 
   // Implementation code
-  const [active_page, setActive_page] = React.useState('Battalion One');
+  const [active_page, setActive_page] = React.useState('VIPPU Admin Home');
 
   const routing_info = (page) => {
     console.log(page);
@@ -199,6 +201,7 @@ function Paperbase(props) {
     props.battallion_three_overrall_data();
     props.battallion_two_overrall_data();
     props.battallion_one_overrall_data();
+    props.vippu_overrall_data();
   }, [props]);
 
   return (
@@ -225,6 +228,13 @@ function Paperbase(props) {
 
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
           {/* Render conditionally */}
+          
+          {active_page === 'VIPPU Admin Home' ? (
+              <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <Header title="VIPPU Admin Overview" onDrawerToggle={handleDrawerToggle} />
+                <AdminOverview />
+              </Box>
+          ) : null}
           {active_page === 'Battalion One' ? (
               <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <Header title="Battalion One Overview" onDrawerToggle={handleDrawerToggle} />
@@ -287,4 +297,5 @@ export default connect(mapStateToProps, {
   battallion_three_overrall_data,
   battallion_two_overrall_data,
   battallion_one_overrall_data,
+  vippu_overrall_data,
 })(Paperbase);

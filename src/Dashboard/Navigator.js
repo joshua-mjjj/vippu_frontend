@@ -11,6 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import StorageIcon from '@mui/icons-material/Storage';
@@ -37,13 +38,14 @@ function Navigator(props) {
   const { ...other } = props;
   // console.log(props.auth)
 
-  const [battallion_one, setBattalionOne] = React.useState(true);
+  const [battallion_one, setBattalionOne] = React.useState(false);
   const [battallion_two, setBattalionTwo] = React.useState(false);
   const [battallion_three, setBattalionThree] = React.useState(false);
   const [battallion_four, setBattalionFour] = React.useState(false);
   const [battallion_five, setBattalionFive] = React.useState(false);
   const [battallion_six, setBattalionSix] = React.useState(false);
   const [profile, setProfile] = React.useState(false);
+  const [dashboard, setDashboard] = React.useState(true);
 
   const categories = [
       {
@@ -52,6 +54,11 @@ function Navigator(props) {
             ? `${props.auth.user.first_name} ${props.auth.user.last_name}`
             : null,
         children: [
+          {
+            id: 'VIPPU Admin Home',
+            icon: <AccountCircleIcon />,
+            active: dashboard
+          },
           {
             id: 'Battalion One',
             icon: <StorageIcon />,
@@ -110,14 +117,25 @@ function Navigator(props) {
       setBattalionFour(false)
       setBattalionFive(false)
       setBattalionSix(false)
+      setDashboard(false);
       setProfile(false)
-    } else if (child === 'Battalion Two') {
+    }else if(child === 'VIPPU Admin Home'){
+      setBattalionOne(false)
+      setBattalionTwo(false)
+      setBattalionThree(false)
+      setBattalionFour(false)
+      setBattalionFive(false)
+      setBattalionSix(false)
+      setDashboard(true);
+      setProfile(false)
+    }else if (child === 'Battalion Two') {
       setBattalionOne(false)
       setBattalionTwo(true)
       setBattalionThree(false)
       setBattalionFour(false)
       setBattalionFive(false)
       setBattalionSix(false)
+      setDashboard(false);
       setProfile(false)
     } else if (child === 'Battalion Three') {
       setBattalionOne(false)
@@ -125,6 +143,7 @@ function Navigator(props) {
       setBattalionThree(true)
       setBattalionFour(false)
       setBattalionFive(false)
+      setDashboard(false);
       setBattalionSix(false)
       setProfile(false)
     } else if (child === 'Battalion Four') {
@@ -133,6 +152,7 @@ function Navigator(props) {
       setBattalionThree(false)
       setBattalionFour(true)
       setBattalionFive(false)
+      setDashboard(false);
       setBattalionSix(false)
       setProfile(false)
     } else if (child === 'Battalion Five') {
@@ -141,6 +161,7 @@ function Navigator(props) {
       setBattalionThree(false)
       setBattalionFour(false)
       setBattalionFive(true)
+      setDashboard(false);
       setBattalionSix(false)
       setProfile(false)
     } else if (child === 'Battalion Six') {
@@ -148,6 +169,7 @@ function Navigator(props) {
       setBattalionTwo(false)
       setBattalionThree(false)
       setBattalionFour(false)
+      setDashboard(false);
       setBattalionFive(false)
       setBattalionSix(true)
       setProfile(false)
@@ -156,6 +178,7 @@ function Navigator(props) {
       setBattalionTwo(false)
       setBattalionThree(false)
       setBattalionFour(false)
+      setDashboard(false);
       setBattalionFive(false)
       setBattalionSix(false)
       setProfile(true)

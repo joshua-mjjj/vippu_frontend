@@ -30,6 +30,7 @@ import {
   BATTALION3_DEPARTEMENT_QUERY_LOADING,
   BATTALION3_DEPARTEMENT_QUERY_FETCHED,
   BATTALION3_DEPARTEMENT_QUERY_FAILED,
+  VIPPU_OVERRALL_FETCHED,
 
   BATTALION_GENERAL_DEPARTEMENT_QUERY_LOADING,
   BATTALION_GENERAL_DEPARTEMENT_QUERY_FETCHED,
@@ -41,6 +42,7 @@ const initialState = {
   battalion_two_data_loading: false,
   battalion_two_overrall_data: null,
   battalion_one_overrall_data: null,
+  vippu_overrall_data: null,
   battalion_two_query_loading: false,
   battalion_two_query_data: null,
 
@@ -214,6 +216,11 @@ export default function battallions_fetch(state = initialState, action) {
       return {
         ...state,
         battalion_one_overrall_data: action.payload
+      };
+    case VIPPU_OVERRALL_FETCHED:
+      return {
+        ...state,
+        vippu_overrall_data: action.payload
       };
    case BATTALION_THREE_OVERRALL_FETCHED:
     return {

@@ -514,6 +514,52 @@ function Content_Newentry(props) {
   return (
     <Paper elevation={0}>
       <div className={classes.root}>
+
+              <Grid container spacing={1}>
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
+              File number
+            </FormLabel>
+            <Input
+              placeholder="File number * "
+              fullWidth
+              value={file_number}
+              onChange={(e) => setFile_number(e.target.value)}
+              disableUnderline
+              className={classes.inputSmall}
+            />
+          </Grid>
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
+              Rank
+            </FormLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              isableUnderline
+              displayEmpty
+              fullWidth
+              id="demo-simple-select"
+              value={rank}
+              className={classes.inputSmall_}
+              onChange={handle_Rank_Change}
+            >
+              <MenuItem value="AIGP">AIGP</MenuItem>
+              <MenuItem value="SCP">SCP</MenuItem>
+              <MenuItem value="CP">CP</MenuItem>
+              <MenuItem value="ACP">ACP</MenuItem>
+              <MenuItem value="SSP">SSP</MenuItem>
+              <MenuItem value="SP">SP</MenuItem>
+              <MenuItem value="ASP">ASP</MenuItem>
+              <MenuItem value="IP">IP</MenuItem>
+              <MenuItem value="AIP">AIP</MenuItem>
+              <MenuItem value="SGT">SGT</MenuItem>
+              <MenuItem value="CPL">CPL</MenuItem>
+              <MenuItem value="PC">PC</MenuItem>
+              <MenuItem value="SPC">SPC</MenuItem>
+            </Select>
+          </Grid>
+        </Grid>
+
         <Grid container spacing={1}>
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
@@ -546,6 +592,24 @@ function Content_Newentry(props) {
         <Grid container spacing={1}>
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
+              Sex
+            </FormLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              isableUnderline
+              displayEmpty
+              fullWidth
+              id="demo-simple-select"
+              value={sex}
+              className={classes.inputSmall_}
+              onChange={(e) => setSex(e.target.value)}
+            >
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+            </Select>
+          </Grid>
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
               NIN
             </FormLabel>
             <Input
@@ -555,48 +619,6 @@ function Content_Newentry(props) {
               onChange={(e) => setNin(e.target.value)}
               disableUnderline
               className={classes.inputSmall}
-            />
-          </Grid>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              IPPS
-            </FormLabel>
-            <Input
-              placeholder="Enter IPPS * "
-              disableUnderline
-              value={ipps}
-              onChange={(e) => setIpps(e.target.value)}
-              className={classes.inputSmall}
-              fullWidth
-            />
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={1}>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              File number
-            </FormLabel>
-            <Input
-              placeholder="File number * "
-              fullWidth
-              value={file_number}
-              onChange={(e) => setFile_number(e.target.value)}
-              disableUnderline
-              className={classes.inputSmall}
-            />
-          </Grid>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              Tin Number
-            </FormLabel>
-            <Input
-              placeholder="Tin Number"
-              disableUnderline
-              value={tin_number}
-              onChange={(e) => setTin_number(e.target.value)}
-              className={classes.inputSmall}
-              fullWidth
             />
           </Grid>
         </Grid>
@@ -633,53 +655,32 @@ function Content_Newentry(props) {
         <Grid container spacing={1}>
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
-              Sex
+              IPPS
             </FormLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              isableUnderline
-              displayEmpty
+            <Input
+              placeholder="Enter IPPS * "
+              disableUnderline
+              value={ipps}
+              onChange={(e) => setIpps(e.target.value)}
+              className={classes.inputSmall}
               fullWidth
-              id="demo-simple-select"
-              value={sex}
-              className={classes.inputSmall_}
-              onChange={(e) => setSex(e.target.value)}
-            >
-              <MenuItem value="Male">Male</MenuItem>
-              <MenuItem value="Female">Female</MenuItem>
-            </Select>
+            />
           </Grid>
+
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
-              Rank
+              Tin Number
             </FormLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              isableUnderline
-              displayEmpty
+            <Input
+              placeholder="Tin Number"
+              disableUnderline
+              value={tin_number}
+              onChange={(e) => setTin_number(e.target.value)}
+              className={classes.inputSmall}
               fullWidth
-              id="demo-simple-select"
-              value={rank}
-              className={classes.inputSmall_}
-              onChange={handle_Rank_Change}
-            >
-              <MenuItem value="AIGP">AIGP</MenuItem>
-              <MenuItem value="SCP">SCP</MenuItem>
-              <MenuItem value="CP">CP</MenuItem>
-              <MenuItem value="ACP">ACP</MenuItem>
-              <MenuItem value="SSP">SSP</MenuItem>
-              <MenuItem value="SP">SP</MenuItem>
-              <MenuItem value="ASP">ASP</MenuItem>
-              <MenuItem value="IP">IP</MenuItem>
-              <MenuItem value="AIP">AIP</MenuItem>
-              <MenuItem value="SGT">SGT</MenuItem>
-              <MenuItem value="CPL">CPL</MenuItem>
-              <MenuItem value="PC">PC</MenuItem>
-              <MenuItem value="SPC">SPC</MenuItem>
-            </Select>
+            />
           </Grid>
         </Grid>
-
         <Grid container spacing={1}>
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
@@ -1129,6 +1130,13 @@ function Content_Newentry(props) {
                 content={
                   'File number already taken, please make sure you are providing the correct file number.'
                 }
+                control_bool={control_bool_error}
+                status="error"
+              />
+            ) : null}
+            {props.error.msg !== null && props.error.msg.file_number_exists ? (
+              <Alert
+                content={props.error.msg.file_number_exists}
                 control_bool={control_bool_error}
                 status="error"
               />

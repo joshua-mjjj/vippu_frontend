@@ -518,73 +518,8 @@ function Content_Newentry(props) {
   return (
     <Paper elevation={0}>
       <div className={classes.root}>
-        <Grid container spacing={1}>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              First Name
-            </FormLabel>
-            <Input
-              placeholder="First name * "
-              fullWidth
-              autoFocus
-              autoComplete
-              value={first_name}
-              disableUnderline
-              onChange={(e) => setFirst_name(e.target.value)}
-              className={classes.inputSmall}
-            />
-          </Grid>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              Last Name
-            </FormLabel>
-            <Input
-              placeholder="Last name * "
-              disableUnderline
-              autoFocus
-              autoComplete
-              value={last_name}
-              onChange={(e) => setLast_name(e.target.value)}
-              className={classes.inputSmall}
-              fullWidth
-            />
-          </Grid>
-        </Grid>
 
-        <Grid container spacing={1}>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              NIN
-            </FormLabel>
-            <Input
-              placeholder="Enter NIN * "
-              fullWidth
-              autoFocus
-              autoComplete
-              value={nin}
-              onChange={(e) => setNin(e.target.value)}
-              disableUnderline
-              className={classes.inputSmall}
-            />
-          </Grid>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              IPPS
-            </FormLabel>
-            <Input
-              placeholder="Enter IPPS * "
-              disableUnderline
-              autoFocus
-              autoComplete
-              value={ipps}
-              onChange={(e) => setIpps(e.target.value)}
-              className={classes.inputSmall}
-              fullWidth
-            />
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={1}>
+               <Grid container spacing={1}>
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
               File number
@@ -592,82 +527,11 @@ function Content_Newentry(props) {
             <Input
               placeholder="File number * "
               fullWidth
-              autoFocus
-              autoComplete
               value={file_number}
               onChange={(e) => setFile_number(e.target.value)}
               disableUnderline
               className={classes.inputSmall}
             />
-          </Grid>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              Tin Number
-            </FormLabel>
-            <Input
-              placeholder="Tin Number"
-              disableUnderline
-              autoFocus
-              autoComplete
-              value={tin_number}
-              onChange={(e) => setTin_number(e.target.value)}
-              className={classes.inputSmall}
-              fullWidth
-            />
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={1}>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              Account no.
-            </FormLabel>
-            <Input
-              placeholder="Account number"
-              fullWidth
-              autoFocus
-              autoComplete
-              value={account_number}
-              onChange={(e) => setAccount_number(e.target.value)}
-              disableUnderline
-              className={classes.inputSmall}
-            />
-          </Grid>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              Tel Contact
-            </FormLabel>
-            <Input
-              placeholder="Contact"
-              disableUnderline
-              autoFocus
-              autoComplete
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-              className={classes.inputSmall}
-              fullWidth
-            />
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={1}>
-          <Grid item md={6} xs={12} sm={6}>
-            <FormLabel component="label" className={classes.formLabel}>
-              Sex
-            </FormLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              isableUnderline
-              displayEmpty
-              fullWidth
-              id="demo-simple-select"
-              value={sex}
-              className={classes.inputSmall_}
-              onChange={(e) => setSex(e.target.value)}
-            >
-              <MenuItem value="Male">Male</MenuItem>
-              <MenuItem value="Female">Female</MenuItem>
-            </Select>
           </Grid>
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
@@ -703,6 +567,127 @@ function Content_Newentry(props) {
         <Grid container spacing={1}>
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
+              First Name
+            </FormLabel>
+            <Input
+              placeholder="First name * "
+              fullWidth
+              value={first_name}
+              disableUnderline
+              onChange={(e) => setFirst_name(e.target.value)}
+              className={classes.inputSmall}
+            />
+          </Grid>
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
+              Last Name
+            </FormLabel>
+            <Input
+              placeholder="Last name * "
+              disableUnderline
+              value={last_name}
+              onChange={(e) => setLast_name(e.target.value)}
+              className={classes.inputSmall}
+              fullWidth
+            />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1}>
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
+              Sex
+            </FormLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              isableUnderline
+              displayEmpty
+              fullWidth
+              id="demo-simple-select"
+              value={sex}
+              className={classes.inputSmall_}
+              onChange={(e) => setSex(e.target.value)}
+            >
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+            </Select>
+          </Grid>
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
+              NIN
+            </FormLabel>
+            <Input
+              placeholder="Enter NIN * "
+              fullWidth
+              value={nin}
+              onChange={(e) => setNin(e.target.value)}
+              disableUnderline
+              className={classes.inputSmall}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1}>
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
+              Account no.
+            </FormLabel>
+            <Input
+              placeholder="Account number"
+              fullWidth
+              value={account_number}
+              onChange={(e) => setAccount_number(e.target.value)}
+              disableUnderline
+              className={classes.inputSmall}
+            />
+          </Grid>
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
+              Tel Contact
+            </FormLabel>
+            <Input
+              placeholder="Contact"
+              disableUnderline
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              className={classes.inputSmall}
+              fullWidth
+            />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1}>
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
+              IPPS
+            </FormLabel>
+            <Input
+              placeholder="Enter IPPS * "
+              disableUnderline
+              value={ipps}
+              onChange={(e) => setIpps(e.target.value)}
+              className={classes.inputSmall}
+              fullWidth
+            />
+          </Grid>
+
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
+              Tin Number
+            </FormLabel>
+            <Input
+              placeholder="Tin Number"
+              disableUnderline
+              value={tin_number}
+              onChange={(e) => setTin_number(e.target.value)}
+              className={classes.inputSmall}
+              fullWidth
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item md={6} xs={12} sm={6}>
+            <FormLabel component="label" className={classes.formLabel}>
               Education Level
             </FormLabel>
             <Select
@@ -726,6 +711,7 @@ function Content_Newentry(props) {
               <MenuItem value="Other">Other</MenuItem>
             </Select>
           </Grid>
+
           <Grid item md={6} xs={12} sm={6}>
             <FormLabel component="label" className={classes.formLabel}>
               Bank
@@ -1160,6 +1146,13 @@ function Content_Newentry(props) {
                 content={
                   'File number already taken, please make sure you are providing the correct file number.'
                 }
+                control_bool={control_bool_error}
+                status="error"
+              />
+            ) : null}
+            {props.error.msg !== null && props.error.msg.file_number_exists ? (
+              <Alert
+                content={props.error.msg.file_number_exists}
                 control_bool={control_bool_error}
                 status="error"
               />

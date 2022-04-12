@@ -29,6 +29,7 @@ import {
   BATTALION3_DEPARTEMENT_QUERY_LOADING,
   BATTALION3_DEPARTEMENT_QUERY_FETCHED,
   BATTALION3_DEPARTEMENT_QUERY_FAILED,
+  VIPPU_OVERRALL_FETCHED,
 
   BATTALION_GENERAL_DEPARTEMENT_QUERY_LOADING,
   BATTALION_GENERAL_DEPARTEMENT_QUERY_FETCHED,
@@ -439,7 +440,26 @@ export const battallion_two_overrall_data = () => (dispatch, getState) => {
     });
 };
 
-//  BATTALLION TWO DATA SUMMARY
+
+// BATTALLION ONE DATA SUMMARY
+export const vippu_overrall_data = () => (dispatch, getState) => {
+  axios
+    .get(`${global_url}/vippu_overrall/`, tokenConfig(getState))
+    .then((res) => {
+      console.log(res.data)
+      if (res.data) {
+        dispatch({
+          type: VIPPU_OVERRALL_FETCHED,
+          payload: res.data
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+};
+
+//  BATTALLION ONE DATA SUMMARY
 export const battallion_one_overrall_data = () => (dispatch, getState) => {
   axios
     .get(`${global_url}/battalionone_overrall/`, tokenConfig(getState))
